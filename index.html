@@ -1,594 +1,2094 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>PRECIFICAÇÃO MERCADO LIVRE</title>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Precificação Marketplaces</title>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;600;700;800&display=swap" rel="stylesheet">
 <style>
-* { box-sizing: border-box; margin: 0; padding: 0; }
-body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif; background: #f5f4f0; color: #1a1a1a; padding: 1.5rem; }
-h1 {
-  font-family: Georgia, 'Times New Roman', serif;
-  font-size: 28px;
-  font-weight: bold;
-  letter-spacing: 0.06em;
-  color: #1a1a1a;
-  margin-bottom: 4px;
-  line-height: 1.2;
-}
-.sub { font-size: 13px; color: #666; margin-bottom: 20px; }
-.card { background: #fff; border: 0.5px solid #ddd; border-radius: 12px; padding: 1rem 1.25rem; margin-bottom: 14px; }
-h2 { font-size: 15px; font-weight: 500; margin-bottom: 4px; }
-.muted { font-size: 12px; color: #888; margin-bottom: 12px; }
-.section-label { font-size: 11px; font-weight: 600; color: #555; text-transform: uppercase; letter-spacing: 0.07em; margin-bottom: 8px; padding-bottom: 4px; border-bottom: 0.5px solid #eee; }
-.inputs-grid { display: grid; gap: 12px; }
-.cols-3 { grid-template-columns: repeat(3, 1fr); }
-.input-group { display: flex; flex-direction: column; gap: 4px; }
-.input-group label { font-size: 11px; color: #888; text-transform: uppercase; letter-spacing: 0.05em; }
-.input-group input { font-size: 15px; width: 100%; padding: 6px 8px; border: 0.5px solid #ccc; border-radius: 8px; }
-.input-group .hint { font-size: 11px; color: #aaa; margin-top: 2px; }
-.pills { display: flex; gap: 6px; flex-wrap: wrap; margin-top: 12px; }
-.pill { font-size: 11px; font-weight: 500; padding: 3px 10px; border-radius: 20px; }
-.pill-amber  { background: #FAEEDA; color: #854F0B; }
-.pill-green  { background: #EAF3DE; color: #3B6D11; }
-.pill-blue   { background: #E6F1FB; color: #185FA5; }
-.pill-purple { background: #EEEDFE; color: #534AB7; }
-.pill-coral  { background: #FAECE7; color: #993C1D; }
-.grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-bottom: 14px; }
-.card-prem { border: 2px solid #378ADD; }
-.big { font-size: 26px; font-weight: 500; }
-.row { display: flex; justify-content: space-between; align-items: center; padding: 7px 0; border-bottom: 0.5px solid #eee; font-size: 13px; }
-.row:last-child { border-bottom: none; }
-.row-label { color: #666; }
-.row-neg { font-weight: 500; color: #993C1D; }
-.row-pos { font-weight: 500; color: #3B6D11; }
-.divider { border: none; border-top: 0.5px solid #eee; margin: 8px 0; }
-.grid-4 { display: grid; grid-template-columns: repeat(4,1fr); gap: 12px; }
-.metric { background: #f5f4f0; border-radius: 8px; padding: 1rem; text-align: center; }
-.metric-val { font-size: 22px; font-weight: 500; }
-.metric-lbl { font-size: 12px; color: #888; margin-top: 2px; }
-.tip { border-left: 3px solid #378ADD; padding: 8px 12px; background: #f5f4f0; border-radius: 0 8px 8px 0; margin-bottom: 8px; font-size: 12px; color: #666; line-height: 1.6; }
-.tip strong { color: #1a1a1a; font-weight: 500; }
-.spacer { margin-bottom: 12px; }
-
-/* Toggle de método */
-.toggle-wrap { display: flex; gap: 0; border: 1px solid #ddd; border-radius: 10px; overflow: hidden; margin-bottom: 16px; width: fit-content; }
-.toggle-btn { padding: 8px 18px; font-size: 13px; font-weight: 500; cursor: pointer; border: none; background: #f5f4f0; color: #666; transition: background 0.15s, color 0.15s; }
-.toggle-btn.active-markup { background: #534AB7; color: #fff; }
-.toggle-btn.active-margem { background: #185FA5; color: #fff; }
-.metodo-box { border-radius: 8px; padding: 10px 14px; font-size: 12px; line-height: 1.6; margin-bottom: 14px; }
-.metodo-markup { background: #EEEDFE; color: #3B2FA0; border-left: 3px solid #534AB7; }
-.metodo-margem { background: #E6F1FB; color: #0F3D6E; border-left: 3px solid #185FA5; }
+:root{--bg:#F5F3F7;--panel:#FFFFFF;--ink:#241B2C;--muted:#6E6478;--line:#E3DDE8;--plum:#6A2C68;--plum-soft:#F1E6F0}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){--bg:#17121B;--panel:#211A26;--ink:#F1EBF4;--muted:#A99CB2;--line:#382D3F;--plum:#D59BD2;--plum-soft:#3A2440}}
+:root[data-theme="dark"]{--bg:#17121B;--panel:#211A26;--ink:#F1EBF4;--muted:#A99CB2;--line:#382D3F;--plum:#D59BD2;--plum-soft:#3A2440}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:"Manrope",system-ui,sans-serif}
+.top{max-width:1180px;margin:0 auto;padding:28px 20px 0}
+h1{font-size:28px;font-weight:800;letter-spacing:-.02em;margin:0 0 4px}
+.sub{margin:0 0 18px;color:var(--muted);font-size:14px}
+.tabs{display:flex;gap:4px;padding:4px;border:1px solid var(--line);border-radius:12px;background:var(--panel);width:max-content;max-width:100%;overflow-x:auto}
+.tabs button{font:inherit;font-weight:700;font-size:14px;border:0;background:transparent;color:var(--muted);padding:9px 18px;border-radius:9px;cursor:pointer;white-space:nowrap}
+.tabs button[aria-selected="true"]{background:var(--plum);color:var(--panel)}
+.tabs button:focus-visible{outline:3px solid var(--plum-soft)}
+.sync{display:flex;gap:8px;align-items:center;font-size:13px;color:var(--muted);margin-top:12px;margin-bottom:4px;cursor:pointer;width:max-content}
+.sync input{accent-color:var(--plum);width:16px;height:16px}
+iframe{display:none;width:100%;border:0;min-height:600px;background:var(--bg)}
+iframe.on{display:block}
 </style>
 </head>
 <body>
-
-<h1>PRECIFICAÇÃO MERCADO LIVRE</h1>
-<p class="sub">Categoria Moda · Simples Nacional · MLB 2026</p>
-
-<div class="card">
-  <h2>Método de precificação</h2>
-  <p class="muted">Escolha como a margem é calculada — o preço de venda se ajusta automaticamente</p>
-
-  <div class="toggle-wrap">
-    <button class="toggle-btn active-markup" id="btnMarkup" onclick="setMetodo('markup')">📦 Markup sobre o custo</button>
-    <button class="toggle-btn" id="btnMargem" onclick="setMetodo('margem')">💰 Margem sobre o preço de venda</button>
+<div class="top">
+  <h1>Precificação Marketplaces</h1>
+  <p class="sub">Shopee, Mercado Livre, TikTok Shop e Temu com as taxas de cada plataforma calculadas automaticamente.</p>
+  <div class="tabs" role="tablist" aria-label="Marketplace">
+    <button role="tab" data-t="shopee" aria-selected="true">Shopee</button>
+    <button role="tab" data-t="ml" aria-selected="false">Mercado Livre</button>
+    <button role="tab" data-t="tiktok" aria-selected="false">TikTok Shop</button>
+    <button role="tab" data-t="temu" aria-selected="false">Temu</button>
   </div>
-
-  <div class="metodo-box metodo-markup" id="boxMetodo">
-    <strong>Markup sobre o custo:</strong> você define quanto quer ganhar <em>em cima do que investiu</em>. Ex: CMV R$28 × 1,30 = R$36,40 como base — depois os custos de canal são deduzidos para chegar ao preço final de venda.
-  </div>
+  <label class="sync"><input type="checkbox" id="sync" checked> Usar os mesmos dados (custo, margem, embalagem, comissões, desconto) em todas as abas</label>
 </div>
+<iframe id="f-shopee" title="Precificação Shopee" class="on" srcdoc="&lt;!DOCTYPE html&gt;
+&lt;html lang=&quot;pt-BR&quot;&gt;
+&lt;head&gt;
+&lt;meta charset=&quot;utf-8&quot;&gt;
+&lt;meta name=&quot;viewport&quot; content=&quot;width=device-width, initial-scale=1, viewport-fit=cover&quot;&gt;
+&lt;title&gt;Precificação Shopee&lt;/title&gt;
+&lt;link rel=&quot;preconnect&quot; href=&quot;https://fonts.googleapis.com&quot;&gt;
+&lt;link rel=&quot;preconnect&quot; href=&quot;https://fonts.gstatic.com&quot; crossorigin&gt;
+&lt;link href=&quot;https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&amp;display=swap&quot; rel=&quot;stylesheet&quot;&gt;
+&lt;style&gt;
+:root{
+  --bg:#F5F3F7; --panel:#FFFFFF; --ink:#241B2C; --muted:#6E6478; --line:#E3DDE8;
+  --plum:#6A2C68; --plum-soft:#F1E6F0; --profit:#1C7A57; --profit-soft:#E3F2EB;
+  --warn:#A6461F; --warn-soft:#FBEDE5; --band-a:#EDE6F0; --band-b:#E2D6E8;
+  --field:#FBFAFC;
+  box-sizing:border-box;
+  padding-top:env(safe-area-inset-top,0px); padding-bottom:env(safe-area-inset-bottom,0px);
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme=&quot;light&quot;]){
+    --bg:#17121B; --panel:#211A26; --ink:#F1EBF4; --muted:#A99CB2; --line:#382D3F;
+    --plum:#D59BD2; --plum-soft:#3A2440; --profit:#6BD3A5; --profit-soft:#173328;
+    --warn:#F0A07C; --warn-soft:#3C2219; --band-a:#2B2231; --band-b:#35293C; --field:#1B1520;
+  }
+}
+:root[data-theme=&quot;dark&quot;]{
+  --bg:#17121B; --panel:#211A26; --ink:#F1EBF4; --muted:#A99CB2; --line:#382D3F;
+  --plum:#D59BD2; --plum-soft:#3A2440; --profit:#6BD3A5; --profit-soft:#173328;
+  --warn:#F0A07C; --warn-soft:#3C2219; --band-a:#2B2231; --band-b:#35293C; --field:#1B1520;
+}
+*,*::before,*::after{box-sizing:border-box}
+html{scroll-padding-top:env(safe-area-inset-top,0px)}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:&quot;Manrope&quot;,system-ui,-apple-system,&quot;Segoe UI&quot;,Roboto,sans-serif;font-size:15px;line-height:1.5;font-variant-numeric:tabular-nums}
+.wrap{max-width:1180px;margin:0 auto;padding:28px 20px 48px}
+header h1{font-size:28px;font-weight:800;letter-spacing:-.02em;margin:0 0 4px}
+header p{margin:0;color:var(--muted);max-width:62ch}
+.grid{display:grid;grid-template-columns:340px 1fr;gap:20px;margin-top:24px;align-items:start}
+@media (max-width:880px){.grid{grid-template-columns:1fr}}
+.panel{background:var(--panel);border:1px solid var(--line);border-radius:14px;padding:20px}
+.panel h2{font-size:16px;font-weight:700;margin:0 0 14px}
+.field{margin-bottom:14px}
+.field label{display:block;font-size:13px;font-weight:600;margin-bottom:5px}
+.field .hint{font-size:12px;color:var(--muted);margin-top:3px}
+.inp{display:flex;align-items:center;border:1px solid var(--line);border-radius:9px;background:var(--field);overflow:hidden}
+.inp:focus-within{border-color:var(--plum);box-shadow:0 0 0 3px var(--plum-soft)}
+.inp span{padding:0 10px;color:var(--muted);font-size:13px;font-weight:600}
+.inp input,.inp select{flex:1;min-width:0;border:0;background:transparent;color:var(--ink);font:inherit;font-weight:600;padding:9px 10px;outline:none}
+.inp select{cursor:pointer}
+.sep{height:1px;background:var(--line);margin:18px 0}
 
-<div class="card">
-  <h2>Parâmetros da simulação</h2>
-  <p class="muted">Todos os campos são editáveis — altere e os preços recalculam automaticamente</p>
+.hero{display:grid;grid-template-columns:1fr 1fr;gap:0;border:1px solid var(--line);border-radius:14px;background:var(--panel);overflow:hidden}
+@media (max-width:560px){.hero{grid-template-columns:1fr}}
+.hero &gt; div{padding:20px 22px}
+.hero &gt; div + div{border-left:1px solid var(--line)}
+@media (max-width:560px){.hero &gt; div + div{border-left:0;border-top:1px solid var(--line)}}
+.hero .k{font-size:13px;color:var(--muted);font-weight:600}
+.hero .v{font-size:40px;font-weight:800;letter-spacing:-.03em;line-height:1.1;margin:4px 0 6px}
+.hero .promo .v{color:var(--plum)}
+.hero .full .v{text-decoration:line-through;text-decoration-thickness:2px;text-decoration-color:var(--muted)}
+.hero .s{font-size:13px;color:var(--muted)}
+.hero .s b{color:var(--profit)}
 
-  <!-- CUSTOS FIXOS POR UNIDADE -->
-  <div class="section-label">Custos fixos por unidade (R$)</div>
-  <div class="inputs-grid cols-3 spacer">
-    <div class="input-group">
-      <label>CMV — custo de produção</label>
-      <input type="number" id="cmv" value="28" min="0" step="0.50" />
-      <span class="hint">fabricação + matéria-prima</span>
-    </div>
-    <div class="input-group">
-      <label>Embalagem + insumos</label>
-      <input type="number" id="embalagem" value="3" min="0" step="0.50" />
-      <span class="hint">saco, etiqueta, papel seda etc.</span>
-    </div>
-    <div class="input-group">
-      <label>Peso real embalado (g)</label>
-      <input type="number" id="peso" value="350" min="1" max="30000" step="10" />
-      <span class="hint">produto + embalagem pronto pra envio</span>
-    </div>
-  </div>
+.ruler{margin-top:20px}
+.ruler .track{overflow-x:auto;padding:0 2px}
+.ruler .inner{min-width:640px;position:relative;padding:34px 0 38px}
+.ruler .bar{position:relative;display:flex;min-height:64px;border-radius:10px}
+.ruler .seg{flex:1;position:relative;display:flex;flex-direction:column;justify-content:center;gap:2px;padding:10px 12px;font-size:12px;line-height:1.3;color:var(--muted);border-right:2px solid var(--panel)}
+.ruler .seg:nth-child(odd){background:var(--band-a)}
+.ruler .seg:nth-child(even){background:var(--band-b)}
+.ruler .seg:first-child{border-radius:10px 0 0 10px}
+.ruler .seg:last-child{border-radius:0 10px 10px 0;border-right:0}
+.ruler .seg b{color:var(--ink);font-size:13px;font-weight:700}
+.ruler .seg.on{box-shadow:inset 0 0 0 2px var(--plum);background:var(--plum-soft)}
+.marker{position:absolute;width:0;z-index:2}
+.marker::before{content:&quot;&quot;;position:absolute;left:-6px;border-left:6px solid transparent;border-right:6px solid transparent}
+.marker i{position:absolute;left:0;transform:translateX(-50%);font-style:normal;font-size:12px;font-weight:700;white-space:nowrap;padding:2px 8px;border-radius:6px}
+.marker.promo{top:0}
+.marker.promo::before{top:22px;border-top:8px solid var(--plum)}
+.marker.promo i{top:0;background:var(--plum);color:var(--panel)}
+.marker.full{bottom:0}
+.marker.full::before{bottom:22px;border-bottom:8px solid var(--muted)}
+.marker.full i{bottom:0;background:var(--panel);color:var(--ink);border:1px solid var(--line)}
+.ruler .legend{display:flex;gap:18px;flex-wrap:wrap;font-size:12px;color:var(--muted);margin-top:4px}
+.ruler .legend span::before{content:&quot;&quot;;display:inline-block;width:10px;height:10px;border-radius:3px;margin-right:6px;vertical-align:-1px}
+.ruler .legend .lp::before{background:var(--plum)}
+.ruler .legend .lf::before{background:var(--panel);border:1px solid var(--muted)}
+.ruler .legend .lb::before{background:var(--plum-soft);box-shadow:inset 0 0 0 2px var(--plum)}
 
-  <!-- DIMENSÕES DA EMBALAGEM -->
-  <div class="section-label" style="margin-top:12px;">Dimensões da embalagem (cm) — para peso volumétrico</div>
-  <div class="inputs-grid spacer" style="grid-template-columns: repeat(4,1fr)">
-    <div class="input-group">
-      <label>Largura (cm)</label>
-      <input type="number" id="dimL" value="20" min="1" max="200" step="1" />
-      <span class="hint">ex: saco 20×30cm → largura 20</span>
-    </div>
-    <div class="input-group">
-      <label>Altura (cm)</label>
-      <input type="number" id="dimA" value="5" min="1" max="200" step="1" />
-      <span class="hint">espessura da embalagem fechada</span>
-    </div>
-    <div class="input-group">
-      <label>Profundidade (cm)</label>
-      <input type="number" id="dimP" value="30" min="1" max="200" step="1" />
-      <span class="hint">ex: saco 20×30cm → profund. 30</span>
-    </div>
-    <div class="input-group">
-      <label>Reputação ML</label>
-      <select id="reputacao" style="font-size:14px;padding:6px 8px;border:0.5px solid #ccc;border-radius:8px;width:100%;">
-        <option value="verde">🟢 Verde / MercadoLíder</option>
-        <option value="amarela">🟡 Amarela</option>
-        <option value="sem">⚪ Sem reputação</option>
-      </select>
-      <span class="hint">muda o % padrão ao lado →</span>
-    </div>
-    <div class="input-group">
-      <label>ML cobre do frete (%)</label>
-      <input type="number" id="coberturaML" value="50" min="0" max="100" step="1"
-             style="font-size:15px;width:100%;padding:6px 8px;border:2px solid #3B6D11;border-radius:8px;background:#F0F9E8;" />
-      <span class="hint" id="coberturaHint">Verde/Líder → 50% · edite conforme o ML mostrar</span>
-    </div>
-    <div class="input-group">
-      <label>Margem de segurança frete (%)</label>
-      <input type="number" id="freteSeguranca" value="30" min="0" max="100" step="1"
-             style="font-size:15px;width:100%;padding:6px 8px;border:2px solid #D85A30;border-radius:8px;background:#FDF3EF;" />
-      <span class="hint">cobre variação regional · ML cobra "até" · ex: 30%</span>
-    </div>
-  </div>
+.alerts{margin-top:18px;display:flex;flex-direction:column;gap:8px}
+.alert{padding:10px 14px;border-radius:10px;font-size:13.5px;background:var(--warn-soft);color:var(--ink);border-left:3px solid var(--warn)}
+.alert.ok{background:var(--profit-soft);border-left-color:var(--profit)}
 
-  <!-- BOX PESO VOLUMÉTRICO + FRETE -->
-  <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:4px;">
-    <div style="background:#EEEDFE;border-radius:8px;padding:10px 14px;">
-      <div style="font-size:11px;font-weight:600;color:#534AB7;text-transform:uppercase;letter-spacing:0.06em;">📦 Peso para cobrança</div>
-      <div id="pesoVolumetricoDesc" style="font-size:11px;color:#534AB7;margin-top:2px;">—</div>
-      <div style="display:flex;justify-content:space-between;align-items:center;margin-top:4px;">
-        <span style="font-size:11px;color:#534AB7;">Peso volumétrico: (L×A×P)/6000</span>
-        <span id="pesoVolVal" style="font-size:15px;font-weight:500;color:#534AB7;">—</span>
-      </div>
-    </div>
-    <div id="freteInfoBox" style="background:#E6F1FB;border-radius:8px;padding:10px 14px;">
-      <div style="font-size:11px;font-weight:600;color:#185FA5;text-transform:uppercase;letter-spacing:0.06em;">🚚 Frete · sua parte</div>
-      <div id="freteInfoDesc" style="font-size:11px;color:#2563A8;margin-top:2px;">—</div>
-      <div style="display:flex;justify-content:space-between;align-items:center;margin-top:4px;">
-        <span id="freteDetalheText" style="font-size:11px;color:#3B6D11;font-weight:500;">—</span>
-        <span id="freteInfoVal" style="font-size:15px;font-weight:500;color:#185FA5;">—</span>
-      </div>
-      <div id="freteDetalhe" style="display:none;"></div>
-    </div>
-  </div>
+.tables{display:grid;grid-template-columns:1fr 1fr;gap:20px;margin-top:20px}
+@media (max-width:720px){.tables{grid-template-columns:1fr}}
+.scroll{overflow-x:auto}
+table{width:100%;border-collapse:collapse;font-size:13.5px}
+th,td{padding:7px 4px;text-align:left;border-bottom:1px solid var(--line)}
+th{font-weight:600;color:var(--muted);font-size:12px}
+td.n,th.n{text-align:right;white-space:nowrap}
+tr.total td{font-weight:800;border-bottom:0;padding-top:10px}
+tr.total td.n{color:var(--profit)}
+tr.neg td.n{color:var(--warn)}
+.sub{font-size:12px;color:var(--muted);margin:-8px 0 12px}
 
-  <!-- PERCENTUAIS SOBRE O PREÇO DE VENDA -->
-  <div class="section-label">Percentuais sobre o preço de venda (%)</div>
-  <div class="inputs-grid spacer" style="grid-template-columns: repeat(4,1fr)">
-    <div class="input-group">
-      <label>Simples Nacional</label>
-      <input type="number" id="imposto" value="10" min="0" max="20" step="0.5" />
-      <span class="hint">incide sobre o preço cheio</span>
-    </div>
-    <div class="input-group">
-      <label>Comissão do vendedor</label>
-      <input type="number" id="comVendedor" value="0" min="0" max="30" step="0.5" />
-      <span class="hint">representante, marketplace próprio etc.</span>
-    </div>
-    <div class="input-group">
-      <label>Mercado Ads (ADS %)</label>
-      <input type="number" id="ads" value="0" min="0" max="20" step="0.5" />
-      <span class="hint">% investido em anúncios patrocinados</span>
-    </div>
-    <div class="input-group" id="grupoMargem">
-      <label id="labelMargem">Markup sobre o custo (%)</label>
-      <input type="number" id="margem" value="30" min="1" max="300" step="1" />
-      <span class="hint" id="hintMargem">ex: 30 = CMV × 1,30</span>
-    </div>
-  </div>
+details{margin-top:20px}
+summary{cursor:pointer;font-weight:700;font-size:15px;list-style:none;display:flex;align-items:center;gap:8px}
+summary::-webkit-details-marker{display:none}
+summary::before{content:&quot;+&quot;;display:inline-grid;place-items:center;width:22px;height:22px;border-radius:6px;background:var(--plum-soft);color:var(--plum);font-weight:800}
+details[open] summary::before{content:&quot;−&quot;}
+.tbl-edit{table-layout:fixed;min-width:560px}
+.tbl-edit th,.tbl-edit td{padding:8px 6px;vertical-align:middle}
+.tbl-edit th{text-align:right}
+.tbl-edit th:first-child,.tbl-edit td:first-child{width:56px;text-align:center}
+.tbl-edit td.n{text-align:right;padding-right:14px}
+.tbl-edit input{display:block;width:100%;min-width:0;border:1px solid var(--line);border-radius:7px;background:var(--field);color:var(--ink);font:inherit;font-weight:600;padding:6px 8px;text-align:right}
+.tbl-edit input:focus{outline:none;border-color:var(--plum);box-shadow:0 0 0 3px var(--plum-soft)}
+.row-actions{display:flex;gap:10px;flex-wrap:wrap;margin-top:14px;align-items:center}
+button{font:inherit;font-weight:700;font-size:13px;border-radius:9px;padding:8px 14px;cursor:pointer;border:1px solid var(--line);background:var(--panel);color:var(--ink)}
+button.primary{background:var(--plum);border-color:var(--plum);color:var(--panel)}
+button:focus-visible{outline:3px solid var(--plum-soft);outline-offset:1px}
+.note{font-size:12px;color:var(--muted)}
+.sim{display:flex;gap:10px;align-items:end;flex-wrap:wrap}
+.sim .field{margin:0;flex:1;min-width:160px}
+&lt;/style&gt;
+&lt;style&gt;header{display:none}.wrap{padding-top:0}.grid{margin-top:16px}&lt;/style&gt;&lt;/head&gt;
+&lt;body&gt;
+&lt;div class=&quot;wrap&quot;&gt;
+  &lt;header&gt;
+    &lt;h1&gt;Precificação Shopee&lt;/h1&gt;
+    &lt;p&gt;Preencha seus custos e metas. As taxas da Shopee (comissão, taxa fixa e frete grátis embutido) entram automaticamente conforme a faixa de preço.&lt;/p&gt;
+  &lt;/header&gt;
 
-  <div class="pills">
-    <span id="pillCmv"         class="pill pill-coral"></span>
-    <span id="pillEmbalagem"   class="pill pill-amber"></span>
-    <span id="pillFrete"       class="pill pill-blue"></span>
-    <span id="pillPeso"        class="pill pill-blue"></span>
-    <span id="pillImposto"     class="pill pill-amber"></span>
-    <span id="pillComVendedor" class="pill pill-purple"></span>
-    <span id="pillAds"         class="pill pill-coral"></span>
-    <span id="pillMargem"      class="pill pill-green"></span>
-  </div>
-</div>
+  &lt;div class=&quot;grid&quot;&gt;
+    &lt;!-- ENTRADAS --&gt;
+    &lt;aside class=&quot;panel&quot; aria-label=&quot;Seus dados&quot;&gt;
+      &lt;h2&gt;Seus dados&lt;/h2&gt;
+      &lt;div class=&quot;field&quot;&gt;&lt;label for=&quot;custo&quot;&gt;Custo do produto&lt;/label&gt;
+        &lt;div class=&quot;inp&quot;&gt;&lt;span&gt;R$&lt;/span&gt;&lt;input id=&quot;custo&quot; inputmode=&quot;decimal&quot; data-key=&quot;custo&quot;&gt;&lt;/div&gt;&lt;/div&gt;
+      &lt;div class=&quot;field&quot;&gt;&lt;label for=&quot;margem&quot;&gt;Margem desejada sobre o custo&lt;/label&gt;
+        &lt;div class=&quot;inp&quot;&gt;&lt;input id=&quot;margem&quot; inputmode=&quot;decimal&quot; data-key=&quot;margem&quot;&gt;&lt;span&gt;%&lt;/span&gt;&lt;/div&gt;&lt;/div&gt;
+      &lt;div class=&quot;field&quot;&gt;&lt;label for=&quot;emb&quot;&gt;Embalagem&lt;/label&gt;
+        &lt;div class=&quot;inp&quot;&gt;&lt;span&gt;R$&lt;/span&gt;&lt;input id=&quot;emb&quot; inputmode=&quot;decimal&quot; data-key=&quot;emb&quot;&gt;&lt;/div&gt;&lt;/div&gt;
+      &lt;div class=&quot;sep&quot;&gt;&lt;/div&gt;
+      &lt;div class=&quot;field&quot;&gt;&lt;label for=&quot;vend&quot;&gt;Comissão do vendedor&lt;/label&gt;
+        &lt;div class=&quot;inp&quot;&gt;&lt;input id=&quot;vend&quot; inputmode=&quot;decimal&quot; data-key=&quot;vend&quot;&gt;&lt;span&gt;%&lt;/span&gt;&lt;/div&gt;
+        &lt;div class=&quot;hint&quot;&gt;Sobre o preço de venda&lt;/div&gt;&lt;/div&gt;
+      &lt;div class=&quot;field&quot;&gt;&lt;label for=&quot;ads&quot;&gt;ADS&lt;/label&gt;
+        &lt;div class=&quot;inp&quot;&gt;&lt;input id=&quot;ads&quot; inputmode=&quot;decimal&quot; data-key=&quot;ads&quot;&gt;&lt;span&gt;%&lt;/span&gt;&lt;/div&gt;
+        &lt;div class=&quot;hint&quot;&gt;Sobre o preço de venda&lt;/div&gt;&lt;/div&gt;
+      &lt;div class=&quot;field&quot;&gt;&lt;label for=&quot;nf&quot;&gt;Nota fiscal&lt;/label&gt;
+        &lt;div class=&quot;inp&quot;&gt;&lt;input id=&quot;nf&quot; inputmode=&quot;decimal&quot; data-key=&quot;nf&quot;&gt;&lt;span&gt;%&lt;/span&gt;&lt;/div&gt;
+        &lt;div class=&quot;hint&quot;&gt;Sobre o preço de venda&lt;/div&gt;&lt;/div&gt;
+      &lt;div class=&quot;sep&quot;&gt;&lt;/div&gt;
+      &lt;div class=&quot;field&quot;&gt;&lt;label for=&quot;desc&quot;&gt;Desconto da promoção&lt;/label&gt;
+        &lt;div class=&quot;inp&quot;&gt;&lt;input id=&quot;desc&quot; inputmode=&quot;decimal&quot; data-key=&quot;desc&quot;&gt;&lt;span&gt;%&lt;/span&gt;&lt;/div&gt;
+        &lt;div class=&quot;hint&quot;&gt;O preço cheio é calculado para que, com esse desconto, o preço final seja o preço promocional&lt;/div&gt;&lt;/div&gt;
+      &lt;div class=&quot;field&quot;&gt;&lt;label for=&quot;arred&quot;&gt;Final do preço promocional&lt;/label&gt;
+        &lt;div class=&quot;inp&quot;&gt;&lt;select id=&quot;arred&quot; data-key=&quot;arred&quot;&gt;
+          &lt;option value=&quot;exato&quot;&gt;Exato (mínimo para a margem)&lt;/option&gt;
+          &lt;option value=&quot;90&quot;&gt;Terminar em ,90&lt;/option&gt;
+          &lt;option value=&quot;99&quot;&gt;Terminar em ,99&lt;/option&gt;
+          &lt;option value=&quot;98&quot;&gt;Terminar em ,98&lt;/option&gt;
+        &lt;/select&gt;&lt;/div&gt;&lt;/div&gt;
+      &lt;div class=&quot;row-actions&quot;&gt;&lt;button id=&quot;reset-inputs&quot; type=&quot;button&quot;&gt;Limpar para o exemplo&lt;/button&gt;&lt;/div&gt;
+    &lt;/aside&gt;
 
-<div class="grid-2">
-  <div class="card card-prem">
-    <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:8px;">
-      <h2>Anúncio Premium</h2>
-      <span class="pill pill-blue">2 anúncios</span>
-    </div>
-    <p class="muted">Comissão ML 19% · frete grátis obrigatório</p>
-    <div class="row"><span class="row-label">Preço de venda</span><span class="big" id="pPrem" style="color:#185FA5;">—</span></div>
-    <hr class="divider">
-    <div class="row" id="rowBaseMarkupPrem" style="display:none;"><span class="row-label" id="lblBaseMarkupPrem">Base markup (CMV × 1,30)</span><span style="font-weight:500;color:#534AB7;" id="baseMarkupPrem">—</span></div>
-    <div class="row"><span class="row-label">Comissão ML (19%)</span><span class="row-neg" id="comMLPrem">—</span></div>
-    <div class="row"><span class="row-label">Simples Nacional</span><span class="row-neg" id="impPrem">—</span></div>
-    <div class="row" id="rowComVendPrem" style="display:none;"><span class="row-label">Comissão vendedor</span><span class="row-neg" id="comVendPrem">—</span></div>
-    <div class="row" id="rowAdsPrem" style="display:none;"><span class="row-label">Mercado Ads</span><span class="row-neg" id="adsPrem">—</span></div>
-    <div class="row"><span class="row-label">Frete (sua parte)</span><span class="row-neg" id="fretePrem">—</span></div>
-    <div class="row"><span class="row-label">CMV</span><span class="row-neg" id="cmvPrem">—</span></div>
-    <div class="row"><span class="row-label">Embalagem + insumos</span><span class="row-neg" id="embPrem">—</span></div>
-    <hr class="divider">
-    <div class="row"><span style="font-size:13px;font-weight:500;">Lucro líquido</span><span class="row-pos" id="lucroPrem" style="font-size:15px;">—</span></div>
-    <div style="background:#FFF8E6;border-radius:8px;padding:10px 12px;margin-top:10px;display:flex;justify-content:space-between;align-items:center;">
-      <div>
-        <div style="font-size:11px;font-weight:600;color:#854F0B;text-transform:uppercase;letter-spacing:0.06em;">💡 Preço FIC para promoções</div>
-        <div style="font-size:11px;color:#A0680A;margin-top:2px;">Preço de venda ÷ 0,70 · desconto máx. 30%</div>
-      </div>
-      <span style="font-size:22px;font-weight:500;color:#854F0B;" id="ficPrem">—</span>
-    </div>
-  </div>
+    &lt;!-- RESULTADOS --&gt;
+    &lt;main&gt;
+      &lt;section class=&quot;hero&quot; aria-live=&quot;polite&quot;&gt;
+        &lt;div class=&quot;promo&quot;&gt;
+          &lt;div class=&quot;k&quot;&gt;Preço promocional (o que o cliente paga)&lt;/div&gt;
+          &lt;div class=&quot;v&quot; id=&quot;promoV&quot;&gt;–&lt;/div&gt;
+          &lt;div class=&quot;s&quot; id=&quot;promoS&quot;&gt;&lt;/div&gt;
+        &lt;/div&gt;
+        &lt;div class=&quot;full&quot;&gt;
+          &lt;div class=&quot;k&quot;&gt;Preço cheio para cadastrar&lt;/div&gt;
+          &lt;div class=&quot;v&quot; id=&quot;fullV&quot;&gt;–&lt;/div&gt;
+          &lt;div class=&quot;s&quot; id=&quot;fullS&quot;&gt;&lt;/div&gt;
+        &lt;/div&gt;
+      &lt;/section&gt;
 
-  <div class="card">
-    <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:8px;">
-      <h2>Anúncio Clássico</h2>
-      <span class="pill pill-green">2 anúncios</span>
-    </div>
-    <p class="muted">Comissão ML 14% · frete grátis recomendado</p>
-    <div class="row"><span class="row-label">Preço de venda</span><span class="big" id="pClass" style="color:#3B6D11;">—</span></div>
-    <hr class="divider">
-    <div class="row" id="rowBaseMarkupClass" style="display:none;"><span class="row-label" id="lblBaseMarkupClass">Base markup (CMV × 1,30)</span><span style="font-weight:500;color:#534AB7;" id="baseMarkupClass">—</span></div>
-    <div class="row"><span class="row-label">Comissão ML (14%)</span><span class="row-neg" id="comMLClass">—</span></div>
-    <div class="row"><span class="row-label">Simples Nacional</span><span class="row-neg" id="impClass">—</span></div>
-    <div class="row" id="rowComVendClass" style="display:none;"><span class="row-label">Comissão vendedor</span><span class="row-neg" id="comVendClass">—</span></div>
-    <div class="row" id="rowAdsClass" style="display:none;"><span class="row-label">Mercado Ads</span><span class="row-neg" id="adsClass">—</span></div>
-    <div class="row"><span class="row-label">Frete (sua parte)</span><span class="row-neg" id="freteClass">—</span></div>
-    <div class="row"><span class="row-label">CMV</span><span class="row-neg" id="cmvClass">—</span></div>
-    <div class="row"><span class="row-label">Embalagem + insumos</span><span class="row-neg" id="embClass">—</span></div>
-    <hr class="divider">
-    <div class="row"><span style="font-size:13px;font-weight:500;">Lucro líquido</span><span class="row-pos" id="lucroClass" style="font-size:15px;">—</span></div>
-    <div style="background:#FFF8E6;border-radius:8px;padding:10px 12px;margin-top:10px;display:flex;justify-content:space-between;align-items:center;">
-      <div>
-        <div style="font-size:11px;font-weight:600;color:#854F0B;text-transform:uppercase;letter-spacing:0.06em;">💡 Preço FIC para promoções</div>
-        <div style="font-size:11px;color:#A0680A;margin-top:2px;">Preço de venda ÷ 0,70 · desconto máx. 30%</div>
-      </div>
-      <span style="font-size:22px;font-weight:500;color:#854F0B;" id="ficClass">—</span>
-    </div>
-  </div>
-</div>
+      &lt;section class=&quot;ruler panel&quot; style=&quot;margin-top:20px&quot; aria-label=&quot;Faixas de taxa da Shopee&quot;&gt;
+        &lt;h2&gt;Onde seus preços caem nas faixas da Shopee&lt;/h2&gt;
+        &lt;div class=&quot;track&quot;&gt;&lt;div class=&quot;inner&quot; id=&quot;inner&quot;&gt;&lt;div class=&quot;bar&quot; id=&quot;bar&quot;&gt;&lt;/div&gt;&lt;/div&gt;&lt;/div&gt;
+        &lt;div class=&quot;legend&quot;&gt;&lt;span class=&quot;lp&quot;&gt;Preço promocional&lt;/span&gt;&lt;span class=&quot;lf&quot;&gt;Preço cheio&lt;/span&gt;&lt;span class=&quot;lb&quot;&gt;Faixa do preço promocional&lt;/span&gt;&lt;/div&gt;
+      &lt;/section&gt;
 
-<div class="card">
-  <h2>Resumo · 4 anúncios combinados</h2>
-  <p class="muted">Média ponderada dos 2 Premium + 2 Clássico</p>
-  <div class="grid-4">
-    <div class="metric">
-      <div class="metric-val" id="mediaPreco" style="color:#185FA5;">—</div>
-      <div class="metric-lbl">preço médio dos 4 anúncios</div>
-    </div>
-    <div class="metric">
-      <div class="metric-val" id="mediaLucro" style="color:#3B6D11;">—</div>
-      <div class="metric-lbl">lucro médio por venda</div>
-    </div>
-    <div class="metric">
-      <div class="metric-val" id="mediaMargemReal">—</div>
-      <div class="metric-lbl" id="lblMargemReal">margem real sobre o preço</div>
-    </div>
-    <div class="metric">
-      <div class="metric-val" id="markupCusto" style="color:#534AB7;">—</div>
-      <div class="metric-lbl" id="lblMarkupCusto">markup sobre o CMV ✓ exato</div>
-    </div>
-  </div>
-</div>
+      &lt;div class=&quot;alerts&quot; id=&quot;alerts&quot;&gt;&lt;/div&gt;
 
-<div class="card">
-  <h2>Observações importantes</h2>
-  <div class="tip" id="tipFormula" style="border-color:#D85A30;">
-    <strong>Markup sobre o custo:</strong> o preço base é CMV × (1 + markup%). O frete é calculado automaticamente com base no peso e no preço final (iterativo). Abaixo de R$79 → frete fixo R$7,95. Acima → tabela ML 2026 por peso.
-  </div>
-  <div class="tip">
-    <strong>Fique de olho na faixa do Simples.</strong> Conforme o faturamento cresce, a alíquota sobe. Quando mudar de faixa, atualize o campo para recalibrar os preços antes de ajustar os anúncios.
-  </div>
-  <div class="tip" style="border-color:#3B6D11;">
-    <strong>Estratégia sugerida:</strong> use os 2 Premium para as cores de maior saída (preto, nude) e os 2 Clássico para cores secundárias. O Clássico sai mais barato e atrai quem pesquisa por menor preço; o Premium converte melhor por ter parcelamento e maior visibilidade.
-  </div>
-</div>
+      &lt;div class=&quot;tables&quot;&gt;
+        &lt;section class=&quot;panel&quot;&gt;
+          &lt;h2&gt;Composição no preço promocional&lt;/h2&gt;
+          &lt;div class=&quot;sub&quot; id=&quot;subPromo&quot;&gt;&lt;/div&gt;
+          &lt;div class=&quot;scroll&quot;&gt;&lt;table id=&quot;tPromo&quot;&gt;&lt;/table&gt;&lt;/div&gt;
+        &lt;/section&gt;
+        &lt;section class=&quot;panel&quot;&gt;
+          &lt;h2&gt;Composição no preço cheio&lt;/h2&gt;
+          &lt;div class=&quot;sub&quot; id=&quot;subFull&quot;&gt;&lt;/div&gt;
+          &lt;div class=&quot;scroll&quot;&gt;&lt;table id=&quot;tFull&quot;&gt;&lt;/table&gt;&lt;/div&gt;
+        &lt;/section&gt;
+      &lt;/div&gt;
 
-<script>
-let metodo = 'markup'; // 'markup' ou 'margem'
+      &lt;section class=&quot;panel&quot; style=&quot;margin-top:20px&quot;&gt;
+        &lt;h2&gt;Simular outro preço&lt;/h2&gt;
+        &lt;div class=&quot;sim&quot;&gt;
+          &lt;div class=&quot;field&quot;&gt;&lt;label for=&quot;simP&quot;&gt;Preço de venda final&lt;/label&gt;
+            &lt;div class=&quot;inp&quot;&gt;&lt;span&gt;R$&lt;/span&gt;&lt;input id=&quot;simP&quot; inputmode=&quot;decimal&quot; placeholder=&quot;Ex.: 94,90&quot; data-key=&quot;simP&quot;&gt;&lt;/div&gt;&lt;/div&gt;
+        &lt;/div&gt;
+        &lt;div class=&quot;scroll&quot; style=&quot;margin-top:14px&quot;&gt;&lt;table id=&quot;tSim&quot;&gt;&lt;/table&gt;&lt;/div&gt;
+      &lt;/section&gt;
 
-function setMetodo(m) {
-  metodo = m;
+      &lt;details class=&quot;panel&quot; id=&quot;tabDetails&quot;&gt;
+        &lt;summary&gt;Tabela de taxas da Shopee (CNPJ)&lt;/summary&gt;
+        &lt;p class=&quot;note&quot; style=&quot;margin:12px 0&quot;&gt;Vigente desde março/2026. O frete grátis já está embutido na comissão e na taxa fixa. Se a Shopee mudar as taxas, edite aqui: todos os cálculos se atualizam e a tabela fica salva neste navegador.&lt;/p&gt;
+        &lt;div class=&quot;scroll&quot;&gt;&lt;table class=&quot;tbl-edit&quot; id=&quot;tBands&quot;&gt;&lt;/table&gt;&lt;/div&gt;
+        &lt;div class=&quot;row-actions&quot;&gt;
+          &lt;button type=&quot;button&quot; id=&quot;resetBands&quot;&gt;Restaurar tabela de março/2026&lt;/button&gt;
+          &lt;span class=&quot;note&quot; id=&quot;bandsStatus&quot;&gt;&lt;/span&gt;
+        &lt;/div&gt;
+      &lt;/details&gt;
+    &lt;/main&gt;
+  &lt;/div&gt;
+&lt;/div&gt;
 
-  // Toggle visual
-  document.getElementById('btnMarkup').className = 'toggle-btn' + (m === 'markup' ? ' active-markup' : '');
-  document.getElementById('btnMargem').className = 'toggle-btn' + (m === 'margem' ? ' active-margem' : '');
+&lt;script&gt;
+(function(){
+  &quot;use strict&quot;;
+  var DEFAULT_INPUTS = {custo:&quot;34,56&quot;, margem:&quot;30&quot;, emb:&quot;1,00&quot;, vend:&quot;4&quot;, ads:&quot;10&quot;, nf:&quot;10&quot;, desc:&quot;30&quot;, arred:&quot;exato&quot;, simP:&quot;&quot;};
+  // meia = taxa fixa é 50% do preço (itens abaixo de R$ 8)
+  var DEFAULT_BANDS = [
+    {min:0,   max:7.99,   pct:20, fixo:0,  meia:true},
+    {min:8,   max:79.99,  pct:20, fixo:4,  meia:false},
+    {min:80,  max:99.99,  pct:14, fixo:16, meia:false},
+    {min:100, max:199.99, pct:14, fixo:20, meia:false},
+    {min:200, max:Infinity, pct:14, fixo:26, meia:false}
+  ];
+  var LS_IN = &quot;shopeePricing.inputs.v1&quot;, LS_B = &quot;shopeePricing.bands.v1&quot;;
 
-  // Label do campo de margem/markup
-  if (m === 'markup') {
-    document.getElementById('labelMargem').textContent = 'Markup sobre o custo (%)';
-    document.getElementById('hintMargem').textContent  = 'ex: 30 = CMV × 1,30';
-    document.getElementById('margem').value = 30;
-    document.getElementById('margem').max   = 300;
-    document.getElementById('boxMetodo').className     = 'metodo-box metodo-markup';
-    document.getElementById('boxMetodo').innerHTML     = '<strong>Markup sobre o custo:</strong> você define quanto quer ganhar <em>em cima do que investiu</em>. Ex: CMV R$28 × 1,30 = R$36,40 como base — depois os custos de canal são deduzidos para chegar ao preço final de venda.';
-    document.getElementById('tipFormula').innerHTML    = '<strong>Markup sobre o custo:</strong> o preço base é CMV × (1 + markup%). Sobre esse base são adicionados embalagem e frete, e então os percentuais de canal (ML, Simples, ADS, Vendedor) são recalculados sobre o preço final para garantir que o markup seja preservado mesmo após todas as deduções.';
-  } else {
-    document.getElementById('labelMargem').textContent = 'Margem líquida desejada (%)';
-    document.getElementById('hintMargem').textContent  = 'lucro que sobra após todos os custos';
-    document.getElementById('margem').value = 35;
-    document.getElementById('margem').max   = 70;
-    document.getElementById('boxMetodo').className     = 'metodo-box metodo-margem';
-    document.getElementById('boxMetodo').innerHTML     = '<strong>Margem sobre o preço de venda:</strong> você define quanto quer que sobre <em>do preço final</em>. Ex: 35% de margem = R$35 de cada R$100 vendidos ficam no bolso — todos os custos são deduzidos do preço de venda.';
-    document.getElementById('tipFormula').innerHTML    = '<strong>Margem sobre o preço de venda:</strong> Preço = (CMV + Embalagem + Frete) ÷ (1 − %ML − %Simples − %Vendedor − %ADS − %Margem). O frete é resolvido iterativamente: abaixo de R$79 → R$7,95 fixo; acima → tabela ML 2026 por peso.';
+  function load(key, fallback){
+    try{ var raw = localStorage.getItem(key); if(!raw) return fallback; return JSON.parse(raw); }catch(e){ return fallback; }
+  }
+  function save(key, val){ try{ localStorage.setItem(key, JSON.stringify(val)); }catch(e){} }
+
+  var inputs = Object.assign({}, DEFAULT_INPUTS, load(LS_IN, {}));
+  var bands = (load(LS_B, null) || DEFAULT_BANDS).map(function(b){ return Object.assign({}, b, {max: (b.max===null||b.max===&quot;inf&quot;) ? Infinity : b.max}); });
+
+  var $ = function(id){ return document.getElementById(id); };
+  var num = function(s){ if(s===undefined||s===null) return NaN; s=String(s).trim().replace(/\s/g,&quot;&quot;).replace(&quot;R$&quot;,&quot;&quot;); if(s.indexOf(&quot;,&quot;)&gt;-1){ s=s.replace(/\./g,&quot;&quot;).replace(&quot;,&quot;,&quot;.&quot;); } return parseFloat(s); };
+  var brl = function(v){ return isFinite(v) ? v.toLocaleString(&quot;pt-BR&quot;,{style:&quot;currency&quot;,currency:&quot;BRL&quot;}) : &quot;–&quot;; };
+  var pct = function(v,d){ return isFinite(v) ? (v*100).toLocaleString(&quot;pt-BR&quot;,{minimumFractionDigits:d===undefined?1:d,maximumFractionDigits:d===undefined?1:d})+&quot;%&quot; : &quot;–&quot;; };
+  var r2 = function(v){ return Math.round(v*100)/100; };
+  var fmtN = function(v){ return v===Infinity ? &quot;&quot; : String(v).replace(&quot;.&quot;,&quot;,&quot;); };
+
+  function bandOf(P){
+    for(var i=0;i&lt;bands.length;i++){ if(P&gt;=bands[i].min-1e-9 &amp;&amp; P&lt;=bands[i].max+0.004) return i; }
+    for(var j=0;j&lt;bands.length-1;j++){ if(P&gt;bands[j].max &amp;&amp; P&lt;bands[j+1].min) return j+1; }
+    return bands.length-1;
   }
 
-  document.getElementById('reputacao').addEventListener('change', function() {
-  const defaults = { verde: 50, amarela: 30, sem: 0 };
-  const key = this.value;
-  document.getElementById('coberturaML').value = defaults[key];
-  const hints = { verde: 'Verde/Líder → 50% padrão · edite conforme o ML mostrar', amarela: 'Amarela → 30% padrão · edite conforme o ML mostrar', sem: 'Sem reputação → 0% (você paga tudo)' };
-  document.getElementById('coberturaHint').textContent = hints[key];
-  calc();
-});
-document.getElementById('coberturaML').addEventListener('input', calc);
-calc();
-}
-
-function fmt(v)  { return 'R$ ' + v.toFixed(2).replace('.', ','); }
-function fpct(v) { return v.toFixed(1).replace('.', ',') + '%'; }
-function fmult(v){ return v.toFixed(2).replace('.', ',') + 'x'; }
-function gv(id)  { return parseFloat(document.getElementById(id).value) || 0; }
-
-// ===========================================================
-// TABELA DE FRETE ML 2026 — reputação verde/MercadoLíder
-// Fonte: tabela oficial ML (março 2026), faixas de peso × preço
-// Acima de R$79: frete variável por peso. Abaixo: R$7,95 fixo.
-// ===========================================================
-const FRETE_FIXO_BAIXO = 7.95; // preço ≤ R$78,99
-
-// Tabela: [pesoMaxGramas, freteVerde_79a149, freteAmarela_79a149, freteSem_79a149]
-// Faixas baseadas na tabela oficial ML 2026 (reputação verde/líder)
-// Para faixas de preço acima de R$149, os valores sobem progressivamente
-// Tabela com valor CHEIO do frete (antes do desconto por reputação)
-// Calibrada no ponto confirmado pelo ML: 334g, R$90 → R$26,50 cheio
-// Descontos por reputação aplicados separadamente em getFreteByPeso()
-// Verde/MercadoLíder: 50% desconto → paga 50%
-// Amarela: 30% desconto → paga 70%
-// Sem reputação: 0% desconto → paga 100%
-const TABELA_FRETE_CHEIA = [
-  // [pesoMaxG, valorCheio]  — independente de reputação
-  [  100,  22.00 ],
-  [  200,  24.00 ],
-  [  300,  25.50 ],
-  [  334,  26.50 ],  // âncora confirmada pelo ML
-  [  400,  27.20 ],
-  [  500,  28.50 ],
-  [  750,  30.00 ],
-  [ 1000,  31.50 ],
-  [ 1500,  34.00 ],
-  [ 2000,  36.50 ],
-  [ 3000,  42.00 ],
-  [ 5000,  52.00 ],
-  [ 6000,  62.00 ],
-  [ 8000,  76.00 ],
-  [10000,  88.00 ],
-  [15000, 100.00 ],
-  [99999, 130.00 ],
-];
-
-const DESCONTO_REP = { verde: 0.50, amarela: 0.30, sem: 0.00 };
-
-function getFreteByPeso(pesoG, repKey) {
-  let cheio = TABELA_FRETE_CHEIA[TABELA_FRETE_CHEIA.length - 1][1];
-  for (const row of TABELA_FRETE_CHEIA) {
-    if (pesoG <= row[0]) { cheio = row[1]; break; }
+  function params(){
+    return {
+      C:num(inputs.custo)||0, M:(num(inputs.margem)||0)/100, E:num(inputs.emb)||0,
+      v:(num(inputs.vend)||0)/100, a:(num(inputs.ads)||0)/100, n:(num(inputs.nf)||0)/100,
+      d:(num(inputs.desc)||0)/100
+    };
   }
-  // Usa o campo manual de cobertura
-  const coberturaEl  = document.getElementById('coberturaML');
-  const segurancaEl  = document.getElementById('freteSeguranca');
-  const descPct      = coberturaEl ? (parseFloat(coberturaEl.value) || 0) / 100 : (DESCONTO_REP[repKey] || 0);
-  const segurancaPct = segurancaEl ? (parseFloat(segurancaEl.value) || 0) / 100 : 0;
-  const descVal      = cheio * descPct;
-  const sellerBase   = cheio - descVal;
-  const seller       = sellerBase * (1 + segurancaPct); // aplica margem de segurança regional
-  return { cheio, descPct, descVal, sellerBase, seller, segurancaPct };
-}
 
-// Resolve a dependência circular: frete depende do preço, preço depende do frete.
-// Estratégia: itera até convergir (máx 20 iterações).
-function resolvePreco(comML, cmv, emb, imp, comVend, ads, margemV, pesoG, repKey) {
-  let frete = FRETE_FIXO_BAIXO; // chute inicial
-  let preco = 0;
-  let baseMarkup = null;
-  const pct = comML + imp + comVend + ads;
+  function breakdown(P, p){
+    var bi = bandOf(P), b = bands[bi];
+    var com = P*b.pct/100, fixo = b.meia ? P*0.5 : b.fixo;
+    var vend = P*p.v, ads = P*p.a, nf = P*p.n;
+    var lucro = P - com - fixo - vend - ads - nf - p.C - p.E;
+    return {P:P, bi:bi, b:b, com:com, fixo:fixo, vend:vend, ads:ads, nf:nf, lucro:lucro,
+            mCusto: p.C&gt;0 ? lucro/p.C : NaN, mVenda: P&gt;0 ? lucro/P : NaN};
+  }
 
-  for (let i = 0; i < 20; i++) {
-    let novoPraco;
-    if (metodo === 'markup') {
-      const den = 1 - pct;
-      baseMarkup = cmv * (1 + margemV);
-      novoPraco = den > 0.01 ? (baseMarkup + emb + frete) / den : 0;
-    } else {
-      const den = 1 - pct - margemV;
-      novoPraco = den > 0.01 ? (cmv + emb + frete) / den : 0;
+  // menor preço que atinge o lucro-alvo
+  function minPrice(p){
+    var L = p.C*p.M, best = null;
+    bands.forEach(function(b){
+      var denom = 1 - b.pct/100 - p.v - p.a - p.n - (b.meia?0.5:0);
+      if(denom&lt;=0) return;
+      var P = (p.C + p.E + (b.meia?0:b.fixo) + L)/denom;
+      if(P &lt; b.min) P = b.min;
+      if(P &gt; b.max + 1e-9) return;
+      P = Math.ceil(P*100 - 1e-6)/100;
+      if(P &gt; b.max + 1e-9) return;
+      if(best===null || P &lt; best) best = P;
+    });
+    return best;
+  }
+
+  function applyEnding(P, mode){
+    if(mode===&quot;exato&quot;) return P;
+    var cents = parseInt(mode,10)/100, bi = bandOf(P), max = bands[bi].max;
+    var base = Math.floor(P), cand = base + cents;
+    if(cand &lt; P - 1e-9) cand += 1;
+    cand = r2(cand);
+    if(cand &gt; max + 1e-9) return {P:P, clipped:true};
+    return cand;
+  }
+
+  function fullFromPromo(promo, d, p){
+    if(d&lt;=0) return {full:promo, promoReal:promo};
+    if(d&gt;=1) return null;
+    var full = Math.ceil(promo/(1-d)*100 - 1e-6)/100;
+    var real = r2(full*(1-d));
+    var maxBand = bands[bandOf(promo)].max;
+    var guard = 0;
+    while(real &gt; maxBand + 1e-9 &amp;&amp; guard&lt;5){ full = r2(full-0.01); real = r2(full*(1-d)); guard++; }
+    return {full:full, promoReal:real};
+  }
+
+  function rows(bd, p){
+    var labelFixo = bd.b.meia ? &quot;Taxa fixa Shopee (50% do preço)&quot; : &quot;Taxa fixa Shopee&quot;;
+    var list = [
+      [&quot;Preço de venda&quot;, &quot;100,0%&quot;, bd.P, &quot;&quot;],
+      [&quot;Comissão Shopee (frete incluso)&quot;, pct(bd.b.pct/100), -bd.com, &quot;&quot;],
+      [labelFixo, bd.b.meia?&quot;50,0%&quot;:&quot;&quot;, -bd.fixo, &quot;&quot;],
+      [&quot;Comissão do vendedor&quot;, pct(p.v), -bd.vend, &quot;&quot;],
+      [&quot;ADS&quot;, pct(p.a), -bd.ads, &quot;&quot;],
+      [&quot;Nota fiscal&quot;, pct(p.n), -bd.nf, &quot;&quot;],
+      [&quot;Custo do produto&quot;, &quot;&quot;, -p.C, &quot;&quot;],
+      [&quot;Embalagem&quot;, &quot;&quot;, -p.E, &quot;&quot;]
+    ];
+    var h = &#x27;&lt;thead&gt;&lt;tr&gt;&lt;th&gt;Item&lt;/th&gt;&lt;th class=&quot;n&quot;&gt;%&lt;/th&gt;&lt;th class=&quot;n&quot;&gt;R$&lt;/th&gt;&lt;/tr&gt;&lt;/thead&gt;&lt;tbody&gt;&#x27;;
+    list.forEach(function(r){ h += &#x27;&lt;tr&gt;&lt;td&gt;&#x27;+r[0]+&#x27;&lt;/td&gt;&lt;td class=&quot;n&quot;&gt;&#x27;+r[1]+&#x27;&lt;/td&gt;&lt;td class=&quot;n&quot;&gt;&#x27;+brl(r[2])+&#x27;&lt;/td&gt;&lt;/tr&gt;&#x27;; });
+    h += &#x27;&lt;tr class=&quot;total&#x27;+(bd.lucro&lt;0?&#x27; neg&#x27;:&#x27;&#x27;)+&#x27;&quot;&gt;&lt;td&gt;Lucro líquido&lt;/td&gt;&lt;td class=&quot;n&quot;&gt;&#x27;+pct(bd.mVenda)+&#x27;&lt;/td&gt;&lt;td class=&quot;n&quot;&gt;&#x27;+brl(bd.lucro)+&#x27;&lt;/td&gt;&lt;/tr&gt;&#x27;;
+    h += &#x27;&lt;tr&gt;&lt;td class=&quot;note&quot; colspan=&quot;2&quot;&gt;Margem sobre o custo&lt;/td&gt;&lt;td class=&quot;n note&quot;&gt;&#x27;+pct(bd.mCusto)+&#x27;&lt;/td&gt;&lt;/tr&gt;&#x27;;
+    return h + &#x27;&lt;/tbody&gt;&#x27;;
+  }
+
+  function bandLabel(b){
+    if(b.min===0) return &quot;Até &quot;+brl(b.max);
+    if(b.max===Infinity) return &quot;A partir de &quot;+brl(b.min);
+    return brl(b.min)+&quot; a &quot;+brl(b.max);
+  }
+  function bandFee(b){ return b.meia ? b.pct+&quot;% + 50% do preço&quot; : b.pct+&quot;% + &quot;+brl(b.fixo); }
+
+  function drawRuler(promoBd, fullBd){
+    var bar = $(&quot;bar&quot;), inner = $(&quot;inner&quot;);
+    var h = &quot;&quot;;
+    bands.forEach(function(b,i){
+      var on = (promoBd &amp;&amp; promoBd.bi===i) ? &quot; on&quot; : &quot;&quot;;
+      h += &#x27;&lt;div class=&quot;seg&#x27;+on+&#x27;&quot;&gt;&lt;b&gt;&#x27;+bandFee(b)+&#x27;&lt;/b&gt;&lt;span&gt;&#x27;+bandLabel(b)+&#x27;&lt;/span&gt;&lt;/div&gt;&#x27;;
+    });
+    bar.innerHTML = h;
+    inner.querySelectorAll(&quot;.marker&quot;).forEach(function(m){ m.remove(); });
+    function place(bd, cls, text){
+      if(!bd) return;
+      var b = bands[bd.bi], w = 100/bands.length;
+      var top = b.max===Infinity ? Math.max(b.min*2, 400) : b.max;
+      var frac = Math.min(1, Math.max(0,(bd.P-b.min)/(top-b.min)));
+      var left = (bd.bi + 0.12 + frac*0.76)*w;
+      var m = document.createElement(&quot;div&quot;);
+      m.className = &quot;marker &quot;+cls; m.style.left = left+&quot;%&quot;;
+      m.innerHTML = &quot;&lt;i&gt;&quot;+text+&quot;&lt;/i&gt;&quot;;
+      inner.appendChild(m);
     }
-    // Frete que o VENDEDOR paga (já com desconto de reputação)
-    const freteObj  = novoPraco < 79 ? { cheio: FRETE_FIXO_BAIXO, descPct: 0, descVal: 0, seller: FRETE_FIXO_BAIXO } : getFreteByPeso(pesoG, repKey);
-    const novoFrete = freteObj.seller;
-    if (Math.abs(novoPraco - preco) < 0.001 && Math.abs(novoFrete - frete) < 0.001) break;
-    preco  = novoPraco;
-    frete  = novoFrete;
-  }
-  // Recalcula objeto final de frete com preço convergido
-  const freteObjFinal = preco < 79
-    ? { cheio: FRETE_FIXO_BAIXO, descPct: 0, descVal: 0, seller: FRETE_FIXO_BAIXO }
-    : getFreteByPeso(pesoG, repKey);
-  return { preco, frete: freteObjFinal.seller, freteObj: freteObjFinal, baseMarkup };
-}
-
-function getPesoCobrado() {
-  const pesoRealG  = gv('peso');
-  const L = gv('dimL'), A = gv('dimA'), P = gv('dimP');
-  const pesoVolG   = L > 0 && A > 0 && P > 0 ? Math.round((L * A * P) / 6000 * 1000) : 0;
-  return { pesoRealG, pesoVolG, pesoCobradoG: Math.max(pesoRealG, pesoVolG), usaVol: pesoVolG > pesoRealG };
-}
-
-function calcPreco(comML) {
-  const cmv     = gv('cmv');
-  const emb     = gv('embalagem');
-  const imp     = gv('imposto')     / 100;
-  const comVend = gv('comVendedor') / 100;
-  const ads     = gv('ads')         / 100;
-  const margemV = gv('margem')      / 100;
-  const { pesoCobradoG } = getPesoCobrado();
-  const repKey  = document.getElementById('reputacao').value;
-  return resolvePreco(comML, cmv, emb, imp, comVend, ads, margemV, pesoCobradoG, repKey);
-}
-
-function calc() {
-  const cmv     = gv('cmv');
-  const emb     = gv('embalagem');
-  const imp     = gv('imposto')     / 100;
-  const comVend = gv('comVendedor') / 100;
-  const ads     = gv('ads')         / 100;
-  const margemV = gv('margem');
-
-  const COM_PREM  = 0.19;
-  const COM_CLASS = 0.14;
-
-  const rPrem  = calcPreco(COM_PREM);
-  const rClass = calcPreco(COM_CLASS);
-  const pPrem  = rPrem.preco;
-  const pClass = rClass.preco;
-  const fretePremVal   = rPrem.frete;
-  const freteClassVal  = rClass.frete;
-  const freteObjPrem   = rPrem.freteObj;
-  const freteObjClass  = rClass.freteObj;
-
-  const comMLPrem    = pPrem  * COM_PREM;
-  const comMLClass   = pClass * COM_CLASS;
-  const impPrem      = pPrem  * imp;
-  const impClass     = pClass * imp;
-  const comVendPrem  = pPrem  * comVend;
-  const comVendClass = pClass * comVend;
-  const adsPremVal   = pPrem  * ads;
-  const adsClassVal  = pClass * ads;
-
-  const lucroPrem  = pPrem  - comMLPrem  - impPrem  - comVendPrem  - adsPremVal  - fretePremVal  - cmv - emb;
-  const lucroClass = pClass - comMLClass - impClass - comVendClass - adsClassVal - freteClassVal - cmv - emb;
-
-  // Atualiza boxes de peso volumétrico e frete
-  const { pesoRealG, pesoVolG, pesoCobradoG, usaVol } = getPesoCobrado();
-  const repKey   = document.getElementById('reputacao').value;
-  const repLabel = repKey === 'verde' ? 'Verde/MercadoLíder' : repKey === 'amarela' ? 'Amarela' : 'Sem reputação';
-
-  // Box peso volumétrico
-  document.getElementById('pesoVolVal').textContent = (pesoVolG / 1000).toFixed(3).replace('.', ',') + ' kg';
-  document.getElementById('pesoVolumetricoDesc').textContent = usaVol
-    ? `⚠️ Volumétrico (${pesoVolG}g) > Real (${pesoRealG}g) → ML cobra ${pesoVolG}g`
-    : `✅ Real (${pesoRealG}g) ≥ Volumétrico (${pesoVolG}g) → ML cobra ${pesoRealG}g`;
-
-  // Box frete com detalhamento cheio → desconto → você paga
-  const fo = freteObjPrem;
-  if (pPrem < 79) {
-    document.getElementById('freteInfoDesc').textContent = `Preço ≤ R$78,99 → frete fixo R$7,95`;
-    document.getElementById('freteInfoVal').textContent  = fmt(FRETE_FIXO_BAIXO);
-    document.getElementById('freteDetalhe').style.display = 'none';
-  } else {
-    const descLabel = fo.descPct > 0
-    ? `✅ ML cobre ${(fo.descPct*100).toFixed(0)}% → base ${fmt(fo.sellerBase)} + segurança ${(fo.segurancaPct*100).toFixed(0)}% = ${fmt(fo.seller)}`
-    : `⚠️ Sem cobertura ML · base ${fmt(fo.sellerBase)} + segurança ${(fo.segurancaPct*100).toFixed(0)}% = ${fmt(fo.seller)}`;
-    document.getElementById('freteInfoDesc').textContent  = `${pesoCobradoG}g · Frete cheio: ${fmt(fo.cheio)}`;
-    document.getElementById('freteInfoVal').textContent   = fmt(fo.seller);
-    document.getElementById('freteDetalhe').style.display = 'block';
-    document.getElementById('freteDetalheText').textContent = descLabel;
+    place(promoBd, &quot;promo&quot;, &quot;Promo &quot;+brl(promoBd &amp;&amp; promoBd.P));
+    if(fullBd &amp;&amp; (!promoBd || fullBd.P!==promoBd.P)) place(fullBd, &quot;full&quot;, &quot;Cheio &quot;+brl(fullBd.P));
   }
 
-  // Mostra/oculta linhas
-  const showComVend    = comVend > 0;
-  const showAds        = ads > 0;
-  const showBaseMarkup = metodo === 'markup';
-  const multLabel      = 'Base markup (CMV × ' + fmult(1 + margemV/100) + ')';
-
-  document.getElementById('rowComVendPrem').style.display    = showComVend    ? 'flex' : 'none';
-  document.getElementById('rowComVendClass').style.display   = showComVend    ? 'flex' : 'none';
-  document.getElementById('rowAdsPrem').style.display        = showAds        ? 'flex' : 'none';
-  document.getElementById('rowAdsClass').style.display       = showAds        ? 'flex' : 'none';
-  document.getElementById('rowBaseMarkupPrem').style.display  = showBaseMarkup ? 'flex' : 'none';
-  document.getElementById('rowBaseMarkupClass').style.display = showBaseMarkup ? 'flex' : 'none';
-
-  if (showBaseMarkup) {
-    document.getElementById('lblBaseMarkupPrem').textContent  = multLabel;
-    document.getElementById('lblBaseMarkupClass').textContent = multLabel;
-    document.getElementById('baseMarkupPrem').textContent     = fmt(rPrem.baseMarkup);
-    document.getElementById('baseMarkupClass').textContent    = fmt(rClass.baseMarkup);
+  function drawBandsTable(){
+    var h = &#x27;&lt;colgroup&gt;&lt;col style=&quot;width:56px&quot;&gt;&lt;col&gt;&lt;col&gt;&lt;col&gt;&lt;col&gt;&lt;/colgroup&gt;&lt;thead&gt;&lt;tr&gt;&lt;th&gt;Faixa&lt;/th&gt;&lt;th class=&quot;n&quot;&gt;De (R$)&lt;/th&gt;&lt;th class=&quot;n&quot;&gt;Até (R$)&lt;/th&gt;&lt;th class=&quot;n&quot;&gt;Comissão (%)&lt;/th&gt;&lt;th class=&quot;n&quot;&gt;Taxa fixa (R$)&lt;/th&gt;&lt;/tr&gt;&lt;/thead&gt;&lt;tbody&gt;&#x27;;
+    bands.forEach(function(b,i){
+      h += &#x27;&lt;tr&gt;&lt;td&gt;&#x27;+(i+1)+&#x27;&lt;/td&gt;&#x27;+
+        &#x27;&lt;td&gt;&lt;input data-b=&quot;&#x27;+i+&#x27;&quot; data-f=&quot;min&quot; value=&quot;&#x27;+fmtN(b.min)+&#x27;&quot; inputmode=&quot;decimal&quot; aria-label=&quot;Faixa &#x27;+(i+1)+&#x27; valor inicial&quot;&gt;&lt;/td&gt;&#x27;+
+        &#x27;&lt;td&gt;&lt;input data-b=&quot;&#x27;+i+&#x27;&quot; data-f=&quot;max&quot; value=&quot;&#x27;+(b.max===Infinity?&quot;&quot;:fmtN(b.max))+&#x27;&quot; placeholder=&quot;sem limite&quot; inputmode=&quot;decimal&quot; aria-label=&quot;Faixa &#x27;+(i+1)+&#x27; valor final&quot;&gt;&lt;/td&gt;&#x27;+
+        &#x27;&lt;td&gt;&lt;input data-b=&quot;&#x27;+i+&#x27;&quot; data-f=&quot;pct&quot; value=&quot;&#x27;+fmtN(b.pct)+&#x27;&quot; inputmode=&quot;decimal&quot; aria-label=&quot;Faixa &#x27;+(i+1)+&#x27; comissão&quot;&gt;&lt;/td&gt;&#x27;+
+        (b.meia ? &#x27;&lt;td class=&quot;n note&quot;&gt;50% do preço&lt;/td&gt;&#x27; :
+        &#x27;&lt;td&gt;&lt;input data-b=&quot;&#x27;+i+&#x27;&quot; data-f=&quot;fixo&quot; value=&quot;&#x27;+fmtN(b.fixo)+&#x27;&quot; inputmode=&quot;decimal&quot; aria-label=&quot;Faixa &#x27;+(i+1)+&#x27; taxa fixa&quot;&gt;&lt;/td&gt;&#x27;)+
+        &#x27;&lt;/tr&gt;&#x27;;
+    });
+    $(&quot;tBands&quot;).innerHTML = h + &#x27;&lt;/tbody&gt;&#x27;;
   }
 
-  // Premium
-  document.getElementById('pPrem').textContent       = fmt(pPrem);
-  document.getElementById('comMLPrem').textContent   = '− ' + fmt(comMLPrem);
-  document.getElementById('impPrem').textContent     = '− ' + fmt(impPrem);
-  document.getElementById('comVendPrem').textContent = '− ' + fmt(comVendPrem);
-  document.getElementById('adsPrem').textContent     = '− ' + fmt(adsPremVal);
-  document.getElementById('fretePrem').textContent   = '− ' + fmt(fretePremVal);
-  document.getElementById('cmvPrem').textContent     = '− ' + fmt(cmv);
-  document.getElementById('embPrem').textContent     = '− ' + fmt(emb);
-  document.getElementById('lucroPrem').textContent   = fmt(lucroPrem);
-  document.getElementById('ficPrem').textContent     = fmt(pPrem / 0.70);
+  function render(){
+    var p = params(), alerts = [];
+    var minP = minPrice(p);
+    var promoBd = null, fullBd = null, promoInfo = null;
 
-  // Clássico
-  document.getElementById('pClass').textContent       = fmt(pClass);
-  document.getElementById('comMLClass').textContent   = '− ' + fmt(comMLClass);
-  document.getElementById('impClass').textContent     = '− ' + fmt(impClass);
-  document.getElementById('comVendClass').textContent = '− ' + fmt(comVendClass);
-  document.getElementById('adsClass').textContent     = '− ' + fmt(adsClassVal);
-  document.getElementById('freteClass').textContent   = '− ' + fmt(freteClassVal);
-  document.getElementById('cmvClass').textContent     = '− ' + fmt(cmv);
-  document.getElementById('embClass').textContent     = '− ' + fmt(emb);
-  document.getElementById('lucroClass').textContent   = fmt(lucroClass);
-  document.getElementById('ficClass').textContent     = fmt(pClass / 0.70);
+    if(minP===null || !(p.C&gt;0)){
+      $(&quot;promoV&quot;).textContent = &quot;–&quot;; $(&quot;fullV&quot;).textContent = &quot;–&quot;;
+      $(&quot;promoS&quot;).textContent = p.C&gt;0 ? &quot;Com esses percentuais nenhum preço atinge a margem.&quot; : &quot;Informe o custo do produto.&quot;;
+      $(&quot;fullS&quot;).textContent = &quot;&quot;;
+      $(&quot;tPromo&quot;).innerHTML = &quot;&quot;; $(&quot;tFull&quot;).innerHTML = &quot;&quot;; $(&quot;subPromo&quot;).textContent=&quot;&quot;; $(&quot;subFull&quot;).textContent=&quot;&quot;;
+      if(p.C&gt;0) alerts.push([&quot;Os percentuais sobre a venda (Shopee + vendedor + ADS + nota) somam 100% ou mais. Reduza algum deles.&quot;, false]);
+      drawRuler(null,null);
+    } else {
+      var target = applyEnding(minP, inputs.arred);
+      if(typeof target === &quot;object&quot;){ target = target.P; alerts.push([&quot;O final escolhido passaria para a próxima faixa da Shopee. Mantive o preço exato.&quot;, false]); }
+      promoInfo = fullFromPromo(target, p.d, p);
+      var promoP = promoInfo ? promoInfo.promoReal : target;
+      var fullP = promoInfo ? promoInfo.full : target;
+      promoBd = breakdown(promoP, p);
+      fullBd = breakdown(fullP, p);
 
-  // Resumo — métricas exatas conforme o método selecionado
-  const mediaPreco  = (2 * pPrem  + 2 * pClass)  / 4;
-  const mediaLucro  = (2 * lucroPrem + 2 * lucroClass) / 4;
+      $(&quot;promoV&quot;).textContent = brl(promoP);
+      $(&quot;promoS&quot;).innerHTML = &quot;Lucro &lt;b&gt;&quot;+brl(promoBd.lucro)+&quot;&lt;/b&gt; · &quot;+pct(promoBd.mCusto)+&quot; sobre o custo&quot;;
+      $(&quot;fullV&quot;).textContent = p.d&gt;0 ? brl(fullP) : brl(promoP);
+      $(&quot;fullS&quot;).innerHTML = p.d&gt;0 ? &quot;Com &quot;+pct(p.d,0)+&quot; de desconto → &quot;+brl(promoP)+&quot; · lucro sem promoção &quot;+brl(fullBd.lucro) : &quot;Sem desconto de promoção&quot;;
 
-  // Markup mode: mostra lucro/CMV (exato = markup% digitado)
-  // Margem mode: mostra lucro/preço (exato = margem% digitada)
-  const metricaCusto  = cmv > 0 ? (mediaLucro / cmv) * 100 : 0;
-  const metricaPreco  = mediaPreco > 0 ? (mediaLucro / mediaPreco) * 100 : 0;
+      $(&quot;tPromo&quot;).innerHTML = rows(promoBd, p);
+      $(&quot;tFull&quot;).innerHTML = rows(fullBd, p);
+      $(&quot;subPromo&quot;).textContent = &quot;Faixa &quot;+bandLabel(promoBd.b)+&quot; · &quot;+bandFee(promoBd.b);
+      $(&quot;subFull&quot;).textContent = &quot;Faixa &quot;+bandLabel(fullBd.b)+&quot; · &quot;+bandFee(fullBd.b);
 
-  document.getElementById('mediaPreco').textContent = fmt(mediaPreco);
-  document.getElementById('mediaLucro').textContent = fmt(mediaLucro);
+      // alertas
+      var pb = promoBd.b;
+      if(pb.max!==Infinity &amp;&amp; pb.max - promoP &lt; 2){
+        alerts.push([&quot;O preço promocional está a &quot;+brl(r2(pb.max-promoP))+&quot; do limite da faixa. Acima de &quot;+brl(pb.max)+&quot; a Shopee passa a cobrar &quot;+bandFee(bands[promoBd.bi+1])+&quot;. Cupons e ofertas precisam manter o preço final dentro da faixa.&quot;, false]);
+      }
+      if(promoBd.bi&gt;0){
+        var prev = bands[promoBd.bi-1];
+        var prevBd = breakdown(prev.max, p);
+        if(prevBd.lucro &gt;= promoBd.lucro - 0.005){
+          alerts.push([&quot;A &quot;+brl(prev.max)+&quot; (faixa anterior) o lucro seria &quot;+brl(prevBd.lucro)+&quot;, igual ou maior que no preço atual.&quot;, false]);
+        } else {
+          alerts.push([&quot;Na faixa anterior (até &quot;+brl(prev.max)+&quot;) o lucro máximo seria &quot;+brl(prevBd.lucro)+&quot; (&quot;+pct(prevBd.mCusto)+&quot; sobre o custo), abaixo da sua meta.&quot;, true]);
+        }
+      }
+      if(p.d&gt;0 &amp;&amp; fullBd.bi!==promoBd.bi){
+        alerts.push([&quot;O preço cheio cai em outra faixa (&quot;+bandFee(fullBd.b)+&quot;). Se vender sem promoção, o lucro é &quot;+brl(fullBd.lucro)+&quot;.&quot;, true]);
+      }
+      if(p.d&gt;0){
+        alerts.push([&quot;O preço cheio precisa ter sido praticado de verdade antes da promoção. A Shopee pode recusar ofertas relâmpago com desconto sobre um preço recém-aumentado.&quot;, false]);
+      }
+      drawRuler(promoBd, fullBd);
+    }
 
-  if (metodo === 'markup') {
-    document.getElementById('mediaMargemReal').textContent  = fpct(metricaPreco);
-    document.getElementById('markupCusto').textContent      = fpct(metricaCusto);
-    document.getElementById('lblMargemReal').textContent    = 'margem real sobre o preço';
-    document.getElementById('lblMarkupCusto').textContent   = 'markup sobre o CMV ✓ exato';
-  } else {
-    document.getElementById('mediaMargemReal').textContent  = fpct(metricaPreco);
-    document.getElementById('markupCusto').textContent      = fpct(metricaCusto);
-    document.getElementById('lblMargemReal').textContent    = 'margem sobre o preço ✓ exato';
-    document.getElementById('lblMarkupCusto').textContent   = 'markup sobre o CMV';
+    // simulação
+    var sp = num(inputs.simP);
+    if(sp&gt;0){
+      var sb = breakdown(sp, p);
+      $(&quot;tSim&quot;).innerHTML = rows(sb, p);
+    } else {
+      $(&quot;tSim&quot;).innerHTML = &#x27;&lt;tbody&gt;&lt;tr&gt;&lt;td class=&quot;note&quot;&gt;Digite um preço para ver a composição e o lucro nele.&lt;/td&gt;&lt;/tr&gt;&lt;/tbody&gt;&#x27;;
+    }
+
+    $(&quot;alerts&quot;).innerHTML = alerts.map(function(a){ return &#x27;&lt;div class=&quot;alert&#x27;+(a[1]?&#x27; ok&#x27;:&#x27;&#x27;)+&#x27;&quot;&gt;&#x27;+a[0]+&#x27;&lt;/div&gt;&#x27;; }).join(&quot;&quot;);
   }
 
-  // Pills
-  document.getElementById('pillCmv').textContent        = 'CMV R$ '        + cmv.toFixed(2).replace('.', ',');
-  document.getElementById('pillEmbalagem').textContent  = 'Embalagem R$ '  + emb.toFixed(2).replace('.', ',');
-  document.getElementById('pillFrete').textContent      = 'Frete Prem R$ '  + fretePremVal.toFixed(2).replace('.', ',');
-  document.getElementById('pillPeso').textContent       = (usaVol ? '📦 Vol. ' : '⚖️ Real ') + pesoCobradoG + 'g';
-  document.getElementById('pillImposto').textContent    = 'Simples '        + gv('imposto').toFixed(1) + '%';
-  document.getElementById('pillComVendedor').textContent= 'Com. Vendedor '  + gv('comVendedor').toFixed(1) + '%';
-  document.getElementById('pillAds').textContent        = 'ADS '            + gv('ads').toFixed(1) + '%';
-  document.getElementById('pillMargem').textContent     = (metodo === 'markup' ? 'Markup ' : 'Margem ') + margemV.toFixed(0) + '%';
+  // ligar entradas
+  document.querySelectorAll(&quot;[data-key]&quot;).forEach(function(el){
+    el.value = inputs[el.dataset.key] || &quot;&quot;;
+    el.addEventListener(&quot;input&quot;, function(){ inputs[el.dataset.key] = el.value; save(LS_IN, inputs); render(); });
+  });
+  $(&quot;reset-inputs&quot;).addEventListener(&quot;click&quot;, function(){
+    inputs = Object.assign({}, DEFAULT_INPUTS); save(LS_IN, inputs);
+    document.querySelectorAll(&quot;[data-key]&quot;).forEach(function(el){ el.value = inputs[el.dataset.key] || &quot;&quot;; });
+    render();
+  });
+
+  $(&quot;tBands&quot;).addEventListener(&quot;input&quot;, function(e){
+    var t = e.target; if(!t.dataset || t.dataset.b===undefined) return;
+    var i = +t.dataset.b, f = t.dataset.f, v = num(t.value);
+    if(f===&quot;max&quot; &amp;&amp; t.value.trim()===&quot;&quot;){ v = Infinity; }
+    if(!isFinite(v) &amp;&amp; v!==Infinity) { $(&quot;bandsStatus&quot;).textContent = &quot;Valor inválido na faixa &quot;+(i+1)+&quot;.&quot;; return; }
+    bands[i][f] = v;
+    save(LS_B, bands.map(function(b){ return Object.assign({}, b, {max: b.max===Infinity ? &quot;inf&quot; : b.max}); }));
+    $(&quot;bandsStatus&quot;).textContent = &quot;Tabela personalizada salva.&quot;;
+    render();
+  });
+  $(&quot;resetBands&quot;).addEventListener(&quot;click&quot;, function(){
+    bands = DEFAULT_BANDS.map(function(b){ return Object.assign({}, b); });
+    try{ localStorage.removeItem(LS_B); }catch(e){}
+    $(&quot;bandsStatus&quot;).textContent = &quot;Tabela de março/2026 restaurada.&quot;;
+    drawBandsTable(); render();
+  });
+
+  drawBandsTable();
+  render();
+})();
+&lt;/script&gt;
+&lt;/body&gt;
+&lt;/html&gt;
+"></iframe>
+<iframe id="f-ml" title="Precificação Mercado Livre" class="" srcdoc="&lt;!DOCTYPE html&gt;
+&lt;html lang=&quot;pt-BR&quot;&gt;
+&lt;head&gt;
+&lt;meta charset=&quot;utf-8&quot;&gt;
+&lt;meta name=&quot;viewport&quot; content=&quot;width=device-width, initial-scale=1, viewport-fit=cover&quot;&gt;
+&lt;title&gt;Precificação Mercado Livre&lt;/title&gt;
+&lt;link rel=&quot;preconnect&quot; href=&quot;https://fonts.googleapis.com&quot;&gt;
+&lt;link rel=&quot;preconnect&quot; href=&quot;https://fonts.gstatic.com&quot; crossorigin&gt;
+&lt;link href=&quot;https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&amp;display=swap&quot; rel=&quot;stylesheet&quot;&gt;
+&lt;style&gt;
+:root{
+  --bg:#F5F3F7; --panel:#FFFFFF; --ink:#241B2C; --muted:#6E6478; --line:#E3DDE8;
+  --plum:#6A2C68; --plum-soft:#F1E6F0; --profit:#1C7A57; --profit-soft:#E3F2EB;
+  --warn:#A6461F; --warn-soft:#FBEDE5; --band-a:#EDE6F0; --band-b:#E2D6E8;
+  --field:#FBFAFC;
+  box-sizing:border-box;
+  padding-top:env(safe-area-inset-top,0px); padding-bottom:env(safe-area-inset-bottom,0px);
 }
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme=&quot;light&quot;]){
+    --bg:#17121B; --panel:#211A26; --ink:#F1EBF4; --muted:#A99CB2; --line:#382D3F;
+    --plum:#D59BD2; --plum-soft:#3A2440; --profit:#6BD3A5; --profit-soft:#173328;
+    --warn:#F0A07C; --warn-soft:#3C2219; --band-a:#2B2231; --band-b:#35293C; --field:#1B1520;
+  }
+}
+:root[data-theme=&quot;dark&quot;]{
+  --bg:#17121B; --panel:#211A26; --ink:#F1EBF4; --muted:#A99CB2; --line:#382D3F;
+  --plum:#D59BD2; --plum-soft:#3A2440; --profit:#6BD3A5; --profit-soft:#173328;
+  --warn:#F0A07C; --warn-soft:#3C2219; --band-a:#2B2231; --band-b:#35293C; --field:#1B1520;
+}
+*,*::before,*::after{box-sizing:border-box}
+html{scroll-padding-top:env(safe-area-inset-top,0px)}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:&quot;Manrope&quot;,system-ui,-apple-system,&quot;Segoe UI&quot;,Roboto,sans-serif;font-size:15px;line-height:1.5;font-variant-numeric:tabular-nums}
+.wrap{max-width:1180px;margin:0 auto;padding:28px 20px 48px}
+header h1{font-size:28px;font-weight:800;letter-spacing:-.02em;margin:0 0 4px}
+header p{margin:0;color:var(--muted);max-width:62ch}
+.grid{display:grid;grid-template-columns:340px 1fr;gap:20px;margin-top:24px;align-items:start}
+@media (max-width:880px){.grid{grid-template-columns:1fr}}
+.panel{background:var(--panel);border:1px solid var(--line);border-radius:14px;padding:20px}
+.panel h2{font-size:16px;font-weight:700;margin:0 0 14px}
+.field{margin-bottom:14px}
+.field label{display:block;font-size:13px;font-weight:600;margin-bottom:5px}
+.field .hint{font-size:12px;color:var(--muted);margin-top:3px}
+.inp{display:flex;align-items:center;border:1px solid var(--line);border-radius:9px;background:var(--field);overflow:hidden}
+.inp:focus-within{border-color:var(--plum);box-shadow:0 0 0 3px var(--plum-soft)}
+.inp span{padding:0 10px;color:var(--muted);font-size:13px;font-weight:600}
+.inp input,.inp select{flex:1;min-width:0;border:0;background:transparent;color:var(--ink);font:inherit;font-weight:600;padding:9px 10px;outline:none}
+.inp select{cursor:pointer}
+.sep{height:1px;background:var(--line);margin:18px 0}
 
-['cmv','embalagem','peso','dimL','dimA','dimP','imposto','comVendedor','ads','margem','coberturaML','freteSeguranca'].forEach(id =>
-  document.getElementById(id).addEventListener('input', calc)
-);
-calc();
+.hero{display:grid;grid-template-columns:1fr 1fr;gap:0;border:1px solid var(--line);border-radius:14px;background:var(--panel);overflow:hidden}
+@media (max-width:560px){.hero{grid-template-columns:1fr}}
+.hero &gt; div{padding:20px 22px}
+.hero &gt; div + div{border-left:1px solid var(--line)}
+@media (max-width:560px){.hero &gt; div + div{border-left:0;border-top:1px solid var(--line)}}
+.hero .k{font-size:13px;color:var(--muted);font-weight:600}
+.hero .v{font-size:40px;font-weight:800;letter-spacing:-.03em;line-height:1.1;margin:4px 0 6px}
+.hero .promo .v{color:var(--plum)}
+.hero .full .v{text-decoration:line-through;text-decoration-thickness:2px;text-decoration-color:var(--muted)}
+.hero .s{font-size:13px;color:var(--muted)}
+.hero .s b{color:var(--profit)}
+
+.ruler{margin-top:20px}
+.ruler .track{overflow-x:auto;padding:0 2px}
+.ruler .inner{min-width:640px;position:relative;padding:34px 0 38px}
+.ruler .bar{position:relative;display:flex;min-height:64px;border-radius:10px}
+.ruler .seg{flex:1;position:relative;display:flex;flex-direction:column;justify-content:center;gap:2px;padding:10px 12px;font-size:12px;line-height:1.3;color:var(--muted);border-right:2px solid var(--panel)}
+.ruler .seg:nth-child(odd){background:var(--band-a)}
+.ruler .seg:nth-child(even){background:var(--band-b)}
+.ruler .seg:first-child{border-radius:10px 0 0 10px}
+.ruler .seg:last-child{border-radius:0 10px 10px 0;border-right:0}
+.ruler .seg b{color:var(--ink);font-size:13px;font-weight:700}
+.ruler .seg.on{box-shadow:inset 0 0 0 2px var(--plum);background:var(--plum-soft)}
+.marker{position:absolute;width:0;z-index:2}
+.marker::before{content:&quot;&quot;;position:absolute;left:-6px;border-left:6px solid transparent;border-right:6px solid transparent}
+.marker i{position:absolute;left:0;transform:translateX(-50%);font-style:normal;font-size:12px;font-weight:700;white-space:nowrap;padding:2px 8px;border-radius:6px}
+.marker.promo{top:0}
+.marker.promo::before{top:22px;border-top:8px solid var(--plum)}
+.marker.promo i{top:0;background:var(--plum);color:var(--panel)}
+.marker.full{bottom:0}
+.marker.full::before{bottom:22px;border-bottom:8px solid var(--muted)}
+.marker.full i{bottom:0;background:var(--panel);color:var(--ink);border:1px solid var(--line)}
+.ruler .legend{display:flex;gap:18px;flex-wrap:wrap;font-size:12px;color:var(--muted);margin-top:4px}
+.ruler .legend span::before{content:&quot;&quot;;display:inline-block;width:10px;height:10px;border-radius:3px;margin-right:6px;vertical-align:-1px}
+.ruler .legend .lp::before{background:var(--plum)}
+.ruler .legend .lf::before{background:var(--panel);border:1px solid var(--muted)}
+.ruler .legend .lb::before{background:var(--plum-soft);box-shadow:inset 0 0 0 2px var(--plum)}
+
+.alerts{margin-top:18px;display:flex;flex-direction:column;gap:8px}
+.alert{padding:10px 14px;border-radius:10px;font-size:13.5px;background:var(--warn-soft);color:var(--ink);border-left:3px solid var(--warn)}
+.alert.ok{background:var(--profit-soft);border-left-color:var(--profit)}
+
+.tables{display:grid;grid-template-columns:1fr 1fr;gap:20px;margin-top:20px}
+@media (max-width:720px){.tables{grid-template-columns:1fr}}
+.scroll{overflow-x:auto}
+table{width:100%;border-collapse:collapse;font-size:13.5px}
+th,td{padding:7px 4px;text-align:left;border-bottom:1px solid var(--line)}
+th{font-weight:600;color:var(--muted);font-size:12px}
+td.n,th.n{text-align:right;white-space:nowrap}
+tr.total td{font-weight:800;border-bottom:0;padding-top:10px}
+tr.total td.n{color:var(--profit)}
+tr.neg td.n{color:var(--warn)}
+.sub{font-size:12px;color:var(--muted);margin:-8px 0 12px}
+
+details{margin-top:20px}
+summary{cursor:pointer;font-weight:700;font-size:15px;list-style:none;display:flex;align-items:center;gap:8px}
+summary::-webkit-details-marker{display:none}
+summary::before{content:&quot;+&quot;;display:inline-grid;place-items:center;width:22px;height:22px;border-radius:6px;background:var(--plum-soft);color:var(--plum);font-weight:800}
+details[open] summary::before{content:&quot;−&quot;}
+.tbl-edit{table-layout:fixed;min-width:560px}
+.tbl-edit th,.tbl-edit td{padding:8px 6px;vertical-align:middle}
+.tbl-edit th{text-align:right}
+.tbl-edit th:first-child,.tbl-edit td:first-child{width:56px;text-align:center}
+.tbl-edit td.n{text-align:right;padding-right:14px}
+.tbl-edit input{display:block;width:100%;min-width:0;border:1px solid var(--line);border-radius:7px;background:var(--field);color:var(--ink);font:inherit;font-weight:600;padding:6px 8px;text-align:right}
+.tbl-edit input:focus{outline:none;border-color:var(--plum);box-shadow:0 0 0 3px var(--plum-soft)}
+.row-actions{display:flex;gap:10px;flex-wrap:wrap;margin-top:14px;align-items:center}
+button{font:inherit;font-weight:700;font-size:13px;border-radius:9px;padding:8px 14px;cursor:pointer;border:1px solid var(--line);background:var(--panel);color:var(--ink)}
+button.primary{background:var(--plum);border-color:var(--plum);color:var(--panel)}
+button:focus-visible{outline:3px solid var(--plum-soft);outline-offset:1px}
+.note{font-size:12px;color:var(--muted)}
+.seg-tog{display:grid;grid-template-columns:1fr 1fr;gap:4px;padding:4px;border:1px solid var(--line);border-radius:10px;background:var(--field)}
+.seg-tog button{border:0;background:transparent;padding:8px 10px;border-radius:7px;color:var(--muted)}
+.seg-tog button.on{background:var(--plum);color:var(--panel)}
+.compare{display:grid;grid-template-columns:1fr 1fr;gap:0;margin-top:20px;border:1px solid var(--line);border-radius:14px;background:var(--panel);overflow:hidden}
+.compare &gt; div{padding:14px 20px;cursor:pointer}
+.compare &gt; div + div{border-left:1px solid var(--line)}
+.compare &gt; div.on{background:var(--plum-soft)}
+.compare .k{font-size:12px;color:var(--muted);font-weight:600}
+.compare .v{font-size:20px;font-weight:800;letter-spacing:-.02em}
+.compare .s{font-size:12px;color:var(--muted)}
+.fees{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px;margin:4px 0 16px}
+@media (max-width:560px){.fees{grid-template-columns:1fr}}
+.fees .field{margin:0}
+.sim{display:flex;gap:10px;align-items:end;flex-wrap:wrap}
+.sim .field{margin:0;flex:1;min-width:160px}
+&lt;/style&gt;
+&lt;style&gt;header{display:none}.wrap{padding-top:0}.grid{margin-top:16px}&lt;/style&gt;&lt;/head&gt;
+&lt;body&gt;
+&lt;div class=&quot;wrap&quot;&gt;
+  &lt;header&gt;
+    &lt;h1&gt;Precificação Mercado Livre&lt;/h1&gt;
+    &lt;p&gt;Preencha seus custos e metas. As taxas do Mercado Livre (comissão do tipo de anúncio, frete grátis a partir de R$ 79 e custo operacional abaixo disso) entram automaticamente conforme a faixa de preço.&lt;/p&gt;
+  &lt;/header&gt;
+
+  &lt;div class=&quot;grid&quot;&gt;
+    &lt;!-- ENTRADAS --&gt;
+    &lt;aside class=&quot;panel&quot; aria-label=&quot;Seus dados&quot;&gt;
+      &lt;h2&gt;Seus dados&lt;/h2&gt;
+      &lt;div class=&quot;field&quot;&gt;&lt;label&gt;Tipo de anúncio&lt;/label&gt;
+        &lt;div class=&quot;seg-tog&quot; role=&quot;radiogroup&quot; aria-label=&quot;Tipo de anúncio&quot;&gt;
+          &lt;button type=&quot;button&quot; data-tipo=&quot;classico&quot; role=&quot;radio&quot;&gt;Clássico&lt;/button&gt;
+          &lt;button type=&quot;button&quot; data-tipo=&quot;premium&quot; role=&quot;radio&quot;&gt;Premium&lt;/button&gt;
+        &lt;/div&gt;&lt;/div&gt;
+      &lt;div class=&quot;field&quot;&gt;&lt;label for=&quot;custo&quot;&gt;Custo do produto&lt;/label&gt;
+        &lt;div class=&quot;inp&quot;&gt;&lt;span&gt;R$&lt;/span&gt;&lt;input id=&quot;custo&quot; inputmode=&quot;decimal&quot; data-key=&quot;custo&quot;&gt;&lt;/div&gt;&lt;/div&gt;
+      &lt;div class=&quot;field&quot;&gt;&lt;label for=&quot;margem&quot;&gt;Margem desejada sobre o custo&lt;/label&gt;
+        &lt;div class=&quot;inp&quot;&gt;&lt;input id=&quot;margem&quot; inputmode=&quot;decimal&quot; data-key=&quot;margem&quot;&gt;&lt;span&gt;%&lt;/span&gt;&lt;/div&gt;&lt;/div&gt;
+      &lt;div class=&quot;field&quot;&gt;&lt;label for=&quot;emb&quot;&gt;Embalagem&lt;/label&gt;
+        &lt;div class=&quot;inp&quot;&gt;&lt;span&gt;R$&lt;/span&gt;&lt;input id=&quot;emb&quot; inputmode=&quot;decimal&quot; data-key=&quot;emb&quot;&gt;&lt;/div&gt;&lt;/div&gt;
+      &lt;div class=&quot;sep&quot;&gt;&lt;/div&gt;
+      &lt;div class=&quot;field&quot;&gt;&lt;label for=&quot;vend&quot;&gt;Comissão do vendedor&lt;/label&gt;
+        &lt;div class=&quot;inp&quot;&gt;&lt;input id=&quot;vend&quot; inputmode=&quot;decimal&quot; data-key=&quot;vend&quot;&gt;&lt;span&gt;%&lt;/span&gt;&lt;/div&gt;
+        &lt;div class=&quot;hint&quot;&gt;Sobre o preço de venda&lt;/div&gt;&lt;/div&gt;
+      &lt;div class=&quot;field&quot;&gt;&lt;label for=&quot;ads&quot;&gt;ADS&lt;/label&gt;
+        &lt;div class=&quot;inp&quot;&gt;&lt;input id=&quot;ads&quot; inputmode=&quot;decimal&quot; data-key=&quot;ads&quot;&gt;&lt;span&gt;%&lt;/span&gt;&lt;/div&gt;
+        &lt;div class=&quot;hint&quot;&gt;Sobre o preço de venda&lt;/div&gt;&lt;/div&gt;
+      &lt;div class=&quot;field&quot;&gt;&lt;label for=&quot;nf&quot;&gt;Nota fiscal&lt;/label&gt;
+        &lt;div class=&quot;inp&quot;&gt;&lt;input id=&quot;nf&quot; inputmode=&quot;decimal&quot; data-key=&quot;nf&quot;&gt;&lt;span&gt;%&lt;/span&gt;&lt;/div&gt;
+        &lt;div class=&quot;hint&quot;&gt;Sobre o preço de venda&lt;/div&gt;&lt;/div&gt;
+      &lt;div class=&quot;sep&quot;&gt;&lt;/div&gt;
+      &lt;div class=&quot;field&quot;&gt;&lt;label for=&quot;desc&quot;&gt;Desconto da promoção&lt;/label&gt;
+        &lt;div class=&quot;inp&quot;&gt;&lt;input id=&quot;desc&quot; inputmode=&quot;decimal&quot; data-key=&quot;desc&quot;&gt;&lt;span&gt;%&lt;/span&gt;&lt;/div&gt;
+        &lt;div class=&quot;hint&quot;&gt;O preço cheio é calculado para que, com esse desconto, o preço final seja o preço promocional&lt;/div&gt;&lt;/div&gt;
+      &lt;div class=&quot;field&quot;&gt;&lt;label for=&quot;arred&quot;&gt;Final do preço promocional&lt;/label&gt;
+        &lt;div class=&quot;inp&quot;&gt;&lt;select id=&quot;arred&quot; data-key=&quot;arred&quot;&gt;
+          &lt;option value=&quot;exato&quot;&gt;Exato (mínimo para a margem)&lt;/option&gt;
+          &lt;option value=&quot;90&quot;&gt;Terminar em ,90&lt;/option&gt;
+          &lt;option value=&quot;99&quot;&gt;Terminar em ,99&lt;/option&gt;
+          &lt;option value=&quot;98&quot;&gt;Terminar em ,98&lt;/option&gt;
+        &lt;/select&gt;&lt;/div&gt;&lt;/div&gt;
+      &lt;div class=&quot;row-actions&quot;&gt;&lt;button id=&quot;reset-inputs&quot; type=&quot;button&quot;&gt;Limpar para o exemplo&lt;/button&gt;&lt;/div&gt;
+    &lt;/aside&gt;
+
+    &lt;!-- RESULTADOS --&gt;
+    &lt;main&gt;
+      &lt;section class=&quot;hero&quot; aria-live=&quot;polite&quot;&gt;
+        &lt;div class=&quot;promo&quot;&gt;
+          &lt;div class=&quot;k&quot;&gt;Preço promocional (o que o cliente paga)&lt;/div&gt;
+          &lt;div class=&quot;v&quot; id=&quot;promoV&quot;&gt;–&lt;/div&gt;
+          &lt;div class=&quot;s&quot; id=&quot;promoS&quot;&gt;&lt;/div&gt;
+        &lt;/div&gt;
+        &lt;div class=&quot;full&quot;&gt;
+          &lt;div class=&quot;k&quot;&gt;Preço cheio para cadastrar&lt;/div&gt;
+          &lt;div class=&quot;v&quot; id=&quot;fullV&quot;&gt;–&lt;/div&gt;
+          &lt;div class=&quot;s&quot; id=&quot;fullS&quot;&gt;&lt;/div&gt;
+        &lt;/div&gt;
+      &lt;/section&gt;
+
+      &lt;section class=&quot;compare&quot; aria-label=&quot;Clássico x Premium&quot;&gt;
+        &lt;div id=&quot;cmpC&quot; data-tipo=&quot;classico&quot;&gt;&lt;div class=&quot;k&quot;&gt;Clássico&lt;/div&gt;&lt;div class=&quot;v&quot; id=&quot;cmpCV&quot;&gt;–&lt;/div&gt;&lt;div class=&quot;s&quot; id=&quot;cmpCS&quot;&gt;&lt;/div&gt;&lt;/div&gt;
+        &lt;div id=&quot;cmpP&quot; data-tipo=&quot;premium&quot;&gt;&lt;div class=&quot;k&quot;&gt;Premium&lt;/div&gt;&lt;div class=&quot;v&quot; id=&quot;cmpPV&quot;&gt;–&lt;/div&gt;&lt;div class=&quot;s&quot; id=&quot;cmpPS&quot;&gt;&lt;/div&gt;&lt;/div&gt;
+      &lt;/section&gt;
+
+      &lt;section class=&quot;ruler panel&quot; style=&quot;margin-top:20px&quot; aria-label=&quot;Faixas de custo do Mercado Livre&quot;&gt;
+        &lt;h2&gt;Onde seus preços caem nas faixas do Mercado Livre&lt;/h2&gt;
+        &lt;div class=&quot;track&quot;&gt;&lt;div class=&quot;inner&quot; id=&quot;inner&quot;&gt;&lt;div class=&quot;bar&quot; id=&quot;bar&quot;&gt;&lt;/div&gt;&lt;/div&gt;&lt;/div&gt;
+        &lt;div class=&quot;legend&quot;&gt;&lt;span class=&quot;lp&quot;&gt;Preço promocional&lt;/span&gt;&lt;span class=&quot;lf&quot;&gt;Preço cheio&lt;/span&gt;&lt;span class=&quot;lb&quot;&gt;Faixa do preço promocional&lt;/span&gt;&lt;/div&gt;
+      &lt;/section&gt;
+
+      &lt;div class=&quot;alerts&quot; id=&quot;alerts&quot;&gt;&lt;/div&gt;
+
+      &lt;div class=&quot;tables&quot;&gt;
+        &lt;section class=&quot;panel&quot;&gt;
+          &lt;h2&gt;Composição no preço promocional&lt;/h2&gt;
+          &lt;div class=&quot;sub&quot; id=&quot;subPromo&quot;&gt;&lt;/div&gt;
+          &lt;div class=&quot;scroll&quot;&gt;&lt;table id=&quot;tPromo&quot;&gt;&lt;/table&gt;&lt;/div&gt;
+        &lt;/section&gt;
+        &lt;section class=&quot;panel&quot;&gt;
+          &lt;h2&gt;Composição no preço cheio&lt;/h2&gt;
+          &lt;div class=&quot;sub&quot; id=&quot;subFull&quot;&gt;&lt;/div&gt;
+          &lt;div class=&quot;scroll&quot;&gt;&lt;table id=&quot;tFull&quot;&gt;&lt;/table&gt;&lt;/div&gt;
+        &lt;/section&gt;
+      &lt;/div&gt;
+
+      &lt;section class=&quot;panel&quot; style=&quot;margin-top:20px&quot;&gt;
+        &lt;h2&gt;Simular outro preço&lt;/h2&gt;
+        &lt;div class=&quot;sim&quot;&gt;
+          &lt;div class=&quot;field&quot;&gt;&lt;label for=&quot;simP&quot;&gt;Preço de venda final&lt;/label&gt;
+            &lt;div class=&quot;inp&quot;&gt;&lt;span&gt;R$&lt;/span&gt;&lt;input id=&quot;simP&quot; inputmode=&quot;decimal&quot; placeholder=&quot;Ex.: 94,90&quot; data-key=&quot;simP&quot;&gt;&lt;/div&gt;&lt;/div&gt;
+        &lt;/div&gt;
+        &lt;div class=&quot;scroll&quot; style=&quot;margin-top:14px&quot;&gt;&lt;table id=&quot;tSim&quot;&gt;&lt;/table&gt;&lt;/div&gt;
+      &lt;/section&gt;
+
+      &lt;details class=&quot;panel&quot; id=&quot;tabDetails&quot;&gt;
+        &lt;summary&gt;Tabela de taxas do Mercado Livre&lt;/summary&gt;
+        &lt;p class=&quot;note&quot; style=&quot;margin:12px 0&quot;&gt;A partir de R$ 79 o frete grátis é obrigatório e está fixado em R$ 21,90. Abaixo de R$ 79 o Mercado Livre cobra um custo operacional por unidade, que desde março/2026 varia por peso e medidas (o valor padrão é uma referência: confira o seu no simulador de custos do ML). Edite aqui se algo mudar: os cálculos se atualizam e ficam salvos neste navegador.&lt;/p&gt;
+        &lt;div class=&quot;fees&quot;&gt;
+          &lt;div class=&quot;field&quot;&gt;&lt;label for=&quot;pctC&quot;&gt;Comissão Clássico&lt;/label&gt;&lt;div class=&quot;inp&quot;&gt;&lt;input id=&quot;pctC&quot; inputmode=&quot;decimal&quot; data-fee=&quot;classico&quot;&gt;&lt;span&gt;%&lt;/span&gt;&lt;/div&gt;&lt;/div&gt;
+          &lt;div class=&quot;field&quot;&gt;&lt;label for=&quot;pctP&quot;&gt;Comissão Premium&lt;/label&gt;&lt;div class=&quot;inp&quot;&gt;&lt;input id=&quot;pctP&quot; inputmode=&quot;decimal&quot; data-fee=&quot;premium&quot;&gt;&lt;span&gt;%&lt;/span&gt;&lt;/div&gt;&lt;/div&gt;
+        &lt;/div&gt;
+        &lt;div class=&quot;scroll&quot;&gt;&lt;table class=&quot;tbl-edit&quot; id=&quot;tBands&quot;&gt;&lt;/table&gt;&lt;/div&gt;
+        &lt;div class=&quot;row-actions&quot;&gt;
+          &lt;button type=&quot;button&quot; id=&quot;resetBands&quot;&gt;Restaurar valores padrão&lt;/button&gt;
+          &lt;span class=&quot;note&quot; id=&quot;bandsStatus&quot;&gt;&lt;/span&gt;
+        &lt;/div&gt;
+      &lt;/details&gt;
+    &lt;/main&gt;
+  &lt;/div&gt;
+&lt;/div&gt;
+
+&lt;script&gt;
+(function(){
+  &quot;use strict&quot;;
+  var DEFAULT_INPUTS = {custo:&quot;34,56&quot;, margem:&quot;30&quot;, emb:&quot;1,00&quot;, vend:&quot;3&quot;, ads:&quot;10&quot;, nf:&quot;10&quot;, desc:&quot;30&quot;, arred:&quot;exato&quot;, simP:&quot;&quot;, tipo:&quot;classico&quot;};
+  var DEFAULT_FEES = {classico:14, premium:19};
+  // meia = taxa fixa é 50% do preço (itens abaixo de R$ 8)
+  // meia = custo é 50% do preço; nome = como aparece na composição
+  var DEFAULT_BANDS = [
+    {min:0,    max:12.49,    fixo:0,     meia:true,  nome:&quot;Custo operacional ML&quot;},
+    {min:12.5, max:78.99,    fixo:7.95,  meia:false, nome:&quot;Custo operacional ML&quot;},
+    {min:79,   max:Infinity, fixo:21.90, meia:false, nome:&quot;Frete grátis (fixo)&quot;}
+  ];
+  var LS_IN = &quot;mlPricing.inputs.v1&quot;, LS_B = &quot;mlPricing.bands.v1&quot;, LS_F = &quot;mlPricing.fees.v1&quot;;
+
+  function load(key, fallback){
+    try{ var raw = localStorage.getItem(key); if(!raw) return fallback; return JSON.parse(raw); }catch(e){ return fallback; }
+  }
+  function save(key, val){ try{ localStorage.setItem(key, JSON.stringify(val)); }catch(e){} }
+
+  var inputs = Object.assign({}, DEFAULT_INPUTS, load(LS_IN, {}));
+  var bands = (load(LS_B, null) || DEFAULT_BANDS).map(function(b){ return Object.assign({}, b, {max: (b.max===null||b.max===&quot;inf&quot;) ? Infinity : b.max}); });
+
+  var fees = Object.assign({}, DEFAULT_FEES, load(LS_F, {}));
+  var $ = function(id){ return document.getElementById(id); };
+  var num = function(s){ if(s===undefined||s===null) return NaN; s=String(s).trim().replace(/\s/g,&quot;&quot;).replace(&quot;R$&quot;,&quot;&quot;); if(s.indexOf(&quot;,&quot;)&gt;-1){ s=s.replace(/\./g,&quot;&quot;).replace(&quot;,&quot;,&quot;.&quot;); } return parseFloat(s); };
+  var brl = function(v){ return isFinite(v) ? v.toLocaleString(&quot;pt-BR&quot;,{style:&quot;currency&quot;,currency:&quot;BRL&quot;}) : &quot;–&quot;; };
+  var pct = function(v,d){ return isFinite(v) ? (v*100).toLocaleString(&quot;pt-BR&quot;,{minimumFractionDigits:d===undefined?1:d,maximumFractionDigits:d===undefined?1:d})+&quot;%&quot; : &quot;–&quot;; };
+  var r2 = function(v){ return Math.round(v*100)/100; };
+  var fmtN = function(v){ return v===Infinity ? &quot;&quot; : String(v).replace(&quot;.&quot;,&quot;,&quot;); };
+
+  function bandOf(P){
+    for(var i=0;i&lt;bands.length;i++){ if(P&gt;=bands[i].min-1e-9 &amp;&amp; P&lt;=bands[i].max+0.004) return i; }
+    for(var j=0;j&lt;bands.length-1;j++){ if(P&gt;bands[j].max &amp;&amp; P&lt;bands[j+1].min) return j+1; }
+    return bands.length-1;
+  }
+
+  function params(){
+    return {
+      C:num(inputs.custo)||0, M:(num(inputs.margem)||0)/100, E:num(inputs.emb)||0,
+      v:(num(inputs.vend)||0)/100, a:(num(inputs.ads)||0)/100, n:(num(inputs.nf)||0)/100,
+      d:(num(inputs.desc)||0)/100,
+      tipo: inputs.tipo===&quot;premium&quot; ? &quot;premium&quot; : &quot;classico&quot;
+    };
+  }
+
+  function breakdown(P, p){
+    var bi = bandOf(P), b = bands[bi];
+    var com = P*fees[p.tipo]/100, fixo = b.meia ? P*0.5 : b.fixo;
+    var vend = P*p.v, ads = P*p.a, nf = P*p.n;
+    var lucro = P - com - fixo - vend - ads - nf - p.C - p.E;
+    return {P:P, bi:bi, b:b, com:com, fixo:fixo, vend:vend, ads:ads, nf:nf, lucro:lucro,
+            mCusto: p.C&gt;0 ? lucro/p.C : NaN, mVenda: P&gt;0 ? lucro/P : NaN};
+  }
+
+  // menor preço que atinge o lucro-alvo
+  function minPrice(p){
+    var L = p.C*p.M, best = null;
+    bands.forEach(function(b){
+      var denom = 1 - fees[p.tipo]/100 - p.v - p.a - p.n - (b.meia?0.5:0);
+      if(denom&lt;=0) return;
+      var P = (p.C + p.E + (b.meia?0:b.fixo) + L)/denom;
+      if(P &lt; b.min) P = b.min;
+      if(P &gt; b.max + 1e-9) return;
+      P = Math.ceil(P*100 - 1e-6)/100;
+      if(P &gt; b.max + 1e-9) return;
+      if(best===null || P &lt; best) best = P;
+    });
+    return best;
+  }
+
+  function applyEnding(P, mode){
+    if(mode===&quot;exato&quot;) return P;
+    var cents = parseInt(mode,10)/100, bi = bandOf(P), max = bands[bi].max;
+    var base = Math.floor(P), cand = base + cents;
+    if(cand &lt; P - 1e-9) cand += 1;
+    cand = r2(cand);
+    if(cand &gt; max + 1e-9) return {P:P, clipped:true};
+    return cand;
+  }
+
+  function fullFromPromo(promo, d, p){
+    if(d&lt;=0) return {full:promo, promoReal:promo};
+    if(d&gt;=1) return null;
+    var full = Math.ceil(promo/(1-d)*100 - 1e-6)/100;
+    var real = r2(full*(1-d));
+    var maxBand = bands[bandOf(promo)].max;
+    var guard = 0;
+    while(real &gt; maxBand + 1e-9 &amp;&amp; guard&lt;5){ full = r2(full-0.01); real = r2(full*(1-d)); guard++; }
+    return {full:full, promoReal:real};
+  }
+
+  function rows(bd, p){
+    var labelFixo = bd.b.meia ? bd.b.nome+&quot; (50% do preço)&quot; : bd.b.nome;
+    var nomeTipo = p.tipo===&quot;premium&quot; ? &quot;Premium&quot; : &quot;Clássico&quot;;
+    var list = [
+      [&quot;Preço de venda&quot;, &quot;100,0%&quot;, bd.P, &quot;&quot;],
+      [&quot;Comissão ML (&quot;+nomeTipo+&quot;)&quot;, pct(fees[p.tipo]/100), -bd.com, &quot;&quot;],
+      [labelFixo, bd.b.meia?&quot;50,0%&quot;:&quot;&quot;, -bd.fixo, &quot;&quot;],
+      [&quot;Comissão do vendedor&quot;, pct(p.v), -bd.vend, &quot;&quot;],
+      [&quot;ADS&quot;, pct(p.a), -bd.ads, &quot;&quot;],
+      [&quot;Nota fiscal&quot;, pct(p.n), -bd.nf, &quot;&quot;],
+      [&quot;Custo do produto&quot;, &quot;&quot;, -p.C, &quot;&quot;],
+      [&quot;Embalagem&quot;, &quot;&quot;, -p.E, &quot;&quot;]
+    ];
+    var h = &#x27;&lt;thead&gt;&lt;tr&gt;&lt;th&gt;Item&lt;/th&gt;&lt;th class=&quot;n&quot;&gt;%&lt;/th&gt;&lt;th class=&quot;n&quot;&gt;R$&lt;/th&gt;&lt;/tr&gt;&lt;/thead&gt;&lt;tbody&gt;&#x27;;
+    list.forEach(function(r){ h += &#x27;&lt;tr&gt;&lt;td&gt;&#x27;+r[0]+&#x27;&lt;/td&gt;&lt;td class=&quot;n&quot;&gt;&#x27;+r[1]+&#x27;&lt;/td&gt;&lt;td class=&quot;n&quot;&gt;&#x27;+brl(r[2])+&#x27;&lt;/td&gt;&lt;/tr&gt;&#x27;; });
+    h += &#x27;&lt;tr class=&quot;total&#x27;+(bd.lucro&lt;0?&#x27; neg&#x27;:&#x27;&#x27;)+&#x27;&quot;&gt;&lt;td&gt;Lucro líquido&lt;/td&gt;&lt;td class=&quot;n&quot;&gt;&#x27;+pct(bd.mVenda)+&#x27;&lt;/td&gt;&lt;td class=&quot;n&quot;&gt;&#x27;+brl(bd.lucro)+&#x27;&lt;/td&gt;&lt;/tr&gt;&#x27;;
+    h += &#x27;&lt;tr&gt;&lt;td class=&quot;note&quot; colspan=&quot;2&quot;&gt;Margem sobre o custo&lt;/td&gt;&lt;td class=&quot;n note&quot;&gt;&#x27;+pct(bd.mCusto)+&#x27;&lt;/td&gt;&lt;/tr&gt;&#x27;;
+    return h + &#x27;&lt;/tbody&gt;&#x27;;
+  }
+
+  function bandLabel(b){
+    if(b.min===0) return &quot;Até &quot;+brl(b.max);
+    if(b.max===Infinity) return &quot;A partir de &quot;+brl(b.min);
+    return brl(b.min)+&quot; a &quot;+brl(b.max);
+  }
+  function bandFee(b){ var c = fees[params().tipo]+&quot;%&quot;; if(b.meia) return c+&quot; + 50% do preço&quot;; return c+&quot; + &quot;+(b.max===Infinity?&quot;frete &quot;:&quot;&quot;)+brl(b.fixo); }
+
+  function drawRuler(promoBd, fullBd){
+    var bar = $(&quot;bar&quot;), inner = $(&quot;inner&quot;);
+    var h = &quot;&quot;;
+    bands.forEach(function(b,i){
+      var on = (promoBd &amp;&amp; promoBd.bi===i) ? &quot; on&quot; : &quot;&quot;;
+      h += &#x27;&lt;div class=&quot;seg&#x27;+on+&#x27;&quot;&gt;&lt;b&gt;&#x27;+bandFee(b)+&#x27;&lt;/b&gt;&lt;span&gt;&#x27;+bandLabel(b)+&#x27;&lt;/span&gt;&lt;/div&gt;&#x27;;
+    });
+    bar.innerHTML = h;
+    inner.querySelectorAll(&quot;.marker&quot;).forEach(function(m){ m.remove(); });
+    function place(bd, cls, text){
+      if(!bd) return;
+      var b = bands[bd.bi], w = 100/bands.length;
+      var top = b.max===Infinity ? Math.max(b.min*2, 400) : b.max;
+      var frac = Math.min(1, Math.max(0,(bd.P-b.min)/(top-b.min)));
+      var left = (bd.bi + 0.12 + frac*0.76)*w;
+      var m = document.createElement(&quot;div&quot;);
+      m.className = &quot;marker &quot;+cls; m.style.left = left+&quot;%&quot;;
+      m.innerHTML = &quot;&lt;i&gt;&quot;+text+&quot;&lt;/i&gt;&quot;;
+      inner.appendChild(m);
+    }
+    place(promoBd, &quot;promo&quot;, &quot;Promo &quot;+brl(promoBd &amp;&amp; promoBd.P));
+    if(fullBd &amp;&amp; (!promoBd || fullBd.P!==promoBd.P)) place(fullBd, &quot;full&quot;, &quot;Cheio &quot;+brl(fullBd.P));
+  }
+
+  function drawBandsTable(){
+    var h = &#x27;&lt;colgroup&gt;&lt;col style=&quot;width:56px&quot;&gt;&lt;col&gt;&lt;col&gt;&lt;col style=&quot;width:34%&quot;&gt;&lt;col&gt;&lt;/colgroup&gt;&lt;thead&gt;&lt;tr&gt;&lt;th&gt;Faixa&lt;/th&gt;&lt;th class=&quot;n&quot;&gt;De (R$)&lt;/th&gt;&lt;th class=&quot;n&quot;&gt;Até (R$)&lt;/th&gt;&lt;th class=&quot;n&quot;&gt;Cobrança por item&lt;/th&gt;&lt;th class=&quot;n&quot;&gt;Valor (R$)&lt;/th&gt;&lt;/tr&gt;&lt;/thead&gt;&lt;tbody&gt;&#x27;;
+    bands.forEach(function(b,i){
+      h += &#x27;&lt;tr&gt;&lt;td&gt;&#x27;+(i+1)+&#x27;&lt;/td&gt;&#x27;+
+        &#x27;&lt;td&gt;&lt;input data-b=&quot;&#x27;+i+&#x27;&quot; data-f=&quot;min&quot; value=&quot;&#x27;+fmtN(b.min)+&#x27;&quot; inputmode=&quot;decimal&quot; aria-label=&quot;Faixa &#x27;+(i+1)+&#x27; valor inicial&quot;&gt;&lt;/td&gt;&#x27;+
+        &#x27;&lt;td&gt;&lt;input data-b=&quot;&#x27;+i+&#x27;&quot; data-f=&quot;max&quot; value=&quot;&#x27;+(b.max===Infinity?&quot;&quot;:fmtN(b.max))+&#x27;&quot; placeholder=&quot;sem limite&quot; inputmode=&quot;decimal&quot; aria-label=&quot;Faixa &#x27;+(i+1)+&#x27; valor final&quot;&gt;&lt;/td&gt;&#x27;+
+        &#x27;&lt;td class=&quot;n note&quot;&gt;&#x27;+b.nome+&#x27;&lt;/td&gt;&#x27;+
+        (b.meia ? &#x27;&lt;td class=&quot;n note&quot;&gt;50% do preço&lt;/td&gt;&#x27; :
+        &#x27;&lt;td&gt;&lt;input data-b=&quot;&#x27;+i+&#x27;&quot; data-f=&quot;fixo&quot; value=&quot;&#x27;+b.fixo.toFixed(2).replace(&quot;.&quot;,&quot;,&quot;)+&#x27;&quot; inputmode=&quot;decimal&quot; aria-label=&quot;Faixa &#x27;+(i+1)+&#x27; valor&quot;&gt;&lt;/td&gt;&#x27;)+
+        &#x27;&lt;/tr&gt;&#x27;;
+    });
+    $(&quot;tBands&quot;).innerHTML = h + &#x27;&lt;/tbody&gt;&#x27;;
+    $(&quot;pctC&quot;).value = fmtN(fees.classico); $(&quot;pctP&quot;).value = fmtN(fees.premium);
+  }
+
+  function render(){
+    var p = params(), alerts = [];
+    var minP = minPrice(p);
+    var promoBd = null, fullBd = null, promoInfo = null;
+
+    if(minP===null || !(p.C&gt;0)){
+      $(&quot;promoV&quot;).textContent = &quot;–&quot;; $(&quot;fullV&quot;).textContent = &quot;–&quot;;
+      $(&quot;promoS&quot;).textContent = p.C&gt;0 ? &quot;Com esses percentuais nenhum preço atinge a margem.&quot; : &quot;Informe o custo do produto.&quot;;
+      $(&quot;fullS&quot;).textContent = &quot;&quot;;
+      $(&quot;tPromo&quot;).innerHTML = &quot;&quot;; $(&quot;tFull&quot;).innerHTML = &quot;&quot;; $(&quot;subPromo&quot;).textContent=&quot;&quot;; $(&quot;subFull&quot;).textContent=&quot;&quot;;
+      if(p.C&gt;0) alerts.push([&quot;Os percentuais sobre a venda (comissão ML + vendedor + ADS + nota) somam 100% ou mais. Reduza algum deles.&quot;, false]);
+      drawRuler(null,null);
+    } else {
+      var target = applyEnding(minP, inputs.arred);
+      if(typeof target === &quot;object&quot;){ target = target.P; alerts.push([&quot;O final escolhido passaria para a próxima faixa do Mercado Livre. Mantive o preço exato.&quot;, false]); }
+      promoInfo = fullFromPromo(target, p.d, p);
+      var promoP = promoInfo ? promoInfo.promoReal : target;
+      var fullP = promoInfo ? promoInfo.full : target;
+      promoBd = breakdown(promoP, p);
+      fullBd = breakdown(fullP, p);
+
+      $(&quot;promoV&quot;).textContent = brl(promoP);
+      $(&quot;promoS&quot;).innerHTML = &quot;Lucro &lt;b&gt;&quot;+brl(promoBd.lucro)+&quot;&lt;/b&gt; · &quot;+pct(promoBd.mCusto)+&quot; sobre o custo&quot;;
+      $(&quot;fullV&quot;).textContent = p.d&gt;0 ? brl(fullP) : brl(promoP);
+      $(&quot;fullS&quot;).innerHTML = p.d&gt;0 ? &quot;Com &quot;+pct(p.d,0)+&quot; de desconto → &quot;+brl(promoP)+&quot; · lucro sem promoção &quot;+brl(fullBd.lucro) : &quot;Sem desconto de promoção&quot;;
+
+      $(&quot;tPromo&quot;).innerHTML = rows(promoBd, p);
+      $(&quot;tFull&quot;).innerHTML = rows(fullBd, p);
+      $(&quot;subPromo&quot;).textContent = &quot;Faixa &quot;+bandLabel(promoBd.b)+&quot; · &quot;+bandFee(promoBd.b);
+      $(&quot;subFull&quot;).textContent = &quot;Faixa &quot;+bandLabel(fullBd.b)+&quot; · &quot;+bandFee(fullBd.b);
+
+      // alertas
+      var pb = promoBd.b;
+      if(pb.max!==Infinity &amp;&amp; pb.max - promoP &lt; 2){
+        alerts.push([&quot;O preço promocional está a &quot;+brl(r2(pb.max-promoP))+&quot; do limite da faixa. Acima de &quot;+brl(pb.max)+&quot; o Mercado Livre passa a cobrar &quot;+bandFee(bands[promoBd.bi+1])+&quot;. Cupons e ofertas precisam manter o preço final dentro da faixa.&quot;, false]);
+      }
+      if(promoBd.bi&gt;0){
+        var prev = bands[promoBd.bi-1];
+        var prevBd = breakdown(prev.max, p);
+        if(prevBd.lucro &gt;= promoBd.lucro - 0.005){
+          alerts.push([&quot;A &quot;+brl(prev.max)+&quot; (faixa anterior) o lucro seria &quot;+brl(prevBd.lucro)+&quot;, igual ou maior que no preço atual.&quot;, false]);
+        } else {
+          alerts.push([&quot;Na faixa anterior (até &quot;+brl(prev.max)+&quot;) o lucro máximo seria &quot;+brl(prevBd.lucro)+&quot; (&quot;+pct(prevBd.mCusto)+&quot; sobre o custo), abaixo da sua meta.&quot;, true]);
+        }
+      }
+      if(p.d&gt;0 &amp;&amp; fullBd.bi!==promoBd.bi){
+        alerts.push([&quot;O preço cheio cai em outra faixa (&quot;+bandFee(fullBd.b)+&quot;). Se vender sem promoção, o lucro é &quot;+brl(fullBd.lucro)+&quot;.&quot;, true]);
+      }
+      if(p.d&gt;0){
+        alerts.push([&quot;O preço cheio precisa ter sido praticado de verdade antes da promoção. O Mercado Livre pode recusar campanhas e promoções com desconto sobre um preço recém-aumentado.&quot;, false]);
+      }
+      drawRuler(promoBd, fullBd);
+    }
+
+    // simulação
+    var sp = num(inputs.simP);
+    if(sp&gt;0){
+      var sb = breakdown(sp, p);
+      $(&quot;tSim&quot;).innerHTML = rows(sb, p);
+    } else {
+      $(&quot;tSim&quot;).innerHTML = &#x27;&lt;tbody&gt;&lt;tr&gt;&lt;td class=&quot;note&quot;&gt;Digite um preço para ver a composição e o lucro nele.&lt;/td&gt;&lt;/tr&gt;&lt;/tbody&gt;&#x27;;
+    }
+
+    [&quot;classico&quot;,&quot;premium&quot;].forEach(function(t){
+      var pp = Object.assign({}, p, {tipo:t}), mp = minPrice(pp);
+      var key = t===&quot;classico&quot; ? &quot;C&quot; : &quot;P&quot;;
+      $(&quot;cmp&quot;+key).classList.toggle(&quot;on&quot;, p.tipo===t);
+      if(mp===null || !(p.C&gt;0)){ $(&quot;cmp&quot;+key+&quot;V&quot;).textContent = &quot;–&quot;; $(&quot;cmp&quot;+key+&quot;S&quot;).textContent = &quot;&quot;; return; }
+      var tg = applyEnding(mp, inputs.arred); if(typeof tg===&quot;object&quot;) tg = tg.P;
+      var fi = fullFromPromo(tg, p.d, pp); var pr = fi ? fi.promoReal : tg;
+      var bd = breakdown(pr, pp);
+      $(&quot;cmp&quot;+key+&quot;V&quot;).textContent = brl(pr);
+      $(&quot;cmp&quot;+key+&quot;S&quot;).textContent = (p.d&gt;0 &amp;&amp; fi ? &quot;Cheio &quot;+brl(fi.full)+&quot; · &quot; : &quot;&quot;)+&quot;lucro &quot;+brl(bd.lucro)+&quot; · comissão &quot;+fmtN(fees[t])+&quot;%&quot;;
+    });
+    document.querySelectorAll(&quot;.seg-tog button&quot;).forEach(function(b){ var on = b.dataset.tipo===p.tipo; b.classList.toggle(&quot;on&quot;, on); b.setAttribute(&quot;aria-checked&quot;, on); });
+
+    $(&quot;alerts&quot;).innerHTML = alerts.map(function(a){ return &#x27;&lt;div class=&quot;alert&#x27;+(a[1]?&#x27; ok&#x27;:&#x27;&#x27;)+&#x27;&quot;&gt;&#x27;+a[0]+&#x27;&lt;/div&gt;&#x27;; }).join(&quot;&quot;);
+  }
+
+  // ligar entradas
+  document.querySelectorAll(&quot;[data-key]&quot;).forEach(function(el){
+    el.value = inputs[el.dataset.key] || &quot;&quot;;
+    el.addEventListener(&quot;input&quot;, function(){ inputs[el.dataset.key] = el.value; save(LS_IN, inputs); render(); });
+  });
+  function setTipo(t){ inputs.tipo = t; save(LS_IN, inputs); drawBandsTable(); render(); }
+  document.querySelectorAll(&quot;[data-tipo]&quot;).forEach(function(el){ el.addEventListener(&quot;click&quot;, function(){ setTipo(el.dataset.tipo); }); });
+  document.querySelectorAll(&quot;[data-fee]&quot;).forEach(function(el){
+    el.addEventListener(&quot;input&quot;, function(){
+      var v = num(el.value); if(!isFinite(v)){ $(&quot;bandsStatus&quot;).textContent = &quot;Comissão inválida.&quot;; return; }
+      fees[el.dataset.fee] = v; save(LS_F, fees); $(&quot;bandsStatus&quot;).textContent = &quot;Tabela personalizada salva.&quot;; render();
+    });
+  });
+  $(&quot;reset-inputs&quot;).addEventListener(&quot;click&quot;, function(){
+    inputs = Object.assign({}, DEFAULT_INPUTS); save(LS_IN, inputs);
+    document.querySelectorAll(&quot;[data-key]&quot;).forEach(function(el){ el.value = inputs[el.dataset.key] || &quot;&quot;; });
+    render();
+  });
+
+  $(&quot;tBands&quot;).addEventListener(&quot;input&quot;, function(e){
+    var t = e.target; if(!t.dataset || t.dataset.b===undefined) return;
+    var i = +t.dataset.b, f = t.dataset.f, v = num(t.value);
+    if(f===&quot;max&quot; &amp;&amp; t.value.trim()===&quot;&quot;){ v = Infinity; }
+    if(!isFinite(v) &amp;&amp; v!==Infinity) { $(&quot;bandsStatus&quot;).textContent = &quot;Valor inválido na faixa &quot;+(i+1)+&quot;.&quot;; return; }
+    bands[i][f] = v;
+    save(LS_B, bands.map(function(b){ return Object.assign({}, b, {max: b.max===Infinity ? &quot;inf&quot; : b.max}); }));
+    $(&quot;bandsStatus&quot;).textContent = &quot;Tabela personalizada salva.&quot;;
+    render();
+  });
+  $(&quot;resetBands&quot;).addEventListener(&quot;click&quot;, function(){
+    bands = DEFAULT_BANDS.map(function(b){ return Object.assign({}, b); });
+    fees = Object.assign({}, DEFAULT_FEES);
+    try{ localStorage.removeItem(LS_B); localStorage.removeItem(LS_F); }catch(e){}
+    $(&quot;bandsStatus&quot;).textContent = &quot;Valores padrão restaurados.&quot;;
+    drawBandsTable(); render();
+  });
+
+  drawBandsTable();
+  render();
+})();
+&lt;/script&gt;
+&lt;/body&gt;
+&lt;/html&gt;
+"></iframe>
+<iframe id="f-tiktok" title="Precificação TikTok Shop" class="" srcdoc="&lt;!DOCTYPE html&gt;
+&lt;html lang=&quot;pt-BR&quot;&gt;
+&lt;head&gt;
+&lt;meta charset=&quot;utf-8&quot;&gt;
+&lt;meta name=&quot;viewport&quot; content=&quot;width=device-width, initial-scale=1, viewport-fit=cover&quot;&gt;
+&lt;title&gt;Precificação TikTok Shop&lt;/title&gt;
+&lt;link rel=&quot;preconnect&quot; href=&quot;https://fonts.googleapis.com&quot;&gt;
+&lt;link rel=&quot;preconnect&quot; href=&quot;https://fonts.gstatic.com&quot; crossorigin&gt;
+&lt;link href=&quot;https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&amp;display=swap&quot; rel=&quot;stylesheet&quot;&gt;
+&lt;style&gt;
+:root{
+  --bg:#F5F3F7; --panel:#FFFFFF; --ink:#241B2C; --muted:#6E6478; --line:#E3DDE8;
+  --plum:#6A2C68; --plum-soft:#F1E6F0; --profit:#1C7A57; --profit-soft:#E3F2EB;
+  --warn:#A6461F; --warn-soft:#FBEDE5; --band-a:#EDE6F0; --band-b:#E2D6E8;
+  --field:#FBFAFC;
+  box-sizing:border-box;
+  padding-top:env(safe-area-inset-top,0px); padding-bottom:env(safe-area-inset-bottom,0px);
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme=&quot;light&quot;]){
+    --bg:#17121B; --panel:#211A26; --ink:#F1EBF4; --muted:#A99CB2; --line:#382D3F;
+    --plum:#D59BD2; --plum-soft:#3A2440; --profit:#6BD3A5; --profit-soft:#173328;
+    --warn:#F0A07C; --warn-soft:#3C2219; --band-a:#2B2231; --band-b:#35293C; --field:#1B1520;
+  }
+}
+:root[data-theme=&quot;dark&quot;]{
+  --bg:#17121B; --panel:#211A26; --ink:#F1EBF4; --muted:#A99CB2; --line:#382D3F;
+  --plum:#D59BD2; --plum-soft:#3A2440; --profit:#6BD3A5; --profit-soft:#173328;
+  --warn:#F0A07C; --warn-soft:#3C2219; --band-a:#2B2231; --band-b:#35293C; --field:#1B1520;
+}
+*,*::before,*::after{box-sizing:border-box}
+html{scroll-padding-top:env(safe-area-inset-top,0px)}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:&quot;Manrope&quot;,system-ui,-apple-system,&quot;Segoe UI&quot;,Roboto,sans-serif;font-size:15px;line-height:1.5;font-variant-numeric:tabular-nums}
+.wrap{max-width:1180px;margin:0 auto;padding:28px 20px 48px}
+header h1{font-size:28px;font-weight:800;letter-spacing:-.02em;margin:0 0 4px}
+header p{margin:0;color:var(--muted);max-width:62ch}
+.grid{display:grid;grid-template-columns:340px 1fr;gap:20px;margin-top:24px;align-items:start}
+@media (max-width:880px){.grid{grid-template-columns:1fr}}
+.panel{background:var(--panel);border:1px solid var(--line);border-radius:14px;padding:20px}
+.panel h2{font-size:16px;font-weight:700;margin:0 0 14px}
+.field{margin-bottom:14px}
+.field label{display:block;font-size:13px;font-weight:600;margin-bottom:5px}
+.field .hint{font-size:12px;color:var(--muted);margin-top:3px}
+.inp{display:flex;align-items:center;border:1px solid var(--line);border-radius:9px;background:var(--field);overflow:hidden}
+.inp:focus-within{border-color:var(--plum);box-shadow:0 0 0 3px var(--plum-soft)}
+.inp span{padding:0 10px;color:var(--muted);font-size:13px;font-weight:600}
+.inp input,.inp select{flex:1;min-width:0;border:0;background:transparent;color:var(--ink);font:inherit;font-weight:600;padding:9px 10px;outline:none}
+.inp select{cursor:pointer}
+.sep{height:1px;background:var(--line);margin:18px 0}
+
+.hero{display:grid;grid-template-columns:1fr 1fr;gap:0;border:1px solid var(--line);border-radius:14px;background:var(--panel);overflow:hidden}
+@media (max-width:560px){.hero{grid-template-columns:1fr}}
+.hero &gt; div{padding:20px 22px}
+.hero &gt; div + div{border-left:1px solid var(--line)}
+@media (max-width:560px){.hero &gt; div + div{border-left:0;border-top:1px solid var(--line)}}
+.hero .k{font-size:13px;color:var(--muted);font-weight:600}
+.hero .v{font-size:40px;font-weight:800;letter-spacing:-.03em;line-height:1.1;margin:4px 0 6px}
+.hero .promo .v{color:var(--plum)}
+.hero .full .v{text-decoration:line-through;text-decoration-thickness:2px;text-decoration-color:var(--muted)}
+.hero .s{font-size:13px;color:var(--muted)}
+.hero .s b{color:var(--profit)}
+
+.ruler{margin-top:20px}
+.ruler .track{overflow-x:auto;padding:0 2px}
+.ruler .inner{min-width:640px;position:relative;padding:34px 0 38px}
+.ruler .bar{position:relative;display:flex;min-height:64px;border-radius:10px}
+.ruler .seg{flex:1;position:relative;display:flex;flex-direction:column;justify-content:center;gap:2px;padding:10px 12px;font-size:12px;line-height:1.3;color:var(--muted);border-right:2px solid var(--panel)}
+.ruler .seg:nth-child(odd){background:var(--band-a)}
+.ruler .seg:nth-child(even){background:var(--band-b)}
+.ruler .seg:first-child{border-radius:10px 0 0 10px}
+.ruler .seg:last-child{border-radius:0 10px 10px 0;border-right:0}
+.ruler .seg b{color:var(--ink);font-size:13px;font-weight:700}
+.ruler .seg.on{box-shadow:inset 0 0 0 2px var(--plum);background:var(--plum-soft)}
+.marker{position:absolute;width:0;z-index:2}
+.marker::before{content:&quot;&quot;;position:absolute;left:-6px;border-left:6px solid transparent;border-right:6px solid transparent}
+.marker i{position:absolute;left:0;transform:translateX(-50%);font-style:normal;font-size:12px;font-weight:700;white-space:nowrap;padding:2px 8px;border-radius:6px}
+.marker.promo{top:0}
+.marker.promo::before{top:22px;border-top:8px solid var(--plum)}
+.marker.promo i{top:0;background:var(--plum);color:var(--panel)}
+.marker.full{bottom:0}
+.marker.full::before{bottom:22px;border-bottom:8px solid var(--muted)}
+.marker.full i{bottom:0;background:var(--panel);color:var(--ink);border:1px solid var(--line)}
+.ruler .legend{display:flex;gap:18px;flex-wrap:wrap;font-size:12px;color:var(--muted);margin-top:4px}
+.ruler .legend span::before{content:&quot;&quot;;display:inline-block;width:10px;height:10px;border-radius:3px;margin-right:6px;vertical-align:-1px}
+.ruler .legend .lp::before{background:var(--plum)}
+.ruler .legend .lf::before{background:var(--panel);border:1px solid var(--muted)}
+.ruler .legend .lb::before{background:var(--plum-soft);box-shadow:inset 0 0 0 2px var(--plum)}
+
+.alerts{margin-top:18px;display:flex;flex-direction:column;gap:8px}
+.alert{padding:10px 14px;border-radius:10px;font-size:13.5px;background:var(--warn-soft);color:var(--ink);border-left:3px solid var(--warn)}
+.alert.ok{background:var(--profit-soft);border-left-color:var(--profit)}
+
+.tables{display:grid;grid-template-columns:1fr 1fr;gap:20px;margin-top:20px}
+@media (max-width:720px){.tables{grid-template-columns:1fr}}
+.scroll{overflow-x:auto}
+table{width:100%;border-collapse:collapse;font-size:13.5px}
+th,td{padding:7px 4px;text-align:left;border-bottom:1px solid var(--line)}
+th{font-weight:600;color:var(--muted);font-size:12px}
+td.n,th.n{text-align:right;white-space:nowrap}
+tr.total td{font-weight:800;border-bottom:0;padding-top:10px}
+tr.total td.n{color:var(--profit)}
+tr.neg td.n{color:var(--warn)}
+.sub{font-size:12px;color:var(--muted);margin:-8px 0 12px}
+
+details{margin-top:20px}
+summary{cursor:pointer;font-weight:700;font-size:15px;list-style:none;display:flex;align-items:center;gap:8px}
+summary::-webkit-details-marker{display:none}
+summary::before{content:&quot;+&quot;;display:inline-grid;place-items:center;width:22px;height:22px;border-radius:6px;background:var(--plum-soft);color:var(--plum);font-weight:800}
+details[open] summary::before{content:&quot;−&quot;}
+.tbl-edit{table-layout:fixed;min-width:560px}
+.tbl-edit th,.tbl-edit td{padding:8px 6px;vertical-align:middle}
+.tbl-edit th{text-align:right}
+.tbl-edit th:first-child,.tbl-edit td:first-child{width:56px;text-align:center}
+.tbl-edit td.n{text-align:right;padding-right:14px}
+.tbl-edit input{display:block;width:100%;min-width:0;border:1px solid var(--line);border-radius:7px;background:var(--field);color:var(--ink);font:inherit;font-weight:600;padding:6px 8px;text-align:right}
+.tbl-edit input:focus{outline:none;border-color:var(--plum);box-shadow:0 0 0 3px var(--plum-soft)}
+.row-actions{display:flex;gap:10px;flex-wrap:wrap;margin-top:14px;align-items:center}
+button{font:inherit;font-weight:700;font-size:13px;border-radius:9px;padding:8px 14px;cursor:pointer;border:1px solid var(--line);background:var(--panel);color:var(--ink)}
+button.primary{background:var(--plum);border-color:var(--plum);color:var(--panel)}
+button:focus-visible{outline:3px solid var(--plum-soft);outline-offset:1px}
+.note{font-size:12px;color:var(--muted)}
+.env{border:1px solid var(--line);border-radius:10px;padding:12px 14px;margin:0 0 16px;background:var(--field)}
+.chk{display:flex;gap:8px;align-items:center;font-size:13px;font-weight:600;cursor:pointer}
+.chk input{width:16px;height:16px;accent-color:var(--plum)}
+.env-f{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:12px}
+.env-f .field{margin:0}
+@media (max-width:560px){.env-f{grid-template-columns:1fr}}
+.sim{display:flex;gap:10px;align-items:end;flex-wrap:wrap}
+.sim .field{margin:0;flex:1;min-width:160px}
+&lt;/style&gt;
+&lt;style&gt;header{display:none}.wrap{padding-top:0}.grid{margin-top:16px}&lt;/style&gt;&lt;/head&gt;
+&lt;body&gt;
+&lt;div class=&quot;wrap&quot;&gt;
+  &lt;header&gt;
+    &lt;h1&gt;Precificação TikTok Shop&lt;/h1&gt;
+    &lt;p&gt;Preencha seus custos e metas. As taxas do TikTok Shop (comissão, tarifa fixa por item e taxa do Programa de Envio) entram automaticamente conforme a faixa de preço.&lt;/p&gt;
+  &lt;/header&gt;
+
+  &lt;div class=&quot;grid&quot;&gt;
+    &lt;!-- ENTRADAS --&gt;
+    &lt;aside class=&quot;panel&quot; aria-label=&quot;Seus dados&quot;&gt;
+      &lt;h2&gt;Seus dados&lt;/h2&gt;
+      &lt;div class=&quot;field&quot;&gt;&lt;label for=&quot;custo&quot;&gt;Custo do produto&lt;/label&gt;
+        &lt;div class=&quot;inp&quot;&gt;&lt;span&gt;R$&lt;/span&gt;&lt;input id=&quot;custo&quot; inputmode=&quot;decimal&quot; data-key=&quot;custo&quot;&gt;&lt;/div&gt;&lt;/div&gt;
+      &lt;div class=&quot;field&quot;&gt;&lt;label for=&quot;margem&quot;&gt;Margem desejada sobre o custo&lt;/label&gt;
+        &lt;div class=&quot;inp&quot;&gt;&lt;input id=&quot;margem&quot; inputmode=&quot;decimal&quot; data-key=&quot;margem&quot;&gt;&lt;span&gt;%&lt;/span&gt;&lt;/div&gt;&lt;/div&gt;
+      &lt;div class=&quot;field&quot;&gt;&lt;label for=&quot;emb&quot;&gt;Embalagem&lt;/label&gt;
+        &lt;div class=&quot;inp&quot;&gt;&lt;span&gt;R$&lt;/span&gt;&lt;input id=&quot;emb&quot; inputmode=&quot;decimal&quot; data-key=&quot;emb&quot;&gt;&lt;/div&gt;&lt;/div&gt;
+      &lt;div class=&quot;sep&quot;&gt;&lt;/div&gt;
+      &lt;div class=&quot;field&quot;&gt;&lt;label for=&quot;vend&quot;&gt;Comissão do vendedor&lt;/label&gt;
+        &lt;div class=&quot;inp&quot;&gt;&lt;input id=&quot;vend&quot; inputmode=&quot;decimal&quot; data-key=&quot;vend&quot;&gt;&lt;span&gt;%&lt;/span&gt;&lt;/div&gt;
+        &lt;div class=&quot;hint&quot;&gt;Sobre o preço de venda&lt;/div&gt;&lt;/div&gt;
+      &lt;div class=&quot;field&quot;&gt;&lt;label for=&quot;ads&quot;&gt;ADS&lt;/label&gt;
+        &lt;div class=&quot;inp&quot;&gt;&lt;input id=&quot;ads&quot; inputmode=&quot;decimal&quot; data-key=&quot;ads&quot;&gt;&lt;span&gt;%&lt;/span&gt;&lt;/div&gt;
+        &lt;div class=&quot;hint&quot;&gt;Sobre o preço de venda&lt;/div&gt;&lt;/div&gt;
+      &lt;div class=&quot;field&quot;&gt;&lt;label for=&quot;afil&quot;&gt;Comissão de afiliado/creator&lt;/label&gt;
+        &lt;div class=&quot;inp&quot;&gt;&lt;input id=&quot;afil&quot; inputmode=&quot;decimal&quot; data-key=&quot;afil&quot;&gt;&lt;span&gt;%&lt;/span&gt;&lt;/div&gt;
+        &lt;div class=&quot;hint&quot;&gt;Sobre o preço de venda. Deixe 0 se não vender por afiliados&lt;/div&gt;&lt;/div&gt;
+      &lt;div class=&quot;field&quot;&gt;&lt;label for=&quot;nf&quot;&gt;Nota fiscal&lt;/label&gt;
+        &lt;div class=&quot;inp&quot;&gt;&lt;input id=&quot;nf&quot; inputmode=&quot;decimal&quot; data-key=&quot;nf&quot;&gt;&lt;span&gt;%&lt;/span&gt;&lt;/div&gt;
+        &lt;div class=&quot;hint&quot;&gt;Sobre o preço de venda&lt;/div&gt;&lt;/div&gt;
+      &lt;div class=&quot;sep&quot;&gt;&lt;/div&gt;
+      &lt;div class=&quot;field&quot;&gt;&lt;label for=&quot;desc&quot;&gt;Desconto da promoção&lt;/label&gt;
+        &lt;div class=&quot;inp&quot;&gt;&lt;input id=&quot;desc&quot; inputmode=&quot;decimal&quot; data-key=&quot;desc&quot;&gt;&lt;span&gt;%&lt;/span&gt;&lt;/div&gt;
+        &lt;div class=&quot;hint&quot;&gt;O preço cheio é calculado para que, com esse desconto, o preço final seja o preço promocional&lt;/div&gt;&lt;/div&gt;
+      &lt;div class=&quot;field&quot;&gt;&lt;label for=&quot;arred&quot;&gt;Final do preço promocional&lt;/label&gt;
+        &lt;div class=&quot;inp&quot;&gt;&lt;select id=&quot;arred&quot; data-key=&quot;arred&quot;&gt;
+          &lt;option value=&quot;exato&quot;&gt;Exato (mínimo para a margem)&lt;/option&gt;
+          &lt;option value=&quot;90&quot;&gt;Terminar em ,90&lt;/option&gt;
+          &lt;option value=&quot;99&quot;&gt;Terminar em ,99&lt;/option&gt;
+          &lt;option value=&quot;98&quot;&gt;Terminar em ,98&lt;/option&gt;
+        &lt;/select&gt;&lt;/div&gt;&lt;/div&gt;
+      &lt;div class=&quot;row-actions&quot;&gt;&lt;button id=&quot;reset-inputs&quot; type=&quot;button&quot;&gt;Limpar para o exemplo&lt;/button&gt;&lt;/div&gt;
+    &lt;/aside&gt;
+
+    &lt;!-- RESULTADOS --&gt;
+    &lt;main&gt;
+      &lt;section class=&quot;hero&quot; aria-live=&quot;polite&quot;&gt;
+        &lt;div class=&quot;promo&quot;&gt;
+          &lt;div class=&quot;k&quot;&gt;Preço promocional (o que o cliente paga)&lt;/div&gt;
+          &lt;div class=&quot;v&quot; id=&quot;promoV&quot;&gt;–&lt;/div&gt;
+          &lt;div class=&quot;s&quot; id=&quot;promoS&quot;&gt;&lt;/div&gt;
+        &lt;/div&gt;
+        &lt;div class=&quot;full&quot;&gt;
+          &lt;div class=&quot;k&quot;&gt;Preço cheio para cadastrar&lt;/div&gt;
+          &lt;div class=&quot;v&quot; id=&quot;fullV&quot;&gt;–&lt;/div&gt;
+          &lt;div class=&quot;s&quot; id=&quot;fullS&quot;&gt;&lt;/div&gt;
+        &lt;/div&gt;
+      &lt;/section&gt;
+
+      &lt;section class=&quot;ruler panel&quot; style=&quot;margin-top:20px&quot; aria-label=&quot;Faixas de taxa do TikTok Shop&quot;&gt;
+        &lt;h2&gt;Onde seus preços caem nas faixas do TikTok Shop&lt;/h2&gt;
+        &lt;div class=&quot;track&quot;&gt;&lt;div class=&quot;inner&quot; id=&quot;inner&quot;&gt;&lt;div class=&quot;bar&quot; id=&quot;bar&quot;&gt;&lt;/div&gt;&lt;/div&gt;&lt;/div&gt;
+        &lt;div class=&quot;legend&quot;&gt;&lt;span class=&quot;lp&quot;&gt;Preço promocional&lt;/span&gt;&lt;span class=&quot;lf&quot;&gt;Preço cheio&lt;/span&gt;&lt;span class=&quot;lb&quot;&gt;Faixa do preço promocional&lt;/span&gt;&lt;/div&gt;
+      &lt;/section&gt;
+
+      &lt;div class=&quot;alerts&quot; id=&quot;alerts&quot;&gt;&lt;/div&gt;
+
+      &lt;div class=&quot;tables&quot;&gt;
+        &lt;section class=&quot;panel&quot;&gt;
+          &lt;h2&gt;Composição no preço promocional&lt;/h2&gt;
+          &lt;div class=&quot;sub&quot; id=&quot;subPromo&quot;&gt;&lt;/div&gt;
+          &lt;div class=&quot;scroll&quot;&gt;&lt;table id=&quot;tPromo&quot;&gt;&lt;/table&gt;&lt;/div&gt;
+        &lt;/section&gt;
+        &lt;section class=&quot;panel&quot;&gt;
+          &lt;h2&gt;Composição no preço cheio&lt;/h2&gt;
+          &lt;div class=&quot;sub&quot; id=&quot;subFull&quot;&gt;&lt;/div&gt;
+          &lt;div class=&quot;scroll&quot;&gt;&lt;table id=&quot;tFull&quot;&gt;&lt;/table&gt;&lt;/div&gt;
+        &lt;/section&gt;
+      &lt;/div&gt;
+
+      &lt;section class=&quot;panel&quot; style=&quot;margin-top:20px&quot;&gt;
+        &lt;h2&gt;Simular outro preço&lt;/h2&gt;
+        &lt;div class=&quot;sim&quot;&gt;
+          &lt;div class=&quot;field&quot;&gt;&lt;label for=&quot;simP&quot;&gt;Preço de venda final&lt;/label&gt;
+            &lt;div class=&quot;inp&quot;&gt;&lt;span&gt;R$&lt;/span&gt;&lt;input id=&quot;simP&quot; inputmode=&quot;decimal&quot; placeholder=&quot;Ex.: 94,90&quot; data-key=&quot;simP&quot;&gt;&lt;/div&gt;&lt;/div&gt;
+        &lt;/div&gt;
+        &lt;div class=&quot;scroll&quot; style=&quot;margin-top:14px&quot;&gt;&lt;table id=&quot;tSim&quot;&gt;&lt;/table&gt;&lt;/div&gt;
+      &lt;/section&gt;
+
+      &lt;details class=&quot;panel&quot; id=&quot;tabDetails&quot;&gt;
+        &lt;summary&gt;Tabela de taxas do TikTok Shop&lt;/summary&gt;
+        &lt;p class=&quot;note&quot; style=&quot;margin:12px 0&quot;&gt;Vigente desde 15/07/2026. A comissão incide sobre o preço já com os descontos bancados por você; descontos e cupons pagos pelo TikTok não entram na conta. Se o TikTok mudar as taxas, edite aqui: os cálculos se atualizam e ficam salvos neste navegador.&lt;/p&gt;
+        &lt;div class=&quot;env&quot;&gt;
+          &lt;label class=&quot;chk&quot;&gt;&lt;input type=&quot;checkbox&quot; id=&quot;envOn&quot;&gt; Participo do Programa de Taxas de Envio (frete grátis/reduzido)&lt;/label&gt;
+          &lt;div class=&quot;env-f&quot;&gt;
+            &lt;div class=&quot;field&quot;&gt;&lt;label for=&quot;envPct&quot;&gt;Taxa de serviço do envio&lt;/label&gt;&lt;div class=&quot;inp&quot;&gt;&lt;input id=&quot;envPct&quot; inputmode=&quot;decimal&quot;&gt;&lt;span&gt;%&lt;/span&gt;&lt;/div&gt;&lt;/div&gt;
+            &lt;div class=&quot;field&quot;&gt;&lt;label for=&quot;envTeto&quot;&gt;Teto por item&lt;/label&gt;&lt;div class=&quot;inp&quot;&gt;&lt;span&gt;R$&lt;/span&gt;&lt;input id=&quot;envTeto&quot; inputmode=&quot;decimal&quot;&gt;&lt;/div&gt;&lt;/div&gt;
+          &lt;/div&gt;
+        &lt;/div&gt;
+        &lt;div class=&quot;scroll&quot;&gt;&lt;table class=&quot;tbl-edit&quot; id=&quot;tBands&quot;&gt;&lt;/table&gt;&lt;/div&gt;
+        &lt;div class=&quot;row-actions&quot;&gt;
+          &lt;button type=&quot;button&quot; id=&quot;resetBands&quot;&gt;Restaurar tabela de julho/2026&lt;/button&gt;
+          &lt;span class=&quot;note&quot; id=&quot;bandsStatus&quot;&gt;&lt;/span&gt;
+        &lt;/div&gt;
+      &lt;/details&gt;
+    &lt;/main&gt;
+  &lt;/div&gt;
+&lt;/div&gt;
+
+&lt;script&gt;
+(function(){
+  &quot;use strict&quot;;
+  var DEFAULT_INPUTS = {custo:&quot;34,56&quot;, margem:&quot;30&quot;, emb:&quot;1,00&quot;, vend:&quot;3&quot;, ads:&quot;10&quot;, nf:&quot;10&quot;, afil:&quot;0&quot;, desc:&quot;30&quot;, arred:&quot;exato&quot;, simP:&quot;&quot;};
+  var DEFAULT_ENV = {on:true, pct:6, teto:50};
+  var DEFAULT_BANDS = [
+    {min:0,  max:49.99,    pct:10, fixo:4, meia:false},
+    {min:50, max:Infinity, pct:6,  fixo:6, meia:false}
+  ];
+  var LS_IN = &quot;ttsPricing.inputs.v1&quot;, LS_B = &quot;ttsPricing.bands.v1&quot;, LS_E = &quot;ttsPricing.env.v1&quot;;
+
+  function load(key, fallback){
+    try{ var raw = localStorage.getItem(key); if(!raw) return fallback; return JSON.parse(raw); }catch(e){ return fallback; }
+  }
+  function save(key, val){ try{ localStorage.setItem(key, JSON.stringify(val)); }catch(e){} }
+
+  var inputs = Object.assign({}, DEFAULT_INPUTS, load(LS_IN, {}));
+  var bands = (load(LS_B, null) || DEFAULT_BANDS).map(function(b){ return Object.assign({}, b, {max: (b.max===null||b.max===&quot;inf&quot;) ? Infinity : b.max}); });
+
+  var env = Object.assign({}, DEFAULT_ENV, load(LS_E, {}));
+  var $ = function(id){ return document.getElementById(id); };
+  var num = function(s){ if(s===undefined||s===null) return NaN; s=String(s).trim().replace(/\s/g,&quot;&quot;).replace(&quot;R$&quot;,&quot;&quot;); if(s.indexOf(&quot;,&quot;)&gt;-1){ s=s.replace(/\./g,&quot;&quot;).replace(&quot;,&quot;,&quot;.&quot;); } return parseFloat(s); };
+  var brl = function(v){ return isFinite(v) ? v.toLocaleString(&quot;pt-BR&quot;,{style:&quot;currency&quot;,currency:&quot;BRL&quot;}) : &quot;–&quot;; };
+  var pct = function(v,d){ return isFinite(v) ? (v*100).toLocaleString(&quot;pt-BR&quot;,{minimumFractionDigits:d===undefined?1:d,maximumFractionDigits:d===undefined?1:d})+&quot;%&quot; : &quot;–&quot;; };
+  var r2 = function(v){ return Math.round(v*100)/100; };
+  var fmtN = function(v){ return v===Infinity ? &quot;&quot; : String(v).replace(&quot;.&quot;,&quot;,&quot;); };
+
+  function bandOf(P){
+    for(var i=0;i&lt;bands.length;i++){ if(P&gt;=bands[i].min-1e-9 &amp;&amp; P&lt;=bands[i].max+0.004) return i; }
+    for(var j=0;j&lt;bands.length-1;j++){ if(P&gt;bands[j].max &amp;&amp; P&lt;bands[j+1].min) return j+1; }
+    return bands.length-1;
+  }
+
+  function params(){
+    return {
+      C:num(inputs.custo)||0, M:(num(inputs.margem)||0)/100, E:num(inputs.emb)||0,
+      v:(num(inputs.vend)||0)/100, a:(num(inputs.ads)||0)/100, n:(num(inputs.nf)||0)/100,
+      d:(num(inputs.desc)||0)/100,
+      f:(num(inputs.afil)||0)/100
+    };
+  }
+
+  function breakdown(P, p){
+    var bi = bandOf(P), b = bands[bi];
+    var com = P*b.pct/100, fixo = b.meia ? P*0.5 : b.fixo;
+    var vend = P*p.v, ads = P*p.a, nf = P*p.n, afil = P*p.f;
+    var envio = env.on ? Math.min(P*env.pct/100, env.teto) : 0;
+    var lucro = P - com - fixo - vend - ads - nf - afil - envio - p.C - p.E;
+    return {P:P, bi:bi, b:b, com:com, fixo:fixo, vend:vend, ads:ads, nf:nf, afil:afil, envio:envio, lucro:lucro,
+            mCusto: p.C&gt;0 ? lucro/p.C : NaN, mVenda: P&gt;0 ? lucro/P : NaN};
+  }
+
+  // menor preço que atinge o lucro-alvo
+  function minPrice(p){
+    var L = p.C*p.M, best = null;
+    bands.forEach(function(b){
+      var ep = env.on ? env.pct/100 : 0;
+      var base = 1 - b.pct/100 - p.v - p.a - p.n - p.f - (b.meia?0.5:0);
+      var denom = base - ep;
+      if(denom&lt;=0) return;
+      var P = (p.C + p.E + (b.meia?0:b.fixo) + L)/denom;
+      if(env.on &amp;&amp; P*ep &gt; env.teto){ if(base&lt;=0) return; P = (p.C + p.E + (b.meia?0:b.fixo) + env.teto + L)/base; }
+      if(P &lt; b.min) P = b.min;
+      if(P &gt; b.max + 1e-9) return;
+      P = Math.ceil(P*100 - 1e-6)/100;
+      if(P &gt; b.max + 1e-9) return;
+      if(best===null || P &lt; best) best = P;
+    });
+    return best;
+  }
+
+  function applyEnding(P, mode){
+    if(mode===&quot;exato&quot;) return P;
+    var cents = parseInt(mode,10)/100, bi = bandOf(P), max = bands[bi].max;
+    var base = Math.floor(P), cand = base + cents;
+    if(cand &lt; P - 1e-9) cand += 1;
+    cand = r2(cand);
+    if(cand &gt; max + 1e-9) return {P:P, clipped:true};
+    return cand;
+  }
+
+  function fullFromPromo(promo, d, p){
+    if(d&lt;=0) return {full:promo, promoReal:promo};
+    if(d&gt;=1) return null;
+    var full = Math.ceil(promo/(1-d)*100 - 1e-6)/100;
+    var real = r2(full*(1-d));
+    var maxBand = bands[bandOf(promo)].max;
+    var guard = 0;
+    while(real &gt; maxBand + 1e-9 &amp;&amp; guard&lt;5){ full = r2(full-0.01); real = r2(full*(1-d)); guard++; }
+    return {full:full, promoReal:real};
+  }
+
+  function rows(bd, p){
+    var labelFixo = &quot;Tarifa fixa por item&quot;;
+    var list = [
+      [&quot;Preço de venda&quot;, &quot;100,0%&quot;, bd.P, &quot;&quot;],
+      [&quot;Comissão TikTok Shop&quot;, pct(bd.b.pct/100), -bd.com, &quot;&quot;],
+      [labelFixo, &quot;&quot;, -bd.fixo, &quot;&quot;],
+      [&quot;Programa de envio&quot;+(env.on &amp;&amp; bd.envio&gt;=env.teto-0.001?&quot; (teto)&quot;:&quot;&quot;), env.on &amp;&amp; bd.envio&lt;env.teto-0.001 ? pct(env.pct/100) : &quot;&quot;, -bd.envio, &quot;&quot;],
+      [&quot;Comissão do vendedor&quot;, pct(p.v), -bd.vend, &quot;&quot;],
+      [&quot;ADS&quot;, pct(p.a), -bd.ads, &quot;&quot;],
+      [&quot;Nota fiscal&quot;, pct(p.n), -bd.nf, &quot;&quot;],
+      [&quot;Afiliado/creator&quot;, pct(p.f), -bd.afil, &quot;&quot;],
+      [&quot;Custo do produto&quot;, &quot;&quot;, -p.C, &quot;&quot;],
+      [&quot;Embalagem&quot;, &quot;&quot;, -p.E, &quot;&quot;]
+    ];
+    var h = &#x27;&lt;thead&gt;&lt;tr&gt;&lt;th&gt;Item&lt;/th&gt;&lt;th class=&quot;n&quot;&gt;%&lt;/th&gt;&lt;th class=&quot;n&quot;&gt;R$&lt;/th&gt;&lt;/tr&gt;&lt;/thead&gt;&lt;tbody&gt;&#x27;;
+    list.forEach(function(r){ h += &#x27;&lt;tr&gt;&lt;td&gt;&#x27;+r[0]+&#x27;&lt;/td&gt;&lt;td class=&quot;n&quot;&gt;&#x27;+r[1]+&#x27;&lt;/td&gt;&lt;td class=&quot;n&quot;&gt;&#x27;+brl(r[2])+&#x27;&lt;/td&gt;&lt;/tr&gt;&#x27;; });
+    h += &#x27;&lt;tr class=&quot;total&#x27;+(bd.lucro&lt;0?&#x27; neg&#x27;:&#x27;&#x27;)+&#x27;&quot;&gt;&lt;td&gt;Lucro líquido&lt;/td&gt;&lt;td class=&quot;n&quot;&gt;&#x27;+pct(bd.mVenda)+&#x27;&lt;/td&gt;&lt;td class=&quot;n&quot;&gt;&#x27;+brl(bd.lucro)+&#x27;&lt;/td&gt;&lt;/tr&gt;&#x27;;
+    h += &#x27;&lt;tr&gt;&lt;td class=&quot;note&quot; colspan=&quot;2&quot;&gt;Margem sobre o custo&lt;/td&gt;&lt;td class=&quot;n note&quot;&gt;&#x27;+pct(bd.mCusto)+&#x27;&lt;/td&gt;&lt;/tr&gt;&#x27;;
+    return h + &#x27;&lt;/tbody&gt;&#x27;;
+  }
+
+  function bandLabel(b){
+    if(b.min===0) return &quot;Até &quot;+brl(b.max);
+    if(b.max===Infinity) return &quot;A partir de &quot;+brl(b.min);
+    return brl(b.min)+&quot; a &quot;+brl(b.max);
+  }
+  function bandFee(b){ return b.pct+&quot;% + &quot;+brl(b.fixo)+(env.on?&quot; + envio &quot;+fmtN(env.pct)+&quot;%&quot;:&quot;&quot;); }
+
+  function drawRuler(promoBd, fullBd){
+    var bar = $(&quot;bar&quot;), inner = $(&quot;inner&quot;);
+    var h = &quot;&quot;;
+    bands.forEach(function(b,i){
+      var on = (promoBd &amp;&amp; promoBd.bi===i) ? &quot; on&quot; : &quot;&quot;;
+      h += &#x27;&lt;div class=&quot;seg&#x27;+on+&#x27;&quot;&gt;&lt;b&gt;&#x27;+bandFee(b)+&#x27;&lt;/b&gt;&lt;span&gt;&#x27;+bandLabel(b)+&#x27;&lt;/span&gt;&lt;/div&gt;&#x27;;
+    });
+    bar.innerHTML = h;
+    inner.querySelectorAll(&quot;.marker&quot;).forEach(function(m){ m.remove(); });
+    function place(bd, cls, text){
+      if(!bd) return;
+      var b = bands[bd.bi], w = 100/bands.length;
+      var top = b.max===Infinity ? Math.max(b.min*2, 400) : b.max;
+      var frac = Math.min(1, Math.max(0,(bd.P-b.min)/(top-b.min)));
+      var left = (bd.bi + 0.12 + frac*0.76)*w;
+      var m = document.createElement(&quot;div&quot;);
+      m.className = &quot;marker &quot;+cls; m.style.left = left+&quot;%&quot;;
+      m.innerHTML = &quot;&lt;i&gt;&quot;+text+&quot;&lt;/i&gt;&quot;;
+      inner.appendChild(m);
+    }
+    place(promoBd, &quot;promo&quot;, &quot;Promo &quot;+brl(promoBd &amp;&amp; promoBd.P));
+    if(fullBd &amp;&amp; (!promoBd || fullBd.P!==promoBd.P)) place(fullBd, &quot;full&quot;, &quot;Cheio &quot;+brl(fullBd.P));
+  }
+
+  function drawBandsTable(){
+    var h = &#x27;&lt;colgroup&gt;&lt;col style=&quot;width:56px&quot;&gt;&lt;col&gt;&lt;col&gt;&lt;col&gt;&lt;col&gt;&lt;/colgroup&gt;&lt;thead&gt;&lt;tr&gt;&lt;th&gt;Faixa&lt;/th&gt;&lt;th class=&quot;n&quot;&gt;De (R$)&lt;/th&gt;&lt;th class=&quot;n&quot;&gt;Até (R$)&lt;/th&gt;&lt;th class=&quot;n&quot;&gt;Comissão (%)&lt;/th&gt;&lt;th class=&quot;n&quot;&gt;Taxa fixa (R$)&lt;/th&gt;&lt;/tr&gt;&lt;/thead&gt;&lt;tbody&gt;&#x27;;
+    bands.forEach(function(b,i){
+      h += &#x27;&lt;tr&gt;&lt;td&gt;&#x27;+(i+1)+&#x27;&lt;/td&gt;&#x27;+
+        &#x27;&lt;td&gt;&lt;input data-b=&quot;&#x27;+i+&#x27;&quot; data-f=&quot;min&quot; value=&quot;&#x27;+fmtN(b.min)+&#x27;&quot; inputmode=&quot;decimal&quot; aria-label=&quot;Faixa &#x27;+(i+1)+&#x27; valor inicial&quot;&gt;&lt;/td&gt;&#x27;+
+        &#x27;&lt;td&gt;&lt;input data-b=&quot;&#x27;+i+&#x27;&quot; data-f=&quot;max&quot; value=&quot;&#x27;+(b.max===Infinity?&quot;&quot;:fmtN(b.max))+&#x27;&quot; placeholder=&quot;sem limite&quot; inputmode=&quot;decimal&quot; aria-label=&quot;Faixa &#x27;+(i+1)+&#x27; valor final&quot;&gt;&lt;/td&gt;&#x27;+
+        &#x27;&lt;td&gt;&lt;input data-b=&quot;&#x27;+i+&#x27;&quot; data-f=&quot;pct&quot; value=&quot;&#x27;+fmtN(b.pct)+&#x27;&quot; inputmode=&quot;decimal&quot; aria-label=&quot;Faixa &#x27;+(i+1)+&#x27; comissão&quot;&gt;&lt;/td&gt;&#x27;+
+        (b.meia ? &#x27;&lt;td class=&quot;n note&quot;&gt;50% do preço&lt;/td&gt;&#x27; :
+        &#x27;&lt;td&gt;&lt;input data-b=&quot;&#x27;+i+&#x27;&quot; data-f=&quot;fixo&quot; value=&quot;&#x27;+fmtN(b.fixo)+&#x27;&quot; inputmode=&quot;decimal&quot; aria-label=&quot;Faixa &#x27;+(i+1)+&#x27; taxa fixa&quot;&gt;&lt;/td&gt;&#x27;)+
+        &#x27;&lt;/tr&gt;&#x27;;
+    });
+    $(&quot;tBands&quot;).innerHTML = h + &#x27;&lt;/tbody&gt;&#x27;;
+  }
+
+  function render(){
+    var p = params(), alerts = [];
+    var minP = minPrice(p);
+    var promoBd = null, fullBd = null, promoInfo = null;
+
+    if(minP===null || !(p.C&gt;0)){
+      $(&quot;promoV&quot;).textContent = &quot;–&quot;; $(&quot;fullV&quot;).textContent = &quot;–&quot;;
+      $(&quot;promoS&quot;).textContent = p.C&gt;0 ? &quot;Com esses percentuais nenhum preço atinge a margem.&quot; : &quot;Informe o custo do produto.&quot;;
+      $(&quot;fullS&quot;).textContent = &quot;&quot;;
+      $(&quot;tPromo&quot;).innerHTML = &quot;&quot;; $(&quot;tFull&quot;).innerHTML = &quot;&quot;; $(&quot;subPromo&quot;).textContent=&quot;&quot;; $(&quot;subFull&quot;).textContent=&quot;&quot;;
+      if(p.C&gt;0) alerts.push([&quot;Os percentuais sobre a venda (TikTok + envio + vendedor + ADS + nota + afiliado) somam 100% ou mais. Reduza algum deles.&quot;, false]);
+      drawRuler(null,null);
+    } else {
+      var target = applyEnding(minP, inputs.arred);
+      if(typeof target === &quot;object&quot;){ target = target.P; alerts.push([&quot;O final escolhido passaria para a próxima faixa do TikTok Shop. Mantive o preço exato.&quot;, false]); }
+      promoInfo = fullFromPromo(target, p.d, p);
+      var promoP = promoInfo ? promoInfo.promoReal : target;
+      var fullP = promoInfo ? promoInfo.full : target;
+      promoBd = breakdown(promoP, p);
+      fullBd = breakdown(fullP, p);
+
+      $(&quot;promoV&quot;).textContent = brl(promoP);
+      $(&quot;promoS&quot;).innerHTML = &quot;Lucro &lt;b&gt;&quot;+brl(promoBd.lucro)+&quot;&lt;/b&gt; · &quot;+pct(promoBd.mCusto)+&quot; sobre o custo&quot;;
+      $(&quot;fullV&quot;).textContent = p.d&gt;0 ? brl(fullP) : brl(promoP);
+      $(&quot;fullS&quot;).innerHTML = p.d&gt;0 ? &quot;Com &quot;+pct(p.d,0)+&quot; de desconto → &quot;+brl(promoP)+&quot; · lucro sem promoção &quot;+brl(fullBd.lucro) : &quot;Sem desconto de promoção&quot;;
+
+      $(&quot;tPromo&quot;).innerHTML = rows(promoBd, p);
+      $(&quot;tFull&quot;).innerHTML = rows(fullBd, p);
+      $(&quot;subPromo&quot;).textContent = &quot;Faixa &quot;+bandLabel(promoBd.b)+&quot; · &quot;+bandFee(promoBd.b);
+      $(&quot;subFull&quot;).textContent = &quot;Faixa &quot;+bandLabel(fullBd.b)+&quot; · &quot;+bandFee(fullBd.b);
+
+      // alertas
+      var pb = promoBd.b;
+      if(pb.max!==Infinity &amp;&amp; pb.max - promoP &lt; 2){
+        alerts.push([&quot;O preço promocional está a &quot;+brl(r2(pb.max-promoP))+&quot; do limite da faixa. Acima de &quot;+brl(pb.max)+&quot; o TikTok Shop passa a cobrar &quot;+bandFee(bands[promoBd.bi+1])+&quot;. Cupons e ofertas precisam manter o preço final dentro da faixa.&quot;, false]);
+      }
+      if(promoBd.bi&gt;0){
+        var prev = bands[promoBd.bi-1];
+        var prevBd = breakdown(prev.max, p);
+        if(prevBd.lucro &gt;= promoBd.lucro - 0.005){
+          alerts.push([&quot;A &quot;+brl(prev.max)+&quot; (faixa anterior) o lucro seria &quot;+brl(prevBd.lucro)+&quot;, igual ou maior que no preço atual.&quot;, false]);
+        } else {
+          alerts.push([&quot;Na faixa anterior (até &quot;+brl(prev.max)+&quot;) o lucro máximo seria &quot;+brl(prevBd.lucro)+&quot; (&quot;+pct(prevBd.mCusto)+&quot; sobre o custo), abaixo da sua meta.&quot;, true]);
+        }
+      }
+      if(p.d&gt;0 &amp;&amp; fullBd.bi!==promoBd.bi){
+        alerts.push([&quot;O preço cheio cai em outra faixa (&quot;+bandFee(fullBd.b)+&quot;). Se vender sem promoção, o lucro é &quot;+brl(fullBd.lucro)+&quot;.&quot;, true]);
+      }
+      if(p.d&gt;0){
+        alerts.push([&quot;O preço cheio precisa ter sido praticado de verdade antes da promoção. O TikTok Shop pode recusar campanhas (como a Black Friday) com desconto sobre um preço recém-aumentado.&quot;, false]);
+      }
+      drawRuler(promoBd, fullBd);
+    }
+
+    // simulação
+    var sp = num(inputs.simP);
+    if(sp&gt;0){
+      var sb = breakdown(sp, p);
+      $(&quot;tSim&quot;).innerHTML = rows(sb, p);
+    } else {
+      $(&quot;tSim&quot;).innerHTML = &#x27;&lt;tbody&gt;&lt;tr&gt;&lt;td class=&quot;note&quot;&gt;Digite um preço para ver a composição e o lucro nele.&lt;/td&gt;&lt;/tr&gt;&lt;/tbody&gt;&#x27;;
+    }
+
+    $(&quot;alerts&quot;).innerHTML = alerts.map(function(a){ return &#x27;&lt;div class=&quot;alert&#x27;+(a[1]?&#x27; ok&#x27;:&#x27;&#x27;)+&#x27;&quot;&gt;&#x27;+a[0]+&#x27;&lt;/div&gt;&#x27;; }).join(&quot;&quot;);
+  }
+
+  // ligar entradas
+  document.querySelectorAll(&quot;[data-key]&quot;).forEach(function(el){
+    el.value = inputs[el.dataset.key] || &quot;&quot;;
+    el.addEventListener(&quot;input&quot;, function(){ inputs[el.dataset.key] = el.value; save(LS_IN, inputs); render(); });
+  });
+  $(&quot;reset-inputs&quot;).addEventListener(&quot;click&quot;, function(){
+    inputs = Object.assign({}, DEFAULT_INPUTS); save(LS_IN, inputs);
+    document.querySelectorAll(&quot;[data-key]&quot;).forEach(function(el){ el.value = inputs[el.dataset.key] || &quot;&quot;; });
+    render();
+  });
+
+  $(&quot;tBands&quot;).addEventListener(&quot;input&quot;, function(e){
+    var t = e.target; if(!t.dataset || t.dataset.b===undefined) return;
+    var i = +t.dataset.b, f = t.dataset.f, v = num(t.value);
+    if(f===&quot;max&quot; &amp;&amp; t.value.trim()===&quot;&quot;){ v = Infinity; }
+    if(!isFinite(v) &amp;&amp; v!==Infinity) { $(&quot;bandsStatus&quot;).textContent = &quot;Valor inválido na faixa &quot;+(i+1)+&quot;.&quot;; return; }
+    bands[i][f] = v;
+    save(LS_B, bands.map(function(b){ return Object.assign({}, b, {max: b.max===Infinity ? &quot;inf&quot; : b.max}); }));
+    $(&quot;bandsStatus&quot;).textContent = &quot;Tabela personalizada salva.&quot;;
+    render();
+  });
+  $(&quot;resetBands&quot;).addEventListener(&quot;click&quot;, function(){
+    bands = DEFAULT_BANDS.map(function(b){ return Object.assign({}, b); });
+    env = Object.assign({}, DEFAULT_ENV);
+    try{ localStorage.removeItem(LS_B); localStorage.removeItem(LS_E); }catch(e){}
+    $(&quot;bandsStatus&quot;).textContent = &quot;Tabela de julho/2026 restaurada.&quot;;
+    drawEnv(); drawBandsTable(); render();
+  });
+  function drawEnv(){ $(&quot;envOn&quot;).checked = !!env.on; $(&quot;envPct&quot;).value = fmtN(env.pct); $(&quot;envTeto&quot;).value = env.teto.toFixed(2).replace(&quot;.&quot;,&quot;,&quot;); }
+  function saveEnv(){ save(LS_E, env); $(&quot;bandsStatus&quot;).textContent = &quot;Tabela personalizada salva.&quot;; render(); }
+  $(&quot;envOn&quot;).addEventListener(&quot;change&quot;, function(e){ env.on = e.target.checked; saveEnv(); });
+  $(&quot;envPct&quot;).addEventListener(&quot;input&quot;, function(e){ var v = num(e.target.value); if(isFinite(v)){ env.pct = v; saveEnv(); } });
+  $(&quot;envTeto&quot;).addEventListener(&quot;input&quot;, function(e){ var v = num(e.target.value); if(isFinite(v)){ env.teto = v; saveEnv(); } });
+  drawEnv();
+
+  drawBandsTable();
+  render();
+})();
+&lt;/script&gt;
+&lt;/body&gt;
+&lt;/html&gt;
+"></iframe>
+<iframe id="f-temu" title="Precificação Temu" class="" srcdoc="&lt;!DOCTYPE html&gt;
+&lt;html lang=&quot;pt-BR&quot;&gt;
+&lt;head&gt;
+&lt;meta charset=&quot;utf-8&quot;&gt;
+&lt;meta name=&quot;viewport&quot; content=&quot;width=device-width, initial-scale=1, viewport-fit=cover&quot;&gt;
+&lt;title&gt;Precificação Temu&lt;/title&gt;
+&lt;link rel=&quot;preconnect&quot; href=&quot;https://fonts.googleapis.com&quot;&gt;
+&lt;link rel=&quot;preconnect&quot; href=&quot;https://fonts.gstatic.com&quot; crossorigin&gt;
+&lt;link href=&quot;https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&amp;display=swap&quot; rel=&quot;stylesheet&quot;&gt;
+&lt;style&gt;
+:root{
+  --bg:#F5F3F7; --panel:#FFFFFF; --ink:#241B2C; --muted:#6E6478; --line:#E3DDE8;
+  --plum:#6A2C68; --plum-soft:#F1E6F0; --profit:#1C7A57; --profit-soft:#E3F2EB;
+  --warn:#A6461F; --warn-soft:#FBEDE5; --band-a:#EDE6F0; --band-b:#E2D6E8;
+  --field:#FBFAFC;
+  box-sizing:border-box;
+  padding-top:env(safe-area-inset-top,0px); padding-bottom:env(safe-area-inset-bottom,0px);
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme=&quot;light&quot;]){
+    --bg:#17121B; --panel:#211A26; --ink:#F1EBF4; --muted:#A99CB2; --line:#382D3F;
+    --plum:#D59BD2; --plum-soft:#3A2440; --profit:#6BD3A5; --profit-soft:#173328;
+    --warn:#F0A07C; --warn-soft:#3C2219; --band-a:#2B2231; --band-b:#35293C; --field:#1B1520;
+  }
+}
+:root[data-theme=&quot;dark&quot;]{
+  --bg:#17121B; --panel:#211A26; --ink:#F1EBF4; --muted:#A99CB2; --line:#382D3F;
+  --plum:#D59BD2; --plum-soft:#3A2440; --profit:#6BD3A5; --profit-soft:#173328;
+  --warn:#F0A07C; --warn-soft:#3C2219; --band-a:#2B2231; --band-b:#35293C; --field:#1B1520;
+}
+*,*::before,*::after{box-sizing:border-box}
+html{scroll-padding-top:env(safe-area-inset-top,0px)}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:&quot;Manrope&quot;,system-ui,-apple-system,&quot;Segoe UI&quot;,Roboto,sans-serif;font-size:15px;line-height:1.5;font-variant-numeric:tabular-nums}
+.wrap{max-width:1180px;margin:0 auto;padding:28px 20px 48px}
+header h1{font-size:28px;font-weight:800;letter-spacing:-.02em;margin:0 0 4px}
+header p{margin:0;color:var(--muted);max-width:62ch}
+.grid{display:grid;grid-template-columns:340px 1fr;gap:20px;margin-top:24px;align-items:start}
+@media (max-width:880px){.grid{grid-template-columns:1fr}}
+.panel{background:var(--panel);border:1px solid var(--line);border-radius:14px;padding:20px}
+.panel h2{font-size:16px;font-weight:700;margin:0 0 14px}
+.field{margin-bottom:14px}
+.field label{display:block;font-size:13px;font-weight:600;margin-bottom:5px}
+.field .hint{font-size:12px;color:var(--muted);margin-top:3px}
+.inp{display:flex;align-items:center;border:1px solid var(--line);border-radius:9px;background:var(--field);overflow:hidden}
+.inp:focus-within{border-color:var(--plum);box-shadow:0 0 0 3px var(--plum-soft)}
+.inp span{padding:0 10px;color:var(--muted);font-size:13px;font-weight:600}
+.inp input,.inp select{flex:1;min-width:0;border:0;background:transparent;color:var(--ink);font:inherit;font-weight:600;padding:9px 10px;outline:none}
+.inp select{cursor:pointer}
+.sep{height:1px;background:var(--line);margin:18px 0}
+
+.hero{display:grid;grid-template-columns:1fr 1fr;gap:0;border:1px solid var(--line);border-radius:14px;background:var(--panel);overflow:hidden}
+@media (max-width:560px){.hero{grid-template-columns:1fr}}
+.hero &gt; div{padding:20px 22px}
+.hero &gt; div + div{border-left:1px solid var(--line)}
+@media (max-width:560px){.hero &gt; div + div{border-left:0;border-top:1px solid var(--line)}}
+.hero .k{font-size:13px;color:var(--muted);font-weight:600}
+.hero .v{font-size:40px;font-weight:800;letter-spacing:-.03em;line-height:1.1;margin:4px 0 6px}
+.hero .promo .v{color:var(--plum)}
+.hero .full .v{text-decoration:line-through;text-decoration-thickness:2px;text-decoration-color:var(--muted)}
+.hero .s{font-size:13px;color:var(--muted)}
+.hero .s b{color:var(--profit)}
+
+.ruler{margin-top:20px}
+.ruler .track{overflow-x:auto;padding:0 2px}
+.ruler .inner{min-width:640px;position:relative;padding:34px 0 38px}
+.ruler .bar{position:relative;display:flex;min-height:64px;border-radius:10px}
+.ruler .seg{flex:1;position:relative;display:flex;flex-direction:column;justify-content:center;gap:2px;padding:10px 12px;font-size:12px;line-height:1.3;color:var(--muted);border-right:2px solid var(--panel)}
+.ruler .seg:nth-child(odd){background:var(--band-a)}
+.ruler .seg:nth-child(even){background:var(--band-b)}
+.ruler .seg:first-child{border-radius:10px 0 0 10px}
+.ruler .seg:last-child{border-radius:0 10px 10px 0;border-right:0}
+.ruler .seg b{color:var(--ink);font-size:13px;font-weight:700}
+.ruler .seg.on{box-shadow:inset 0 0 0 2px var(--plum);background:var(--plum-soft)}
+.marker{position:absolute;width:0;z-index:2}
+.marker::before{content:&quot;&quot;;position:absolute;left:-6px;border-left:6px solid transparent;border-right:6px solid transparent}
+.marker i{position:absolute;left:0;transform:translateX(-50%);font-style:normal;font-size:12px;font-weight:700;white-space:nowrap;padding:2px 8px;border-radius:6px}
+.marker.promo{top:0}
+.marker.promo::before{top:22px;border-top:8px solid var(--plum)}
+.marker.promo i{top:0;background:var(--plum);color:var(--panel)}
+.marker.full{bottom:0}
+.marker.full::before{bottom:22px;border-bottom:8px solid var(--muted)}
+.marker.full i{bottom:0;background:var(--panel);color:var(--ink);border:1px solid var(--line)}
+.ruler .legend{display:flex;gap:18px;flex-wrap:wrap;font-size:12px;color:var(--muted);margin-top:4px}
+.ruler .legend span::before{content:&quot;&quot;;display:inline-block;width:10px;height:10px;border-radius:3px;margin-right:6px;vertical-align:-1px}
+.ruler .legend .lp::before{background:var(--plum)}
+.ruler .legend .lf::before{background:var(--panel);border:1px solid var(--muted)}
+.ruler .legend .lb::before{background:var(--plum-soft);box-shadow:inset 0 0 0 2px var(--plum)}
+
+.alerts{margin-top:18px;display:flex;flex-direction:column;gap:8px}
+.alert{padding:10px 14px;border-radius:10px;font-size:13.5px;background:var(--warn-soft);color:var(--ink);border-left:3px solid var(--warn)}
+.alert.ok{background:var(--profit-soft);border-left-color:var(--profit)}
+
+.tables{display:grid;grid-template-columns:1fr 1fr;gap:20px;margin-top:20px}
+@media (max-width:720px){.tables{grid-template-columns:1fr}}
+.scroll{overflow-x:auto}
+table{width:100%;border-collapse:collapse;font-size:13.5px}
+th,td{padding:7px 4px;text-align:left;border-bottom:1px solid var(--line)}
+th{font-weight:600;color:var(--muted);font-size:12px}
+td.n,th.n{text-align:right;white-space:nowrap}
+tr.total td{font-weight:800;border-bottom:0;padding-top:10px}
+tr.total td.n{color:var(--profit)}
+tr.neg td.n{color:var(--warn)}
+.sub{font-size:12px;color:var(--muted);margin:-8px 0 12px}
+
+details{margin-top:20px}
+summary{cursor:pointer;font-weight:700;font-size:15px;list-style:none;display:flex;align-items:center;gap:8px}
+summary::-webkit-details-marker{display:none}
+summary::before{content:&quot;+&quot;;display:inline-grid;place-items:center;width:22px;height:22px;border-radius:6px;background:var(--plum-soft);color:var(--plum);font-weight:800}
+details[open] summary::before{content:&quot;−&quot;}
+.tbl-edit{table-layout:fixed;min-width:560px}
+.tbl-edit th,.tbl-edit td{padding:8px 6px;vertical-align:middle}
+.tbl-edit th{text-align:right}
+.tbl-edit th:first-child,.tbl-edit td:first-child{width:56px;text-align:center}
+.tbl-edit td.n{text-align:right;padding-right:14px}
+.tbl-edit input{display:block;width:100%;min-width:0;border:1px solid var(--line);border-radius:7px;background:var(--field);color:var(--ink);font:inherit;font-weight:600;padding:6px 8px;text-align:right}
+.tbl-edit input:focus{outline:none;border-color:var(--plum);box-shadow:0 0 0 3px var(--plum-soft)}
+.row-actions{display:flex;gap:10px;flex-wrap:wrap;margin-top:14px;align-items:center}
+button{font:inherit;font-weight:700;font-size:13px;border-radius:9px;padding:8px 14px;cursor:pointer;border:1px solid var(--line);background:var(--panel);color:var(--ink)}
+button.primary{background:var(--plum);border-color:var(--plum);color:var(--panel)}
+button:focus-visible{outline:3px solid var(--plum-soft);outline-offset:1px}
+.note{font-size:12px;color:var(--muted)}
+.env{border:1px solid var(--line);border-radius:10px;padding:12px 14px;margin:0 0 16px;background:var(--field)}
+.chk{display:flex;gap:8px;align-items:center;font-size:13px;font-weight:600;cursor:pointer}
+.chk input{width:16px;height:16px;accent-color:var(--plum)}
+.env-f{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:12px}
+.env-f .field{margin:0}
+@media (max-width:560px){.env-f{grid-template-columns:1fr}}
+.sim{display:flex;gap:10px;align-items:end;flex-wrap:wrap}
+.sim .field{margin:0;flex:1;min-width:160px}
+&lt;/style&gt;
+&lt;style&gt;header{display:none}.wrap{padding-top:0}.grid{margin-top:16px}&lt;/style&gt;&lt;/head&gt;
+&lt;body&gt;
+&lt;div class=&quot;wrap&quot;&gt;
+  &lt;header&gt;
+    &lt;h1&gt;Precificação Temu&lt;/h1&gt;
+    &lt;p&gt;Preencha seus custos e metas. O preço é calculado como se a comissão da Temu já estivesse sendo cobrada. Enquanto a isenção de novo vendedor valer, a calculadora mostra também o lucro real de hoje.&lt;/p&gt;
+  &lt;/header&gt;
+
+  &lt;div class=&quot;grid&quot;&gt;
+    &lt;!-- ENTRADAS --&gt;
+    &lt;aside class=&quot;panel&quot; aria-label=&quot;Seus dados&quot;&gt;
+      &lt;h2&gt;Seus dados&lt;/h2&gt;
+      &lt;div class=&quot;field&quot;&gt;&lt;label for=&quot;custo&quot;&gt;Custo do produto&lt;/label&gt;
+        &lt;div class=&quot;inp&quot;&gt;&lt;span&gt;R$&lt;/span&gt;&lt;input id=&quot;custo&quot; inputmode=&quot;decimal&quot; data-key=&quot;custo&quot;&gt;&lt;/div&gt;&lt;/div&gt;
+      &lt;div class=&quot;field&quot;&gt;&lt;label for=&quot;margem&quot;&gt;Margem desejada sobre o custo&lt;/label&gt;
+        &lt;div class=&quot;inp&quot;&gt;&lt;input id=&quot;margem&quot; inputmode=&quot;decimal&quot; data-key=&quot;margem&quot;&gt;&lt;span&gt;%&lt;/span&gt;&lt;/div&gt;&lt;/div&gt;
+      &lt;div class=&quot;field&quot;&gt;&lt;label for=&quot;emb&quot;&gt;Embalagem&lt;/label&gt;
+        &lt;div class=&quot;inp&quot;&gt;&lt;span&gt;R$&lt;/span&gt;&lt;input id=&quot;emb&quot; inputmode=&quot;decimal&quot; data-key=&quot;emb&quot;&gt;&lt;/div&gt;&lt;/div&gt;
+      &lt;div class=&quot;sep&quot;&gt;&lt;/div&gt;
+      &lt;div class=&quot;field&quot;&gt;&lt;label for=&quot;vend&quot;&gt;Comissão do vendedor&lt;/label&gt;
+        &lt;div class=&quot;inp&quot;&gt;&lt;input id=&quot;vend&quot; inputmode=&quot;decimal&quot; data-key=&quot;vend&quot;&gt;&lt;span&gt;%&lt;/span&gt;&lt;/div&gt;
+        &lt;div class=&quot;hint&quot;&gt;Sobre o preço de venda&lt;/div&gt;&lt;/div&gt;
+      &lt;div class=&quot;field&quot;&gt;&lt;label for=&quot;ads&quot;&gt;ADS&lt;/label&gt;
+        &lt;div class=&quot;inp&quot;&gt;&lt;input id=&quot;ads&quot; inputmode=&quot;decimal&quot; data-key=&quot;ads&quot;&gt;&lt;span&gt;%&lt;/span&gt;&lt;/div&gt;
+        &lt;div class=&quot;hint&quot;&gt;Sobre o preço de venda&lt;/div&gt;&lt;/div&gt;
+      &lt;div class=&quot;field&quot;&gt;&lt;label for=&quot;nf&quot;&gt;Nota fiscal&lt;/label&gt;
+        &lt;div class=&quot;inp&quot;&gt;&lt;input id=&quot;nf&quot; inputmode=&quot;decimal&quot; data-key=&quot;nf&quot;&gt;&lt;span&gt;%&lt;/span&gt;&lt;/div&gt;
+        &lt;div class=&quot;hint&quot;&gt;Sobre o preço de venda&lt;/div&gt;&lt;/div&gt;
+      &lt;div class=&quot;sep&quot;&gt;&lt;/div&gt;
+      &lt;div class=&quot;field&quot;&gt;&lt;label for=&quot;desc&quot;&gt;Desconto da promoção&lt;/label&gt;
+        &lt;div class=&quot;inp&quot;&gt;&lt;input id=&quot;desc&quot; inputmode=&quot;decimal&quot; data-key=&quot;desc&quot;&gt;&lt;span&gt;%&lt;/span&gt;&lt;/div&gt;
+        &lt;div class=&quot;hint&quot;&gt;O preço cheio é calculado para que, com esse desconto, o preço final seja o preço promocional&lt;/div&gt;&lt;/div&gt;
+      &lt;div class=&quot;field&quot;&gt;&lt;label for=&quot;arred&quot;&gt;Final do preço promocional&lt;/label&gt;
+        &lt;div class=&quot;inp&quot;&gt;&lt;select id=&quot;arred&quot; data-key=&quot;arred&quot;&gt;
+          &lt;option value=&quot;exato&quot;&gt;Exato (mínimo para a margem)&lt;/option&gt;
+          &lt;option value=&quot;90&quot;&gt;Terminar em ,90&lt;/option&gt;
+          &lt;option value=&quot;99&quot;&gt;Terminar em ,99&lt;/option&gt;
+          &lt;option value=&quot;98&quot;&gt;Terminar em ,98&lt;/option&gt;
+        &lt;/select&gt;&lt;/div&gt;&lt;/div&gt;
+      &lt;div class=&quot;row-actions&quot;&gt;&lt;button id=&quot;reset-inputs&quot; type=&quot;button&quot;&gt;Limpar para o exemplo&lt;/button&gt;&lt;/div&gt;
+    &lt;/aside&gt;
+
+    &lt;!-- RESULTADOS --&gt;
+    &lt;main&gt;
+      &lt;section class=&quot;hero&quot; aria-live=&quot;polite&quot;&gt;
+        &lt;div class=&quot;promo&quot;&gt;
+          &lt;div class=&quot;k&quot;&gt;Preço promocional (o que o cliente paga)&lt;/div&gt;
+          &lt;div class=&quot;v&quot; id=&quot;promoV&quot;&gt;–&lt;/div&gt;
+          &lt;div class=&quot;s&quot; id=&quot;promoS&quot;&gt;&lt;/div&gt;
+        &lt;/div&gt;
+        &lt;div class=&quot;full&quot;&gt;
+          &lt;div class=&quot;k&quot;&gt;Preço cheio para cadastrar&lt;/div&gt;
+          &lt;div class=&quot;v&quot; id=&quot;fullV&quot;&gt;–&lt;/div&gt;
+          &lt;div class=&quot;s&quot; id=&quot;fullS&quot;&gt;&lt;/div&gt;
+        &lt;/div&gt;
+      &lt;/section&gt;
+
+      &lt;section class=&quot;ruler panel&quot; style=&quot;margin-top:20px&quot; aria-label=&quot;Faixas de taxa da Temu&quot;&gt;
+        &lt;h2&gt;Onde seus preços caem nas faixas da Temu&lt;/h2&gt;
+        &lt;div class=&quot;track&quot;&gt;&lt;div class=&quot;inner&quot; id=&quot;inner&quot;&gt;&lt;div class=&quot;bar&quot; id=&quot;bar&quot;&gt;&lt;/div&gt;&lt;/div&gt;&lt;/div&gt;
+        &lt;div class=&quot;legend&quot;&gt;&lt;span class=&quot;lp&quot;&gt;Preço promocional&lt;/span&gt;&lt;span class=&quot;lf&quot;&gt;Preço cheio&lt;/span&gt;&lt;span class=&quot;lb&quot;&gt;Faixa do preço promocional&lt;/span&gt;&lt;/div&gt;
+      &lt;/section&gt;
+
+      &lt;div class=&quot;alerts&quot; id=&quot;alerts&quot;&gt;&lt;/div&gt;
+
+      &lt;div class=&quot;tables&quot;&gt;
+        &lt;section class=&quot;panel&quot;&gt;
+          &lt;h2&gt;Composição no preço promocional&lt;/h2&gt;
+          &lt;div class=&quot;sub&quot; id=&quot;subPromo&quot;&gt;&lt;/div&gt;
+          &lt;div class=&quot;scroll&quot;&gt;&lt;table id=&quot;tPromo&quot;&gt;&lt;/table&gt;&lt;/div&gt;
+        &lt;/section&gt;
+        &lt;section class=&quot;panel&quot;&gt;
+          &lt;h2&gt;Composição no preço cheio&lt;/h2&gt;
+          &lt;div class=&quot;sub&quot; id=&quot;subFull&quot;&gt;&lt;/div&gt;
+          &lt;div class=&quot;scroll&quot;&gt;&lt;table id=&quot;tFull&quot;&gt;&lt;/table&gt;&lt;/div&gt;
+        &lt;/section&gt;
+      &lt;/div&gt;
+
+      &lt;section class=&quot;panel&quot; style=&quot;margin-top:20px&quot;&gt;
+        &lt;h2&gt;Simular outro preço&lt;/h2&gt;
+        &lt;div class=&quot;sim&quot;&gt;
+          &lt;div class=&quot;field&quot;&gt;&lt;label for=&quot;simP&quot;&gt;Preço de venda final&lt;/label&gt;
+            &lt;div class=&quot;inp&quot;&gt;&lt;span&gt;R$&lt;/span&gt;&lt;input id=&quot;simP&quot; inputmode=&quot;decimal&quot; placeholder=&quot;Ex.: 94,90&quot; data-key=&quot;simP&quot;&gt;&lt;/div&gt;&lt;/div&gt;
+        &lt;/div&gt;
+        &lt;div class=&quot;scroll&quot; style=&quot;margin-top:14px&quot;&gt;&lt;table id=&quot;tSim&quot;&gt;&lt;/table&gt;&lt;/div&gt;
+      &lt;/section&gt;
+
+      &lt;details class=&quot;panel&quot; id=&quot;tabDetails&quot;&gt;
+        &lt;summary&gt;Tabela de taxas da Temu&lt;/summary&gt;
+        &lt;p class=&quot;note&quot; style=&quot;margin:12px 0&quot;&gt;Comissão provisória de 20%: a Temu ainda não publicou o percentual para vendedor local. Quando sair o valor oficial, altere aqui (e crie faixas se houver). Os cálculos se atualizam e ficam salvos neste navegador.&lt;/p&gt;
+        &lt;div class=&quot;env&quot;&gt;
+          &lt;label class=&quot;chk&quot;&gt;&lt;input type=&quot;checkbox&quot; id=&quot;isOn&quot;&gt; Isenção de novo vendedor ativa (comissão 0% hoje)&lt;/label&gt;
+          &lt;div class=&quot;env-f&quot;&gt;
+            &lt;div class=&quot;field&quot;&gt;&lt;label for=&quot;freteV&quot;&gt;Frete pago pelo vendedor (por item)&lt;/label&gt;&lt;div class=&quot;inp&quot;&gt;&lt;span&gt;R$&lt;/span&gt;&lt;input id=&quot;freteV&quot; inputmode=&quot;decimal&quot;&gt;&lt;/div&gt;&lt;div class=&quot;hint&quot;&gt;Hoje dispensado. Preencha se a Temu passar a cobrar.&lt;/div&gt;&lt;/div&gt;
+          &lt;/div&gt;
+        &lt;/div&gt;
+        &lt;div class=&quot;scroll&quot;&gt;&lt;table class=&quot;tbl-edit&quot; id=&quot;tBands&quot;&gt;&lt;/table&gt;&lt;/div&gt;
+        &lt;div class=&quot;row-actions&quot;&gt;
+          &lt;button type=&quot;button&quot; id=&quot;resetBands&quot;&gt;Restaurar padrão (20%)&lt;/button&gt;
+          &lt;span class=&quot;note&quot; id=&quot;bandsStatus&quot;&gt;&lt;/span&gt;
+        &lt;/div&gt;
+      &lt;/details&gt;
+    &lt;/main&gt;
+  &lt;/div&gt;
+&lt;/div&gt;
+
+&lt;script&gt;
+(function(){
+  &quot;use strict&quot;;
+  var DEFAULT_INPUTS = {custo:&quot;34,56&quot;, margem:&quot;30&quot;, emb:&quot;1,00&quot;, vend:&quot;3&quot;, ads:&quot;10&quot;, nf:&quot;10&quot;, desc:&quot;30&quot;, arred:&quot;exato&quot;, simP:&quot;&quot;};
+  var DEFAULT_T = {isencao:true, frete:0};
+  var DEFAULT_BANDS = [
+    {min:0, max:Infinity, pct:20, fixo:0, meia:false}
+  ];
+  var LS_IN = &quot;temuPricing.inputs.v1&quot;, LS_B = &quot;temuPricing.bands.v1&quot;, LS_T = &quot;temuPricing.extra.v1&quot;;
+
+  function load(key, fallback){
+    try{ var raw = localStorage.getItem(key); if(!raw) return fallback; return JSON.parse(raw); }catch(e){ return fallback; }
+  }
+  function save(key, val){ try{ localStorage.setItem(key, JSON.stringify(val)); }catch(e){} }
+
+  var inputs = Object.assign({}, DEFAULT_INPUTS, load(LS_IN, {}));
+  var bands = (load(LS_B, null) || DEFAULT_BANDS).map(function(b){ return Object.assign({}, b, {max: (b.max===null||b.max===&quot;inf&quot;) ? Infinity : b.max}); });
+
+  var tx = Object.assign({}, DEFAULT_T, load(LS_T, {}));
+  var $ = function(id){ return document.getElementById(id); };
+  var num = function(s){ if(s===undefined||s===null) return NaN; s=String(s).trim().replace(/\s/g,&quot;&quot;).replace(&quot;R$&quot;,&quot;&quot;); if(s.indexOf(&quot;,&quot;)&gt;-1){ s=s.replace(/\./g,&quot;&quot;).replace(&quot;,&quot;,&quot;.&quot;); } return parseFloat(s); };
+  var brl = function(v){ return isFinite(v) ? v.toLocaleString(&quot;pt-BR&quot;,{style:&quot;currency&quot;,currency:&quot;BRL&quot;}) : &quot;–&quot;; };
+  var pct = function(v,d){ return isFinite(v) ? (v*100).toLocaleString(&quot;pt-BR&quot;,{minimumFractionDigits:d===undefined?1:d,maximumFractionDigits:d===undefined?1:d})+&quot;%&quot; : &quot;–&quot;; };
+  var r2 = function(v){ return Math.round(v*100)/100; };
+  var fmtN = function(v){ return v===Infinity ? &quot;&quot; : String(v).replace(&quot;.&quot;,&quot;,&quot;); };
+
+  function bandOf(P){
+    for(var i=0;i&lt;bands.length;i++){ if(P&gt;=bands[i].min-1e-9 &amp;&amp; P&lt;=bands[i].max+0.004) return i; }
+    for(var j=0;j&lt;bands.length-1;j++){ if(P&gt;bands[j].max &amp;&amp; P&lt;bands[j+1].min) return j+1; }
+    return bands.length-1;
+  }
+
+  function params(){
+    return {
+      C:num(inputs.custo)||0, M:(num(inputs.margem)||0)/100, E:num(inputs.emb)||0,
+      v:(num(inputs.vend)||0)/100, a:(num(inputs.ads)||0)/100, n:(num(inputs.nf)||0)/100,
+      d:(num(inputs.desc)||0)/100
+    };
+  }
+
+  function breakdown(P, p, semComissao){
+    var bi = bandOf(P), b = bands[bi];
+    var com = semComissao ? 0 : P*b.pct/100, fixo = semComissao ? 0 : (b.meia ? P*0.5 : b.fixo), frete = tx.frete||0;
+    var vend = P*p.v, ads = P*p.a, nf = P*p.n;
+    var lucro = P - com - fixo - frete - vend - ads - nf - p.C - p.E;
+    return {P:P, bi:bi, b:b, semComissao:!!semComissao, frete:frete, com:com, fixo:fixo, vend:vend, ads:ads, nf:nf, lucro:lucro,
+            mCusto: p.C&gt;0 ? lucro/p.C : NaN, mVenda: P&gt;0 ? lucro/P : NaN};
+  }
+
+  // menor preço que atinge o lucro-alvo
+  function minPrice(p){
+    var L = p.C*p.M, best = null;
+    bands.forEach(function(b){
+      var denom = 1 - b.pct/100 - p.v - p.a - p.n - (b.meia?0.5:0);
+      if(denom&lt;=0) return;
+      var P = (p.C + p.E + (b.meia?0:b.fixo) + (tx.frete||0) + L)/denom;
+      if(P &lt; b.min) P = b.min;
+      if(P &gt; b.max + 1e-9) return;
+      P = Math.ceil(P*100 - 1e-6)/100;
+      if(P &gt; b.max + 1e-9) return;
+      if(best===null || P &lt; best) best = P;
+    });
+    return best;
+  }
+
+  function applyEnding(P, mode){
+    if(mode===&quot;exato&quot;) return P;
+    var cents = parseInt(mode,10)/100, bi = bandOf(P), max = bands[bi].max;
+    var base = Math.floor(P), cand = base + cents;
+    if(cand &lt; P - 1e-9) cand += 1;
+    cand = r2(cand);
+    if(cand &gt; max + 1e-9) return {P:P, clipped:true};
+    return cand;
+  }
+
+  function fullFromPromo(promo, d, p){
+    if(d&lt;=0) return {full:promo, promoReal:promo};
+    if(d&gt;=1) return null;
+    var full = Math.ceil(promo/(1-d)*100 - 1e-6)/100;
+    var real = r2(full*(1-d));
+    var maxBand = bands[bandOf(promo)].max;
+    var guard = 0;
+    while(real &gt; maxBand + 1e-9 &amp;&amp; guard&lt;5){ full = r2(full-0.01); real = r2(full*(1-d)); guard++; }
+    return {full:full, promoReal:real};
+  }
+
+  function rows(bd, p){
+    var labelFixo = &quot;Taxa fixa por item&quot;;
+    var list = [
+      [&quot;Preço de venda&quot;, &quot;100,0%&quot;, bd.P, &quot;&quot;],
+      [&quot;Comissão Temu&quot;+(bd.semComissao?&quot; (isenta)&quot;:&quot;&quot;), bd.semComissao?&quot;0,0%&quot;:pct(bd.b.pct/100), -bd.com, &quot;&quot;],
+      [labelFixo, &quot;&quot;, -bd.fixo, &quot;&quot;],
+      [&quot;Frete pago pelo vendedor&quot;, &quot;&quot;, -bd.frete, &quot;&quot;],
+      [&quot;Comissão do vendedor&quot;, pct(p.v), -bd.vend, &quot;&quot;],
+      [&quot;ADS&quot;, pct(p.a), -bd.ads, &quot;&quot;],
+      [&quot;Nota fiscal&quot;, pct(p.n), -bd.nf, &quot;&quot;],
+      [&quot;Custo do produto&quot;, &quot;&quot;, -p.C, &quot;&quot;],
+      [&quot;Embalagem&quot;, &quot;&quot;, -p.E, &quot;&quot;]
+    ];
+    var h = &#x27;&lt;thead&gt;&lt;tr&gt;&lt;th&gt;Item&lt;/th&gt;&lt;th class=&quot;n&quot;&gt;%&lt;/th&gt;&lt;th class=&quot;n&quot;&gt;R$&lt;/th&gt;&lt;/tr&gt;&lt;/thead&gt;&lt;tbody&gt;&#x27;;
+    list.forEach(function(r){ h += &#x27;&lt;tr&gt;&lt;td&gt;&#x27;+r[0]+&#x27;&lt;/td&gt;&lt;td class=&quot;n&quot;&gt;&#x27;+r[1]+&#x27;&lt;/td&gt;&lt;td class=&quot;n&quot;&gt;&#x27;+brl(r[2])+&#x27;&lt;/td&gt;&lt;/tr&gt;&#x27;; });
+    h += &#x27;&lt;tr class=&quot;total&#x27;+(bd.lucro&lt;0?&#x27; neg&#x27;:&#x27;&#x27;)+&#x27;&quot;&gt;&lt;td&gt;Lucro líquido&lt;/td&gt;&lt;td class=&quot;n&quot;&gt;&#x27;+pct(bd.mVenda)+&#x27;&lt;/td&gt;&lt;td class=&quot;n&quot;&gt;&#x27;+brl(bd.lucro)+&#x27;&lt;/td&gt;&lt;/tr&gt;&#x27;;
+    h += &#x27;&lt;tr&gt;&lt;td class=&quot;note&quot; colspan=&quot;2&quot;&gt;Margem sobre o custo&lt;/td&gt;&lt;td class=&quot;n note&quot;&gt;&#x27;+pct(bd.mCusto)+&#x27;&lt;/td&gt;&lt;/tr&gt;&#x27;;
+    return h + &#x27;&lt;/tbody&gt;&#x27;;
+  }
+
+  function bandLabel(b){
+    if(b.min===0 &amp;&amp; b.max===Infinity) return &quot;Qualquer preço&quot;;
+    if(b.min===0) return &quot;Até &quot;+brl(b.max);
+    if(b.max===Infinity) return &quot;A partir de &quot;+brl(b.min);
+    return brl(b.min)+&quot; a &quot;+brl(b.max);
+  }
+  function bandFee(b){ return b.meia ? b.pct+&quot;% + 50% do preço&quot; : b.pct+&quot;% + &quot;+brl(b.fixo); }
+
+  function drawRuler(promoBd, fullBd){
+    var bar = $(&quot;bar&quot;), inner = $(&quot;inner&quot;);
+    var h = &quot;&quot;;
+    bands.forEach(function(b,i){
+      var on = (promoBd &amp;&amp; promoBd.bi===i) ? &quot; on&quot; : &quot;&quot;;
+      h += &#x27;&lt;div class=&quot;seg&#x27;+on+&#x27;&quot;&gt;&lt;b&gt;&#x27;+bandFee(b)+&#x27;&lt;/b&gt;&lt;span&gt;&#x27;+bandLabel(b)+&#x27;&lt;/span&gt;&lt;/div&gt;&#x27;;
+    });
+    bar.innerHTML = h;
+    inner.querySelectorAll(&quot;.marker&quot;).forEach(function(m){ m.remove(); });
+    function place(bd, cls, text){
+      if(!bd) return;
+      var b = bands[bd.bi], w = 100/bands.length;
+      var top = b.max===Infinity ? Math.max(b.min*2, 400) : b.max;
+      var frac = Math.min(1, Math.max(0,(bd.P-b.min)/(top-b.min)));
+      var left = (bd.bi + 0.12 + frac*0.76)*w;
+      var m = document.createElement(&quot;div&quot;);
+      m.className = &quot;marker &quot;+cls; m.style.left = left+&quot;%&quot;;
+      m.innerHTML = &quot;&lt;i&gt;&quot;+text+&quot;&lt;/i&gt;&quot;;
+      inner.appendChild(m);
+    }
+    place(promoBd, &quot;promo&quot;, &quot;Promo &quot;+brl(promoBd &amp;&amp; promoBd.P));
+    if(fullBd &amp;&amp; (!promoBd || fullBd.P!==promoBd.P)) place(fullBd, &quot;full&quot;, &quot;Cheio &quot;+brl(fullBd.P));
+  }
+
+  function drawBandsTable(){
+    var h = &#x27;&lt;colgroup&gt;&lt;col style=&quot;width:56px&quot;&gt;&lt;col&gt;&lt;col&gt;&lt;col&gt;&lt;col&gt;&lt;/colgroup&gt;&lt;thead&gt;&lt;tr&gt;&lt;th&gt;Faixa&lt;/th&gt;&lt;th class=&quot;n&quot;&gt;De (R$)&lt;/th&gt;&lt;th class=&quot;n&quot;&gt;Até (R$)&lt;/th&gt;&lt;th class=&quot;n&quot;&gt;Comissão (%)&lt;/th&gt;&lt;th class=&quot;n&quot;&gt;Taxa fixa (R$)&lt;/th&gt;&lt;/tr&gt;&lt;/thead&gt;&lt;tbody&gt;&#x27;;
+    bands.forEach(function(b,i){
+      h += &#x27;&lt;tr&gt;&lt;td&gt;&#x27;+(i+1)+&#x27;&lt;/td&gt;&#x27;+
+        &#x27;&lt;td&gt;&lt;input data-b=&quot;&#x27;+i+&#x27;&quot; data-f=&quot;min&quot; value=&quot;&#x27;+fmtN(b.min)+&#x27;&quot; inputmode=&quot;decimal&quot; aria-label=&quot;Faixa &#x27;+(i+1)+&#x27; valor inicial&quot;&gt;&lt;/td&gt;&#x27;+
+        &#x27;&lt;td&gt;&lt;input data-b=&quot;&#x27;+i+&#x27;&quot; data-f=&quot;max&quot; value=&quot;&#x27;+(b.max===Infinity?&quot;&quot;:fmtN(b.max))+&#x27;&quot; placeholder=&quot;sem limite&quot; inputmode=&quot;decimal&quot; aria-label=&quot;Faixa &#x27;+(i+1)+&#x27; valor final&quot;&gt;&lt;/td&gt;&#x27;+
+        &#x27;&lt;td&gt;&lt;input data-b=&quot;&#x27;+i+&#x27;&quot; data-f=&quot;pct&quot; value=&quot;&#x27;+fmtN(b.pct)+&#x27;&quot; inputmode=&quot;decimal&quot; aria-label=&quot;Faixa &#x27;+(i+1)+&#x27; comissão&quot;&gt;&lt;/td&gt;&#x27;+
+        (b.meia ? &#x27;&lt;td class=&quot;n note&quot;&gt;50% do preço&lt;/td&gt;&#x27; :
+        &#x27;&lt;td&gt;&lt;input data-b=&quot;&#x27;+i+&#x27;&quot; data-f=&quot;fixo&quot; value=&quot;&#x27;+fmtN(b.fixo)+&#x27;&quot; inputmode=&quot;decimal&quot; aria-label=&quot;Faixa &#x27;+(i+1)+&#x27; taxa fixa&quot;&gt;&lt;/td&gt;&#x27;)+
+        &#x27;&lt;/tr&gt;&#x27;;
+    });
+    $(&quot;tBands&quot;).innerHTML = h + &#x27;&lt;/tbody&gt;&#x27;;
+  }
+
+  function render(){
+    var p = params(), alerts = [];
+    var minP = minPrice(p);
+    var promoBd = null, fullBd = null, promoInfo = null;
+
+    if(minP===null || !(p.C&gt;0)){
+      $(&quot;promoV&quot;).textContent = &quot;–&quot;; $(&quot;fullV&quot;).textContent = &quot;–&quot;;
+      $(&quot;promoS&quot;).textContent = p.C&gt;0 ? &quot;Com esses percentuais nenhum preço atinge a margem.&quot; : &quot;Informe o custo do produto.&quot;;
+      $(&quot;fullS&quot;).textContent = &quot;&quot;;
+      $(&quot;tPromo&quot;).innerHTML = &quot;&quot;; $(&quot;tFull&quot;).innerHTML = &quot;&quot;; $(&quot;subPromo&quot;).textContent=&quot;&quot;; $(&quot;subFull&quot;).textContent=&quot;&quot;;
+      if(p.C&gt;0) alerts.push([&quot;Os percentuais sobre a venda (Temu + vendedor + ADS + nota) somam 100% ou mais. Reduza algum deles.&quot;, false]);
+      drawRuler(null,null);
+    } else {
+      var target = applyEnding(minP, inputs.arred);
+      if(typeof target === &quot;object&quot;){ target = target.P; alerts.push([&quot;O final escolhido passaria para a próxima faixa da Temu. Mantive o preço exato.&quot;, false]); }
+      promoInfo = fullFromPromo(target, p.d, p);
+      var promoP = promoInfo ? promoInfo.promoReal : target;
+      var fullP = promoInfo ? promoInfo.full : target;
+      promoBd = breakdown(promoP, p);
+      fullBd = breakdown(fullP, p);
+
+      $(&quot;promoV&quot;).textContent = brl(promoP);
+      $(&quot;promoS&quot;).innerHTML = &quot;Lucro &lt;b&gt;&quot;+brl(promoBd.lucro)+&quot;&lt;/b&gt; · &quot;+pct(promoBd.mCusto)+&quot; sobre o custo&quot;;
+      if(tx.isencao){ var hoje = breakdown(promoP, p, true); $(&quot;promoS&quot;).innerHTML += &quot;&lt;br&gt;Hoje, com isenção: lucro &lt;b&gt;&quot;+brl(hoje.lucro)+&quot;&lt;/b&gt; · &quot;+pct(hoje.mCusto)+&quot; sobre o custo&quot;; alerts.push([&quot;Isenção ativa: hoje você recebe &quot;+brl(r2(hoje.lucro-promoBd.lucro))+&quot; a mais por venda. O preço já está calculado para manter a margem quando a comissão de &quot;+fmtN(promoBd.b.pct)+&quot;% começar.&quot;, true]); }
+      $(&quot;fullV&quot;).textContent = p.d&gt;0 ? brl(fullP) : brl(promoP);
+      $(&quot;fullS&quot;).innerHTML = p.d&gt;0 ? &quot;Com &quot;+pct(p.d,0)+&quot; de desconto → &quot;+brl(promoP)+&quot; · lucro sem promoção &quot;+brl(fullBd.lucro) : &quot;Sem desconto de promoção&quot;;
+
+      $(&quot;tPromo&quot;).innerHTML = rows(promoBd, p);
+      $(&quot;tFull&quot;).innerHTML = rows(fullBd, p);
+      $(&quot;subPromo&quot;).textContent = &quot;Faixa &quot;+bandLabel(promoBd.b)+&quot; · &quot;+bandFee(promoBd.b);
+      $(&quot;subFull&quot;).textContent = &quot;Faixa &quot;+bandLabel(fullBd.b)+&quot; · &quot;+bandFee(fullBd.b);
+
+      // alertas
+      var pb = promoBd.b;
+      if(pb.max!==Infinity &amp;&amp; pb.max - promoP &lt; 2){
+        alerts.push([&quot;O preço promocional está a &quot;+brl(r2(pb.max-promoP))+&quot; do limite da faixa. Acima de &quot;+brl(pb.max)+&quot; a Temu passa a cobrar &quot;+bandFee(bands[promoBd.bi+1])+&quot;. Cupons e ofertas precisam manter o preço final dentro da faixa.&quot;, false]);
+      }
+      if(promoBd.bi&gt;0){
+        var prev = bands[promoBd.bi-1];
+        var prevBd = breakdown(prev.max, p);
+        if(prevBd.lucro &gt;= promoBd.lucro - 0.005){
+          alerts.push([&quot;A &quot;+brl(prev.max)+&quot; (faixa anterior) o lucro seria &quot;+brl(prevBd.lucro)+&quot;, igual ou maior que no preço atual.&quot;, false]);
+        } else {
+          alerts.push([&quot;Na faixa anterior (até &quot;+brl(prev.max)+&quot;) o lucro máximo seria &quot;+brl(prevBd.lucro)+&quot; (&quot;+pct(prevBd.mCusto)+&quot; sobre o custo), abaixo da sua meta.&quot;, true]);
+        }
+      }
+      if(p.d&gt;0 &amp;&amp; fullBd.bi!==promoBd.bi){
+        alerts.push([&quot;O preço cheio cai em outra faixa (&quot;+bandFee(fullBd.b)+&quot;). Se vender sem promoção, o lucro é &quot;+brl(fullBd.lucro)+&quot;.&quot;, true]);
+      }
+      if(p.d&gt;0){
+        alerts.push([&quot;O preço cheio precisa ter sido praticado de verdade antes da promoção. A Temu pode recusar campanhas com desconto sobre um preço recém-aumentado.&quot;, false]);
+      }
+      drawRuler(promoBd, fullBd);
+    }
+
+    // simulação
+    var sp = num(inputs.simP);
+    if(sp&gt;0){
+      var sb = breakdown(sp, p);
+      $(&quot;tSim&quot;).innerHTML = rows(sb, p);
+    } else {
+      $(&quot;tSim&quot;).innerHTML = &#x27;&lt;tbody&gt;&lt;tr&gt;&lt;td class=&quot;note&quot;&gt;Digite um preço para ver a composição e o lucro nele.&lt;/td&gt;&lt;/tr&gt;&lt;/tbody&gt;&#x27;;
+    }
+
+    $(&quot;alerts&quot;).innerHTML = alerts.map(function(a){ return &#x27;&lt;div class=&quot;alert&#x27;+(a[1]?&#x27; ok&#x27;:&#x27;&#x27;)+&#x27;&quot;&gt;&#x27;+a[0]+&#x27;&lt;/div&gt;&#x27;; }).join(&quot;&quot;);
+  }
+
+  // ligar entradas
+  document.querySelectorAll(&quot;[data-key]&quot;).forEach(function(el){
+    el.value = inputs[el.dataset.key] || &quot;&quot;;
+    el.addEventListener(&quot;input&quot;, function(){ inputs[el.dataset.key] = el.value; save(LS_IN, inputs); render(); });
+  });
+  $(&quot;reset-inputs&quot;).addEventListener(&quot;click&quot;, function(){
+    inputs = Object.assign({}, DEFAULT_INPUTS); save(LS_IN, inputs);
+    document.querySelectorAll(&quot;[data-key]&quot;).forEach(function(el){ el.value = inputs[el.dataset.key] || &quot;&quot;; });
+    render();
+  });
+
+  $(&quot;tBands&quot;).addEventListener(&quot;input&quot;, function(e){
+    var t = e.target; if(!t.dataset || t.dataset.b===undefined) return;
+    var i = +t.dataset.b, f = t.dataset.f, v = num(t.value);
+    if(f===&quot;max&quot; &amp;&amp; t.value.trim()===&quot;&quot;){ v = Infinity; }
+    if(!isFinite(v) &amp;&amp; v!==Infinity) { $(&quot;bandsStatus&quot;).textContent = &quot;Valor inválido na faixa &quot;+(i+1)+&quot;.&quot;; return; }
+    bands[i][f] = v;
+    save(LS_B, bands.map(function(b){ return Object.assign({}, b, {max: b.max===Infinity ? &quot;inf&quot; : b.max}); }));
+    $(&quot;bandsStatus&quot;).textContent = &quot;Tabela personalizada salva.&quot;;
+    render();
+  });
+  $(&quot;resetBands&quot;).addEventListener(&quot;click&quot;, function(){
+    bands = DEFAULT_BANDS.map(function(b){ return Object.assign({}, b); });
+    tx = Object.assign({}, DEFAULT_T);
+    try{ localStorage.removeItem(LS_B); localStorage.removeItem(LS_T); }catch(e){}
+    $(&quot;bandsStatus&quot;).textContent = &quot;Padrão restaurado.&quot;;
+    drawTx(); drawBandsTable(); render();
+  });
+  function drawTx(){ $(&quot;isOn&quot;).checked = !!tx.isencao; $(&quot;freteV&quot;).value = (tx.frete||0).toFixed(2).replace(&quot;.&quot;,&quot;,&quot;); }
+  function saveTx(){ save(LS_T, tx); $(&quot;bandsStatus&quot;).textContent = &quot;Tabela personalizada salva.&quot;; render(); }
+  $(&quot;isOn&quot;).addEventListener(&quot;change&quot;, function(e){ tx.isencao = e.target.checked; saveTx(); });
+  $(&quot;freteV&quot;).addEventListener(&quot;input&quot;, function(e){ var v = num(e.target.value); if(isFinite(v)){ tx.frete = v; saveTx(); } });
+  drawTx();
+
+  drawBandsTable();
+  render();
+})();
+&lt;/script&gt;
+&lt;/body&gt;
+&lt;/html&gt;
+"></iframe>
+<script>
+(function(){
+  var KEYS=["custo","margem","emb","vend","ads","nf","desc","arred"];
+  var ids=["shopee","ml","tiktok","temu"], LS="mkPricing.tab";
+  function fr(k){return document.getElementById("f-"+k);}
+  function doc(k){try{return fr(k).contentDocument;}catch(e){return null;}}
+  function fit(k){var d=doc(k); if(d&&d.body){fr(k).style.height=d.documentElement.scrollHeight+"px";}}
+  function show(k){
+    ids.forEach(function(x){fr(x).classList.toggle("on",x===k);});
+    document.querySelectorAll(".tabs button").forEach(function(b){b.setAttribute("aria-selected",b.dataset.t===k);});
+    try{localStorage.setItem(LS,k);}catch(e){}
+    setTimeout(function(){fit(k);},30);
+  }
+  document.querySelectorAll(".tabs button").forEach(function(b){b.addEventListener("click",function(){show(b.dataset.t);});});
+  var busy=false;
+  function push(src,key,val){
+    if(busy||!document.getElementById("sync").checked) return;
+    busy=true;
+    ids.forEach(function(k){
+      if(k===src) return; var d=doc(k); if(!d) return;
+      var el=d.querySelector('[data-key="'+key+'"]'); if(!el||el.value===val) return;
+      el.value=val; el.dispatchEvent(new Event(el.tagName==="SELECT"?"change":"input",{bubbles:true}));
+      if(el.tagName==="SELECT") el.dispatchEvent(new Event("input",{bubbles:true}));
+    });
+    busy=false;
+  }
+  ids.forEach(function(k){
+    fr(k).addEventListener("load",function(){
+      var d=doc(k); if(!d) return;
+      KEYS.forEach(function(key){
+        var el=d.querySelector('[data-key="'+key+'"]'); if(!el) return;
+        ["input","change"].forEach(function(ev){el.addEventListener(ev,function(){push(k,key,el.value);});});
+      });
+      try{new (fr(k).contentWindow.ResizeObserver)(function(){fit(k);}).observe(d.body);}catch(e){}
+      d.addEventListener("click",function(){setTimeout(function(){fit(k);},30);});
+      fit(k);
+    });
+  });
+  var start="shopee"; try{start=localStorage.getItem(LS)||"shopee";}catch(e){}
+  if(ids.indexOf(start)<0) start="shopee";
+  show(start);
+})();
 </script>
 </body>
 </html>
